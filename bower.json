@@ -1,0 +1,20 @@
+{
+  "name": "maria-bonita-agenda",
+  "description": "Agenda para salão de beleza",
+  "authors": [
+    "ads.silvanei@gmail.com"
+  ],
+  "dependencies": {
+    "admin-lte": "*",
+    "font-awesome": "*"
+  },
+  "install": "dist",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "package.json",
+    "src"
+  ]
+}

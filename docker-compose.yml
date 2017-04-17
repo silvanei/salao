@@ -1,0 +1,32 @@
+version: "3"
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "9999:80"
+    volumes:
+      - .:/var/www/salao
+      - ./docker/nginx/site:/etc/nginx/conf.d
+      - ./docker/nginx/log:/var/log/nginx
+    links:
+      - php-fpm
+
+  php-fpm:
+    build: .
+    volumes:
+      - .:/var/www/salao
+      - ./docker/php-fpm/log:/tmp
+    links:
+      - redis
+      - mysql
+
+  mysql:
+    image: mysql:latest
+    environment:
+     - MYSQL_ROOT_PASSWORD=root
+     - MYSQL_DATABASE=agenda
+    ports:
+      - "3306:3306"
+
+  redis:
+    image: redis:alpine
