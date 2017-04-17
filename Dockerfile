@@ -19,9 +19,14 @@ RUN set -e \
         intl
 
 RUN set -e \
-    && pecl install redis-3.0.0 \
+    && pecl install redis-3.1.2 \
     && docker-php-ext-enable redis
 
 RUN set -e \
     && pecl install xdebug-2.4.0 \
     && docker-php-ext-enable xdebug
+
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && php composer-setup.php \
+    && php -r "unlink('composer-setup.php');" \
+    && mv composer.phar /usr/local/bin/composer
