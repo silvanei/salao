@@ -7,6 +7,7 @@
 
 namespace Application;
 
+use Application\Form\FormElementErrorsCustom;
 use Zend\Navigation\Service\DefaultNavigationFactory;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
@@ -56,6 +57,11 @@ return [
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',
+        ],
+    ],
+    'view_helpers' => [
+        'invokables' => [
+            'formElementErrors' => FormElementErrorsCustom::class,
         ],
     ],
 

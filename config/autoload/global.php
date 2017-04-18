@@ -27,4 +27,22 @@ return [
             ],
         ],
     ],
+
+
+    'translator' => [
+        'locale' => 'pt_BR',
+        'translation_file_patterns' => [
+            [
+                'type' => \Zend\I18n\Translator\Loader\Gettext::class,
+                'base_dir' => getcwd() . '/data/language',
+                'pattern' => '%s.mo',
+            ],
+            [
+                'type' => \Zend\I18n\Translator\Loader\PhpArray::class,
+                'base_dir' => getcwd() . '/data/language',
+                'pattern' => 'pt_BR.php',
+                'text_domain' => 'default'
+            ],
+        ],
+    ],
 ];

@@ -24,12 +24,10 @@ class LoginController extends AbstractActionController
         $form->setInputFilter($validator);
 
         $form->setData([
-            'email' => 'ads.silvanei@gmail.com',
+            'email' => '',
             'password' => '1',
         ]);
-//        var_dump($form->isValid());
-//        var_dump($form->getMessages());
-//        die;
+        $form->isValid();
         return new ViewModel(['form' => $form]);
     }
 }
