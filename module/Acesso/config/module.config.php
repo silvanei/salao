@@ -44,4 +44,8 @@ return [
             __DIR__ . '/../view',
         ],
     ],
+    'module_layouts' => [
+        'Acesso' => 'acesso/layout',
+    ],
+
 ];

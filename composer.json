@@ -20,7 +20,8 @@
         "zendframework/zend-navigation": "^2.8",
         "doctrine/doctrine-orm-module": "^1.1",
         "doctrine/migrations": "^1.5",
-        "evandotpro/edp-module-layouts": "^1.0"
+        "evandotpro/edp-module-layouts": "^1.0",
+        "zendframework/zend-mvc-i18n": "^1.0"
     },
     "autoload": {
         "psr-4": {

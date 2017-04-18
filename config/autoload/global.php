@@ -12,11 +12,6 @@
  */
 
 return [
-    'module_layouts' => [
-        'Acesso' => 'acesso/layout',
-        'Application' => 'application/layout',
-    ],
-
     'doctrine' => [
         'connection' => [
             // default connection name
