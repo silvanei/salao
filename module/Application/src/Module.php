@@ -21,12 +21,11 @@ class Module implements ConfigProviderInterface, BootstrapListenerInterface
 
     public function onBootstrap(EventInterface $e)
     {
-        //date_default_timezone_set('America/Sao_Paulo');
 
         $translator = new Translator();
-        $translator->addTranslationFile(PhpArray::class, getcwd() .  '/data/language/pt_BR.php', 'default', 'pt_BR');
-        var_dump($translator->getAllMessages());
-        AbstractValidator::setDefaultTranslator(new \Zend\Mvc\I18n\Translator($translator));
+        $translator->setLocale('pt_BR');
+        $translator->addTranslationFile(PhpArray::class, getcwd() .  '/data/language/Zend_Validate.php', 'default', 'pt_BR');
+        AbstractValidator::setDefaultTranslator(new \Zend\Mvc\I18n\Translator($translator), 'default');
     }
 
     public function getConfig(): array
