@@ -11,6 +11,7 @@
  * This should be an array of module namespaces used in the application.
  */
 return [
+    'EdpModuleLayouts',
     'AssetManager',
     'Zend\Navigation',
     'Zend\Router',
@@ -18,4 +19,5 @@ return [
     'Application',
     'DoctrineModule',
     'DoctrineORMModule',
+    'Acesso'
 ];

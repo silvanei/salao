@@ -1,0 +1,42 @@
+<div class="register-box">
+    <div class="register-box-body">
+        <p class="login-box-msg">Registre-se</p>
+        <form name="registroForm">
+            <!-- NOME DO SALÃO -->
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="Nome do salão" name="nomeSalao" required="required" minlength="5" maxlength="255">
+                <span class="glyphicon glyphicon-asterisk form-control-feedback"></span>
+            </div>
+
+            <!-- TELEFONE DO SALÃO -->
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="Telefone" name="telefoneSalao" required="required" data-inputmask="'mask': '(999) 999-9999'" data-mask>
+                <span class="glyphicon glyphicon-phone-alt form-control-feedback"></span>
+            </div>
+
+            <!-- RESPONSÁVEL PELO SALÃO -->
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="Responsável pelo salão" name="nomeAdministradorSalao" required="required" minlength="5" maxlength="255">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+
+            <!-- EMAIL RESPONSÁVEL PELO SALÃO -->
+            <div class="form-group has-feedback">
+                <input type="email" class="form-control" placeholder="E-mail" name="emailAdministradorSalao" required="required">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+
+            <!-- SENHA RESPONSÁVEL PELO SALÃO -->
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="Senha" name="senhaAdministradorSalao" required="required" minlength="5" maxlength="10">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Registrar</button>
+                </div>
+            </div>
+        </form>
+        <a href="<?=$this->url('acesso-login')?>" class="text-center">Eu já tenho um registro</a>
+    </div>
+</div>

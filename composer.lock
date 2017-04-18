@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3ff89f077061f07639ba6e6efdc904f5",
-    "content-hash": "54021a0cb4a1be65adbafb02225d4b4a",
+    "hash": "404ea3832421d97b39056d082d28a911",
+    "content-hash": "3f8c395ce1581406ff5190bd003784b3",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -891,6 +891,44 @@
                 "orm"
             ],
             "time": "2016-12-18 15:42:34"
+        },
+        {
+            "name": "evandotpro/edp-module-layouts",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/EvanDotPro/EdpModuleLayouts.git",
+                "reference": "984658a4aa3d70d2830b598f0fd44fb0ad56e981"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/EvanDotPro/EdpModuleLayouts/zipball/984658a4aa3d70d2830b598f0fd44fb0ad56e981",
+                "reference": "984658a4aa3d70d2830b598f0fd44fb0ad56e981",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "./Module.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Evan Coury",
+                    "email": "me@evancoury.com",
+                    "homepage": "http://blog.evan.pro/"
+                }
+            ],
+            "description": "EdpModuleLayouts is very simple ZF2 module for making module-specific layouts insanely easy.",
+            "homepage": "https://github.com/EvanDotPro/EdpModuleLayouts",
+            "keywords": [
+                "zf2"
+            ],
+            "time": "2012-09-14 01:32:51"
         },
         {
             "name": "kriswallsmith/assetic",
