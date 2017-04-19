@@ -8,8 +8,8 @@
 
 namespace Acesso\Controller;
 
-use Acesso\Model\LoginForm;
-use Acesso\Model\LoginInputFilter;
+use Acesso\Form\LoginForm;
+use Acesso\Form\LoginInputFilter;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ModelInterface;
 use Zend\View\Model\ViewModel;

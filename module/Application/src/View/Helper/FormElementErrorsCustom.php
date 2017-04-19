@@ -6,7 +6,7 @@
  * Time: 15:53
  */
 
-namespace Application\Form;
+namespace Application\View\Helper;
 
 
 use Zend\Form\View\Helper\FormElementErrors;

@@ -7,7 +7,7 @@
 
 namespace Application;
 
-use Application\Form\FormElementErrorsCustom;
+use Application\View\Helper\FormElementErrorsCustom;
 use Zend\Navigation\Service\DefaultNavigationFactory;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;

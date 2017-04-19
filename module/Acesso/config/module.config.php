@@ -2,6 +2,9 @@
 
 namespace Acesso;
 
+use Acesso\Controller\CadastroControllerFactory;
+use Acesso\Form\CadastroForm;
+use Acesso\Form\CadastroFormFactory;
 use Zend\Router\Http\Literal;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
@@ -33,9 +36,16 @@ return [
     'controllers' => [
         'factories' => [
             Controller\LoginController::class => InvokableFactory::class,
-            Controller\CadastroController::class => InvokableFactory::class,
+            Controller\CadastroController::class => CadastroControllerFactory::class,
         ],
     ],
+
+    'service_manager' => [
+        'factories' => [
+            CadastroForm::class => CadastroFormFactory::class
+        ],
+    ],
+
     'view_manager' => [
         'template_map' => [
             'acesso/layout' => __DIR__ . '/../view/layout/admin-lte.phtml',

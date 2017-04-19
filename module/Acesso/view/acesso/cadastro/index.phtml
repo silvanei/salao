@@ -1,42 +1,51 @@
+<? use \Acesso\Form\CadastroForm; ?>
+<? /** @var CadastroForm $form */ ?>
+
 <div class="register-box">
     <div class="register-box-body">
         <p class="login-box-msg">Registre-se</p>
-        <form name="registroForm">
+        <? $form->prepare(); ?>
+        <?= $this->form()->openTag($form) ?>
             <!-- NOME DO SALÃO -->
-            <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="Nome do salão" name="nomeSalao" required="required" minlength="5" maxlength="255">
+            <div class="form-group has-feedback <?= $form->getMessages(CadastroForm::NOME_SALAO) ? 'has-error' : '' ?>">
+                <?= $this->formInput($form->get(CadastroForm::NOME_SALAO)->setAttribute('class', 'form-control')) ?>
                 <span class="glyphicon glyphicon-asterisk form-control-feedback"></span>
+                <?=$this->formElementErrors($form->get(CadastroForm::NOME_SALAO))?>
             </div>
 
             <!-- TELEFONE DO SALÃO -->
-            <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="Telefone" name="telefoneSalao" required="required" data-inputmask="'mask': '(999) 999-9999'" data-mask>
+            <div class="form-group has-feedback <?= $form->getMessages(CadastroForm::TELEFONE_SALAO) ? 'has-error' : '' ?>">
+                <?= $this->formInput($form->get(CadastroForm::TELEFONE_SALAO)->setAttribute('class', 'form-control')) ?>
                 <span class="glyphicon glyphicon-phone-alt form-control-feedback"></span>
+                <?=$this->formElementErrors($form->get(CadastroForm::TELEFONE_SALAO))?>
             </div>
 
             <!-- RESPONSÁVEL PELO SALÃO -->
-            <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="Responsável pelo salão" name="nomeAdministradorSalao" required="required" minlength="5" maxlength="255">
+            <div class="form-group has-feedback <?= $form->getMessages(CadastroForm::NOME_ADMINISTRADOR_SALAO) ? 'has-error' : '' ?>">
+                <?= $this->formInput($form->get(CadastroForm::NOME_ADMINISTRADOR_SALAO)->setAttribute('class', 'form-control')) ?>
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <?=$this->formElementErrors($form->get(CadastroForm::NOME_ADMINISTRADOR_SALAO))?>
             </div>
 
             <!-- EMAIL RESPONSÁVEL PELO SALÃO -->
-            <div class="form-group has-feedback">
-                <input type="email" class="form-control" placeholder="E-mail" name="emailAdministradorSalao" required="required">
+            <div class="form-group has-feedback <?= $form->getMessages(CadastroForm::EMAIL_ADMINISTRADOR_SALAO) ? 'has-error' : '' ?>">
+                <?= $this->formInput($form->get(CadastroForm::EMAIL_ADMINISTRADOR_SALAO)->setAttribute('class', 'form-control')) ?>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                <?=$this->formElementErrors($form->get(CadastroForm::EMAIL_ADMINISTRADOR_SALAO))?>
             </div>
 
             <!-- SENHA RESPONSÁVEL PELO SALÃO -->
-            <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Senha" name="senhaAdministradorSalao" required="required" minlength="5" maxlength="10">
+            <div class="form-group has-feedback <?= $form->getMessages(CadastroForm::SENHA_ADMINISTRADOR_SALAO) ? 'has-error' : '' ?>">
+                <?= $this->formInput($form->get(CadastroForm::SENHA_ADMINISTRADOR_SALAO)->setAttribute('class', 'form-control')) ?>
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                <?=$this->formElementErrors($form->get(CadastroForm::SENHA_ADMINISTRADOR_SALAO))?>
             </div>
             <div class="row">
                 <div class="col-xs-12">
                     <button type="submit" class="btn btn-primary btn-block btn-flat">Registrar</button>
                 </div>
             </div>
-        </form>
+        <?= $this->form()->closeTag($form) ?>
         <a href="<?=$this->url('acesso-login')?>" class="text-center">Eu já tenho um registro</a>
     </div>
 </div>

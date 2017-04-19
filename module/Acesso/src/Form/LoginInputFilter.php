@@ -6,14 +6,13 @@
  * Time: 10:19
  */
 
-namespace Acesso\Model;
+namespace Acesso\Form;
 
 
 use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;
 use Zend\InputFilter\InputFilter;
 use Zend\Validator\EmailAddress;
-use Zend\Validator\Ip;
 use Zend\Validator\StringLength;
 
 class LoginInputFilter extends InputFilter
@@ -48,8 +47,7 @@ class LoginInputFilter extends InputFilter
                         'min' => 5,
                         'max' => 10,
                     ],
-                ],
-                ['name' => Ip::class]
+                ]
             ]
         ]);
     }

@@ -6,10 +6,10 @@
  * Time: 09:19
  */
 
-namespace Acesso\Model;
+namespace Acesso\Form;
 
-
-use Zend\Form\Element;
+use Zend\Form\Element\Password;
+use Zend\Form\Element\Text;
 use Zend\Form\Form;
 
 class LoginForm extends Form
@@ -18,23 +18,21 @@ class LoginForm extends Form
     {
         parent::__construct($name);
 
-        $email = new Element('email');
+        $email = new Text('email');
         $email->setAttributes([
             'id' => 'email',
-            'type' => 'text',
             'placeholder' => 'E-mail',
-            'class' => 'form-control'
+            'required' => 'required'
         ]);
         $this->add($email);
 
-        $password = new Element\Password('password');
+        $password = new Password('password');
         $password->setAttributes([
             'id' => 'password',
             'placeholder' => 'Password',
             'required' => 'required',
             'minlength' => '5',
-            'maxlength' => '10',
-            'class' => 'form-control'
+            'maxlength' => '10'
         ]);
         $this->add($password);
     }
