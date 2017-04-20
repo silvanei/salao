@@ -5,6 +5,7 @@ namespace Acesso;
 use Acesso\Controller\CadastroControllerFactory;
 use Acesso\Form\CadastroForm;
 use Acesso\Form\CadastroFormFactory;
+use Doctrine\ORM\Mapping\Driver\XmlDriver;
 use Zend\Router\Http\Literal;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
@@ -58,4 +59,18 @@ return [
         'Acesso' => 'acesso/layout',
     ],
 
+    'doctrine' => [
+        'driver' => [
+            __NAMESPACE__ . '_driver' => [
+                'class' => XmlDriver::class,
+                'cache' => 'array',
+                'paths' => [__DIR__ . '/doctrine']
+            ],
+            'orm_default' => [
+                'drivers' => [
+                    __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
+                ]
+            ]
+        ]
+    ]
 ];
