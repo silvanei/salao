@@ -48,15 +48,15 @@ return [
     ],
 
     'view_manager' => [
-        'template_map' => [
-            'acesso/layout' => __DIR__ . '/../view/layout/admin-lte.phtml',
-        ],
+//        'template_map' => [
+//            'acesso/layout' => __DIR__ . '/../view/layout/admin-lte.phtml',
+//        ],
         'template_path_stack' => [
             __DIR__ . '/../view',
         ],
     ],
     'module_layouts' => [
-        'Acesso' => 'acesso/layout',
+        'Acesso' => 'layout/layout',
     ],
 
     'doctrine' => [

@@ -22,8 +22,8 @@ return [
     'Zend\InputFilter',
     'Zend\Filter',
     'Zend\Hydrator',
-    'Application',
     'DoctrineModule',
     'DoctrineORMModule',
+    'Application',
     'Acesso'
 ];

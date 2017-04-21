@@ -23,7 +23,7 @@ RUN set -e \
     && docker-php-ext-enable redis
 
 RUN set -e \
-    && pecl install xdebug-2.4.0 \
+    && pecl install xdebug-2.5.3 \
     && docker-php-ext-enable xdebug
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \

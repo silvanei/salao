@@ -16,7 +16,7 @@ return [
         'connection' => [
             // default connection name
             'orm_default' => [
-                'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
+                'driverClass' => \Doctrine\DBAL\Driver\PDOMySql\Driver::class,
                 'params' => [
                     'host' => 'mysql',
                     'port' => '3306',

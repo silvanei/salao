@@ -72,7 +72,7 @@ return [
              * Example: 'collectors' => array('db' => null)
              * Expects: array
              */
-            'collectors' => [],
+            'collectors' => ['db' => null],
         ],
         'events' => [
             /**
@@ -114,7 +114,7 @@ return [
              * Expects: bool
              * Default: false
              */
-            'enabled' => false,
+            'enabled' => true,
 
             /**
              * If enabled, every empty collector will be hidden.
@@ -139,7 +139,7 @@ return [
              * Expects: bool
              * Default: false
              */
-            'version_check' => false,
+            'version_check' => true,
 
             /**
              * Contains a list with all collector toolbar templates. The name  of the array key must be same as the name
