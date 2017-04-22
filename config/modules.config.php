@@ -11,6 +11,7 @@
  * This should be an array of module namespaces used in the application.
  */
 return [
+    'Zend\Session',
     'Zend\I18n',
     'Zend\Mvc\I18n',
     'EdpModuleLayouts',
@@ -24,6 +25,9 @@ return [
     'Zend\Hydrator',
     'DoctrineModule',
     'DoctrineORMModule',
-    'Application',
-    'Acesso'
+
+    'Common',
+    'Site',
+    #'Acesso',
+    #'Application',
 ];

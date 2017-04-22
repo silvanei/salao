@@ -1,0 +1,78 @@
+<?= $this->doctype() ?>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <?= $this->headTitle('ZF Skeleton Application')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+    <?= $this->headMeta()
+        ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+        ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+    ?>
+
+    <!-- Le styles -->
+    <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath('application/img/favicon.ico')])
+        ->prependStylesheet($this->basePath('vendor/admin-lte/bootstrap/css/bootstrap-theme.min.css'))
+        ->prependStylesheet($this->basePath('vendor/admin-lte/bootstrap/css/bootstrap.min.css'))
+
+        ->prependStylesheet($this->basePath('vendor/admin-lte/dist/css/AdminLTE.min.css'))
+        ->prependStylesheet($this->basePath('vendor/admin-lte/dist/css/skins/_all-skins.min.css'))
+        ->prependStylesheet($this->basePath('vendor/admin-lte/dist/css/AdminLTE.min.css'))
+        ->prependStylesheet($this->basePath('vendor/font-awesome/css/font-awesome.min.css'))
+    ?>
+
+    <!-- Scripts -->
+    <?= $this->headScript()
+        ->appendFile($this->basePath('vendor/admin-lte/plugins/jQuery/jquery-2.2.3.min.js'))
+        ->appendFile($this->basePath('vendor/admin-lte/bootstrap/js/bootstrap.min.js'))
+        ->appendScript('
+            $(function () {
+                var AdminLTEOptions = {
+                };
+            });'
+        )
+        ->appendFile($this->basePath('vendor/admin-lte/dist/js/app.js'))
+    ?>
+
+</head>
+<body class="hold-transition skin-blue layout-top-nav" >
+
+<div class="wrapper">
+    <header class="main-header">
+        <nav class="navbar navbar-static-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="/" class="navbar-brand"><b>{{nomeSalao}}</b></a>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-collapse">
+                    <?  $this->navigation('default')->menu()->setPartial('navigation/default'); ?>
+                    <?= $this->navigation('default')->menu()->render() ?>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li>
+                            <a href="logout"><i class="fa fa-sign-out margin-r-5"></i> Sair</a>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    </header>
+    <div class="content-wrapper">
+        <?= $this->content ?>
+    </div>
+
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 2.3.0
+        </div>
+        <strong>Copyright &copy; <?php echo date('Y') ?> <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+    </footer>
+</div>
+<?= $this->inlineScript() ?>
+</body>
+</html>

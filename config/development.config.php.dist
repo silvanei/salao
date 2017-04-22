@@ -10,6 +10,7 @@ return [
     'modules' => [
         'Zend\Mvc\Console',
         'ZendDeveloperTools',
+        'SanSessionToolbar',
     ],
     // Configuration overrides during development mode
     'module_listener_options' => [

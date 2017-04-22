@@ -1,0 +1,26 @@
+<div class="login-box">
+    <div class="login-box-body">
+        <p class="login-box-msg">
+            Entre com o Login e Senha ou <a href="<?=$this->url('site-cadastro')?>" class="text-center">Registre-se</a>
+        </p>
+        <? /** @var \Site\Form\LoginForm $form */ ?>
+        <? $form->prepare(); ?>
+        <?= $this->form()->openTag($form) ?>
+            <div class="form-group has-feedback <?= $form->getMessages('email') ? 'has-error' : '' ?>">
+                <?= $this->formInput($form->get('email')->setAttribute('class', 'form-control')) ?>
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                <?=$this->formElementErrors($form->get('email'))?>
+            </div>
+            <div class="form-group has-feedback <?= $form->getMessages('password') ? 'has-error' : '' ?>">
+                <?= $this->formInput($form->get('password')->setAttribute('class', 'form-control')) ?>
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                <?=$this->formElementErrors($form->get('password'))?>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <button class="btn btn-primary btn-block btn-flat">Login</button>
+                </div>
+            </div>
+        <?= $this->form()->closeTag($form) ?>
+    </div>
+</div>

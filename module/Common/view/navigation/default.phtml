@@ -1,0 +1,24 @@
+<ul class="nav navbar-nav">
+    <? foreach ($this->container as $page):  /** @var Zend\Navigation\Page\AbstractPage $page */ ?>
+        <li <?= $page->isActive() ? 'class="active"' : '' ?> >
+            <a href="<?= $page->getHref() ?>">
+                <i class="fa <?=$page->get('ico')?> margin-r-5"></i>
+                <?= $page->getLabel() ?>
+                <? if ($page->hasPages()): ?>
+                    <span class="caret"></span>
+                <? endif; ?>
+            </a>
+            <? if ($page->hasPages()): ?>
+                <ul class="dropdown-menu">
+                    <? foreach ($page->getPages() as $child): /** @var Zend\Navigation\Page\AbstractPage $child */ ?>
+                        <li>
+                            <a href="<?= $child->getHref() ?>">
+                                <?= $child->getLabel() ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+        </li>
+    <? endforeach; ?>
+</ul>

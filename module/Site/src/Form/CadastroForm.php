@@ -6,7 +6,7 @@
  * Time: 09:19
  */
 
-namespace Acesso\Form;
+namespace Site\Form;
 
 use Zend\Form\Element\Password;
 use Zend\Form\Element\Text;

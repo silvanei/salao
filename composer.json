@@ -23,9 +23,17 @@
         "evandotpro/edp-module-layouts": "^1.0",
         "zendframework/zend-mvc-i18n": "^1.0"
     },
+    "require-dev": {
+        "zendframework/zend-developer-tools": "^1.1",
+        "zendframework/zend-test": "^3.0",
+        "zendframework/zend-mvc-console": "^1.1",
+        "san/san-session-toolbar": "^1.0"
+    },
     "autoload": {
         "psr-4": {
             "Acesso\\": "module/Acesso/src/",
+            "Site\\": "module/Site/src/",
+            "Common\\": "module/Common/src/",
             "Application\\": "module/Application/src/"
         }
     },
@@ -54,10 +62,5 @@
         "post-update-cmd": [
             "bower install"
         ]
-    },
-    "require-dev": {
-        "zendframework/zend-developer-tools": "^1.1",
-        "zendframework/zend-test": "^3.0",
-        "zendframework/zend-mvc-console": "^1.1"
     }
 }

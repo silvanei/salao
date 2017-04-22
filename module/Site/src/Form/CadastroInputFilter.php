@@ -6,8 +6,7 @@
  * Time: 10:19
  */
 
-namespace Acesso\Form;
-
+namespace Site\Form;
 
 use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;
