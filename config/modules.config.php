@@ -30,5 +30,4 @@ return [
     'Site',
     'Salao'
     #'Acesso',
-    #'Application',
 ];
