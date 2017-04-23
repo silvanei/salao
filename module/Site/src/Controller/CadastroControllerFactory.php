@@ -8,8 +8,8 @@
 
 namespace Site\Controller;
 
-
 use Interop\Container\ContainerInterface;
+use Site\Service\CadastroService;
 use Site\Form\CadastroForm;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\ServiceManager\Factory\FactoryInterface;
@@ -20,14 +20,9 @@ class CadastroControllerFactory implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null): AbstractActionController
     {
 
-//        /** @var EntityManager $entityManager */
-//        $entityManager = $container->get('doctrine.entitymanager.orm_default');
-//
-//        $migrationsRepository = $entityManager->getRepository(Migrations::class);
-//
-//        var_dump($migrationsRepository->findAll());
+        $service = $container->get(CadastroService::class);
+        $form = $container->get(CadastroForm::class);
 
-        $cadastroForm = $container->get(CadastroForm::class);
-        return new CadastroController($cadastroForm);
+        return new CadastroController($service, $form);
     }
 }

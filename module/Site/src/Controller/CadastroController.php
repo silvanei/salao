@@ -8,6 +8,7 @@
 
 namespace Site\Controller;
 
+use Site\Service\CadastroService;
 use Zend\Form\FormInterface;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -21,12 +22,21 @@ class CadastroController extends AbstractActionController
     protected $cadastroForm;
 
     /**
-     * CadastroController constructor.
-     * @param FormInterface $cadastroForm
+     * @var CadastroService
      */
-    public function __construct(FormInterface $cadastroForm)
-    {
-        $this->cadastroForm = $cadastroForm;
+    protected $cadastroService;
+
+    /**
+     * CadastroController constructor.
+     * @param CadastroService $service
+     * @param FormInterface $form
+     */
+    public function __construct(
+        CadastroService $service,
+        FormInterface $form
+    ) {
+        $this->cadastroService = $service;
+        $this->cadastroForm = $form;
     }
 
 

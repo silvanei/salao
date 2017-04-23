@@ -28,6 +28,7 @@ return [
 
     'Common',
     'Site',
+    'Salao'
     #'Acesso',
     #'Application',
 ];
