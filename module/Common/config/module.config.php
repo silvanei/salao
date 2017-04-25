@@ -2,6 +2,7 @@
 
 namespace Common;
 
+use Common\View\Helper\FlashNotifyFactory;
 use Common\View\Helper\FormElementErrorsCustom;
 use Zend\Navigation\Service\DefaultNavigationFactory;
 
@@ -26,6 +27,9 @@ return [
         'invokables' => [
             'formElementErrors' => FormElementErrorsCustom::class,
         ],
+        'factories' => [
+            'flashNotify' => FlashNotifyFactory::class,
+        ]
     ],
 
     'navigation' => [

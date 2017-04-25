@@ -9,6 +9,7 @@
 namespace Site\Form;
 
 use DoctrineModule\Validator\NoObjectExists;
+use Zend\Filter\Digits;
 use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;
 use Zend\InputFilter\InputFilter;
@@ -45,6 +46,7 @@ class CadastroInputFilter extends InputFilter
             'filters' => [
                 ['name' => StripTags::class],
                 ['name' => StringTrim::class],
+                ['name' => Digits::class],
             ]
         ]);
 

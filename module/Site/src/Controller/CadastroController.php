@@ -72,7 +72,7 @@ class CadastroController extends AbstractActionController
 
         $this->cadastroService->cadastrarSalao($salao, $acesso, $profissional);
 
-        $this->flashMessenger()->addMessage('Salão cadastrado com sucesso.');
+        $this->flashMessenger()->addSuccessMessage('Salão cadastrado com sucesso.');
 
         return $this->redirect()->toRoute('site-login');
     }
