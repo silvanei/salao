@@ -15,7 +15,7 @@
 
             <!-- TELEFONE DO SALÃO -->
             <div class="form-group has-feedback <?= $form->getMessages(CadastroForm::TELEFONE_SALAO) ? 'has-error' : '' ?>">
-                <?= $this->formInput($form->get(CadastroForm::TELEFONE_SALAO)->setAttribute('class', 'form-control')) ?>
+                <?= $this->formInput($form->get(CadastroForm::TELEFONE_SALAO)->setAttribute('class', 'form-control mask-phone')) ?>
                 <span class="glyphicon glyphicon-phone-alt form-control-feedback"></span>
                 <?=$this->formElementErrors($form->get(CadastroForm::TELEFONE_SALAO))?>
             </div>

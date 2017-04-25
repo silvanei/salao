@@ -39,8 +39,7 @@ class CadastroForm extends Form
         $telefoneSalao->setAttributes([
             'id' => self::TELEFONE_SALAO,
             'placeholder' => 'Telefone',
-            'required' => 'required',
-            'data-inputmask' => "'mask': '(999) 999-9999'"
+            'required' => 'required'
         ]);
         $this->add($telefoneSalao);
 

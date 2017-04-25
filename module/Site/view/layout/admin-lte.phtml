@@ -23,9 +23,9 @@
     <!-- Scripts -->
     <?= $this->headScript()
         ->appendFile($this->basePath('vendor/admin-lte/plugins/jQuery/jquery-2.2.3.min.js'))
+        ->appendFile($this->basePath('vendor/jquery-mask-plugin/dist/jquery.mask.min.js'))
         ->appendFile($this->basePath('vendor/admin-lte/bootstrap/js/bootstrap.min.js'))
-        ->appendFile($this->basePath('vendor/admin-lte/plugins/input-mask/jquery.inputmask.js'))
-        ->appendFile($this->basePath('vendor/admin-lte/plugins/input-mask/jquery.inputmask.extensions.js'))
+        ->appendFile($this->basePath('common/js/jquery-mask-set.js'))
         ->appendScript('
             $(function () {
                 var AdminLTEOptions = {

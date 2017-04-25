@@ -23,6 +23,10 @@ return [
                     'user' => 'root',
                     'password' => 'root',
                     'dbname' => 'agenda',
+                    'charset'  => 'utf8',
+                    'driverOptions' => array(
+                        1002 => 'SET NAMES utf8'
+                    )
                 ],
             ],
         ],

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "93ffaab85a02e44b807315e9c3e5b96b",
+    "hash": "bc9ee8ab576f3594a65be295342b5f68",
     "content-hash": "d10ec44e3fa4cd2d6a1e36af427006e3",
     "packages": [
         {
@@ -1754,16 +1754,16 @@
         },
         {
             "name": "zendframework/zend-component-installer",
-            "version": "0.7.1",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-component-installer.git",
-                "reference": "700a22e4791daa1110be06f2fb055dc678d2b7ff"
+                "reference": "0ca44807dbcf356b75a869c61b533f917ccbc5ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-component-installer/zipball/700a22e4791daa1110be06f2fb055dc678d2b7ff",
-                "reference": "700a22e4791daa1110be06f2fb055dc678d2b7ff",
+                "url": "https://api.github.com/repos/zendframework/zend-component-installer/zipball/0ca44807dbcf356b75a869c61b533f917ccbc5ae",
+                "reference": "0ca44807dbcf356b75a869c61b533f917ccbc5ae",
                 "shasum": ""
             },
             "require": {
@@ -1794,7 +1794,7 @@
                 "BSD-3-Clause"
             ],
             "description": "Composer plugin for automating component registration in zend-mvc and Expressive applications",
-            "time": "2017-04-11 19:16:05"
+            "time": "2017-04-25 16:43:54"
         },
         {
             "name": "zendframework/zend-config",
