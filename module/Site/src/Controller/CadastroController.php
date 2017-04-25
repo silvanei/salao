@@ -8,6 +8,9 @@
 
 namespace Site\Controller;
 
+use Salao\Entity\Acesso;
+use Salao\Entity\Profissional;
+use Salao\Entity\Salao;
 use Site\Service\CadastroService;
 use Zend\Form\FormInterface;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -54,8 +57,23 @@ class CadastroController extends AbstractActionController
             return new ViewModel($viewParans);
         }
 
-        // @todo salvar no DB
+        $data = $this->cadastroForm->getData();
+        $salao = new Salao();
+        $salao->setNome($data['nomeSalao']);
+        $salao->setTelefone($data['telefoneSalao']);
 
-        return $this->redirect()->toRoute('acesso-login');
+        $profissional = new Profissional();
+        $profissional->setNome($data['nomeAdministradorSalao']);
+
+        $acesso = new Acesso();
+        $acesso->setEmail($data['emailAdministradorSalao']);
+        $acesso->setSenha($data['senhaAdministradorSalao']);
+        $acesso->setPerfil('SALAO_ADMIN');
+
+        $this->cadastroService->cadastrarSalao($salao, $acesso, $profissional);
+
+        $this->flashMessenger()->addMessage('Salão cadastrado com sucesso.');
+
+        return $this->redirect()->toRoute('site-login');
     }
 }

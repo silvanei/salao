@@ -6,16 +6,16 @@ use Doctrine\ORM\Mapping\Driver\XmlDriver;
 use Salao\Infra\Repository\AcessoRepositoryFactory;
 use Salao\Infra\Repository\ProfissionalRepositoryFactory;
 use Salao\Infra\Repository\SalaoRepositoryFactory;
-use Salao\Repository\AcessoRepository;
-use Salao\Repository\ProfissionalRepository;
-use Salao\Repository\SalaoRepository;
+use Salao\Repository\AcessoRepositoryInterface;
+use Salao\Repository\ProfissionalRepositoryInterface;
+use Salao\Repository\SalaoRepositoryInterface;
 
 return [
     'service_manager' => [
         'factories' => [
-            AcessoRepository::class => AcessoRepositoryFactory::class,
-            ProfissionalRepository::class => ProfissionalRepositoryFactory::class,
-            SalaoRepository::class => SalaoRepositoryFactory::class,
+            AcessoRepositoryInterface::class => AcessoRepositoryFactory::class,
+            ProfissionalRepositoryInterface::class => ProfissionalRepositoryFactory::class,
+            SalaoRepositoryInterface::class => SalaoRepositoryFactory::class,
         ],
     ],
 

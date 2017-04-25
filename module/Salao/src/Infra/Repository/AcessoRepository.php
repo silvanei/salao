@@ -9,8 +9,19 @@
 namespace Salao\Infra\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Salao\Entity\Acesso;
+use Salao\Repository\AcessoRepositoryInterface;
 
-class AcessoRepository extends EntityRepository implements \Salao\Repository\AcessoRepository
+class AcessoRepository extends EntityRepository implements AcessoRepositoryInterface
 {
+
+    public function add(Acesso $acesso): Acesso
+    {
+
+        $this->getEntityManager()->persist($acesso);
+        $this->getEntityManager()->flush();
+        return $acesso;
+    }
+
 
 }

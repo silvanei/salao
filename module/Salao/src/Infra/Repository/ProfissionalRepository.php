@@ -8,9 +8,32 @@
 
 namespace Salao\Infra\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManager;
+use Salao\Entity\Profissional;
+use Salao\Repository\ProfissionalRepositoryInterface;
 
-class ProfissionalRepository extends EntityRepository implements \Salao\Repository\ProfissionalRepository
+class ProfissionalRepository implements ProfissionalRepositoryInterface
 {
+
+    /** @var  EntityManager */
+    private $em;
+
+    /**
+     * SalaoRepository constructor.
+     * @param EntityManager $em
+     */
+    public function __construct(EntityManager $em)
+    {
+        $this->em = $em;
+    }
+
+    public function add(Profissional $profissional): Profissional
+    {
+        $this->em->persist($profissional);
+        $this->em->flush();
+
+        return $profissional;
+    }
+
 
 }

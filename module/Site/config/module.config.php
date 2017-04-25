@@ -7,7 +7,7 @@ use Site\Controller\CadastroControllerFactory;
 use Site\Controller\LoginController;
 use Site\Form\CadastroForm;
 use Site\Form\CadastroFormFactory;
-use Site\Infra\Service\CadastroServiceFactory;
+use Site\Service\CadastroServiceFactory;
 use Site\Service\CadastroService;
 use Zend\Router\Http\Literal;
 use Zend\ServiceManager\Factory\InvokableFactory;

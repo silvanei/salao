@@ -8,22 +8,19 @@
 
 namespace Salao\Infra\Repository;
 
-use Salao\Repository\ProfissionalRepository;
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
-use Salao\Entity\Profissional;
+use Salao\Repository\ProfissionalRepositoryInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
 class ProfissionalRepositoryFactory implements FactoryInterface
 {
 
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null): ProfissionalRepository
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null): ProfissionalRepositoryInterface
     {
-        /** @var EntityManager $sm */
-        $sm = $container->get('doctrine.entitymanager.orm_default');
-        /** @var ProfissionalRepository $repository */
-        $repository = $sm->getRepository(Profissional::class);
+        /** @var EntityManager $em */
+        $em = $container->get('doctrine.entitymanager.orm_default');
 
-        return $repository;
+        return new ProfissionalRepository($em);
     }
 }

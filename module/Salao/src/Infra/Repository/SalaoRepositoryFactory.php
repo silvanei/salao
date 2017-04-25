@@ -8,7 +8,7 @@
 
 namespace Salao\Infra\Repository;
 
-use Salao\Repository\SalaoRepository;
+use Salao\Repository\SalaoRepositoryInterface;
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
 use Salao\Entity\Salao;
@@ -17,13 +17,11 @@ use Zend\ServiceManager\Factory\FactoryInterface;
 class SalaoRepositoryFactory implements FactoryInterface
 {
 
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null): SalaoRepository
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null): SalaoRepositoryInterface
     {
-        /** @var EntityManager $sm */
-        $sm = $container->get('doctrine.entitymanager.orm_default');
-        /** @var SalaoRepository $repository */
-        $repository = $sm->getRepository(Salao::class);
+        /** @var EntityManager $em */
+        $em = $container->get('doctrine.entitymanager.orm_default');
 
-        return $repository;
+        return new SalaoRepository($em);
     }
 }

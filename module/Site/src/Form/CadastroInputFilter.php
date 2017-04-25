@@ -8,6 +8,7 @@
 
 namespace Site\Form;
 
+use DoctrineModule\Validator\NoObjectExists;
 use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;
 use Zend\InputFilter\InputFilter;
@@ -16,7 +17,7 @@ use Zend\Validator\StringLength;
 
 class CadastroInputFilter extends InputFilter
 {
-    public function __construct()
+    public function __construct($repository)
     {
 
         $this->add([
@@ -74,7 +75,17 @@ class CadastroInputFilter extends InputFilter
                 ['name' => StringTrim::class],
             ],
             'validators' => [
-                ['name' => EmailAddress::class]
+                ['name' => EmailAddress::class],
+                [
+                    'name' => NoObjectExists::class,
+                    'options' => [
+                        'object_repository' => $repository,
+                        'fields' => 'email',
+                        'messages' => [
+                            NoObjectExists::ERROR_OBJECT_FOUND => "Já existe um usuário com o e-mail '%value%' ",
+                        ],
+                    ],
+                ],
             ]
         ]);
 

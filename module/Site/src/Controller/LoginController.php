@@ -19,15 +19,21 @@ class LoginController extends AbstractActionController
     public function indexAction(): ModelInterface
     {
 
+        $return = ['messages' => []];
+        $flashMessenger = $this->flashMessenger();
+        if ($flashMessenger->hasMessages()) {
+            $return['messages'] = $flashMessenger->getMessages();
+        }
+
         $validator = new LoginInputFilter();
         $form = new LoginForm('loginForm');
         $form->setInputFilter($validator);
 
-        $form->setData([
-            'email' => '',
-            'password' => '1',
-        ]);
-        $form->isValid();
-        return new ViewModel(['form' => $form]);
+//        $form->setData([
+//            'email' => '',
+//            'password' => '1',
+//        ]);
+//        $form->isValid();
+        return new ViewModel(['form' => $form, 'return' => $return]);
     }
 }

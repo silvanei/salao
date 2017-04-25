@@ -21,7 +21,8 @@
         "doctrine/doctrine-orm-module": "^1.1",
         "doctrine/migrations": "^1.5",
         "evandotpro/edp-module-layouts": "^1.0",
-        "zendframework/zend-mvc-i18n": "^1.0"
+        "zendframework/zend-mvc-i18n": "^1.0",
+        "zendframework/zend-mvc-plugin-flashmessenger": "^1.0"
     },
     "require-dev": {
         "zendframework/zend-developer-tools": "^1.1",

@@ -8,7 +8,10 @@
 
 namespace Salao\Repository;
 
-interface ProfissionalRepository
+use Salao\Entity\Salao;
+
+interface SalaoRepositoryInterface
 {
 
+    public function add(Salao $salao): Salao;
 }

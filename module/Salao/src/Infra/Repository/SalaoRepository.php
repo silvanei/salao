@@ -8,8 +8,32 @@
 
 namespace Salao\Infra\Repository;
 
+use Doctrine\ORM\EntityManager;
+use Salao\Entity\Salao;
+use Salao\Repository\SalaoRepositoryInterface;
 
-class SalaoRepository implements \Salao\Repository\SalaoRepository
+class SalaoRepository implements SalaoRepositoryInterface
 {
+
+    /** @var  EntityManager */
+    private $em;
+
+    /**
+     * SalaoRepository constructor.
+     * @param EntityManager $em
+     */
+    public function __construct(EntityManager $em)
+    {
+        $this->em = $em;
+    }
+
+    public function add(Salao $salao): Salao
+    {
+        $this->em->persist($salao);
+        $this->em->flush();
+
+        return $salao;
+    }
+
 
 }

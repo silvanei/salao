@@ -8,7 +8,10 @@
 
 namespace Salao\Repository;
 
-interface AcessoRepository
+use Salao\Entity\Acesso;
+
+interface AcessoRepositoryInterface
 {
 
+    public function add(Acesso $acesso): Acesso;
 }

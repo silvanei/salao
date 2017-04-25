@@ -15,15 +15,13 @@ use Zend\ServiceManager\Factory\FactoryInterface;
 
 class AcessoRepositoryFactory implements FactoryInterface
 {
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null): AcessoRepository
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
 
-        /** @var EntityManager $sm */
-        $sm = $container->get('doctrine.entitymanager.orm_default');
-        /** @var AcessoRepository $repository */
-        $repository = $sm->getRepository(Acesso::class);
+        /** @var EntityManager $em */
+        $em = $container->get('doctrine.entitymanager.orm_default');
 
-        return $repository;
+        return $em->getRepository(Acesso::class);
     }
 
 }

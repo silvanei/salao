@@ -24,3 +24,9 @@
         <?= $this->form()->closeTag($form) ?>
     </div>
 </div>
+
+<script>
+    <? foreach ($this->return['messages'] as $message): ?>
+        $.notify("<?=$message?>", "success");
+    <? endforeach; ?>
+</script>
