@@ -2,6 +2,7 @@
 
 namespace Common;
 
+use Common\Persistence\PasswordType;
 use Common\View\Helper\FlashNotifyFactory;
 use Common\View\Helper\FormElementErrorsCustom;
 use Zend\Navigation\Service\DefaultNavigationFactory;
@@ -47,6 +48,16 @@ return [
             'paths' => [
                 __DIR__ . '/../assets',
             ],
+        ],
+    ],
+
+    'doctrine' => [
+        'configuration' => [
+            'orm_default' => [
+                'types' => [
+                    'password' => PasswordType::class
+                ]
+            ]
         ],
     ],
 ];

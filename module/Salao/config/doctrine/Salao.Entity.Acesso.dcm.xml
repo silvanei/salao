@@ -12,7 +12,7 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="senha" type="string" column="senha" length="255" nullable="false">
+    <field name="senha" type="password" column="senha" length="255" nullable="false">
       <options>
         <option name="fixed"/>
       </options>
