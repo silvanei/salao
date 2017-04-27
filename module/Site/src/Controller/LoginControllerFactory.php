@@ -10,21 +10,27 @@ namespace Site\Controller;
 
 use Interop\Container\ContainerInterface;
 use Site\Form\LoginForm;
-use Zend\Authentication\Adapter\AbstractAdapter;
-use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
-class LoginControllerFactory implements FactoryInterface
+/**
+ * Class LoginControllerFactory
+ * @package Site\Controller
+ */
+final class LoginControllerFactory implements FactoryInterface
 {
 
+    /**
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
+     * @return AbstractActionController
+     */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null): AbstractActionController
     {
 
-        $authenticationService = $container->get(AuthenticationServiceInterface::class);
-        $authenticationAdapter = $container->get(AbstractAdapter::class);
         $form = $container->get(LoginForm::class);
 
-        return new LoginController($form, $authenticationService, $authenticationAdapter);
+        return new LoginController($form);
     }
 }

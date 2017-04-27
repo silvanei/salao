@@ -10,8 +10,6 @@ namespace Site\Controller;
 
 use Common\Controller\AbstractController;
 use Site\Form\LoginForm;
-use Zend\Authentication\Adapter\AbstractAdapter;
-use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\View\Model\ViewModel;
 
 /**
@@ -24,26 +22,12 @@ class LoginController extends AbstractController
     /** @var  LoginForm */
     private $loginForm;
 
-    /** @var  AuthenticationServiceInterface */
-    private $authenticationService;
-
-    /** @var  AbstractAdapter */
-    private $authenticationAdapter;
-
     /**
      * LoginController constructor.
      * @param LoginForm $loginForm
-     * @param AuthenticationServiceInterface $authenticationService
-     * @param AbstractAdapter $authenticationAdapter
      */
-    public function __construct(
-        LoginForm $loginForm,
-        AuthenticationServiceInterface $authenticationService,
-        AbstractAdapter $authenticationAdapter
-    ) {
+    public function __construct( LoginForm $loginForm) {
         $this->loginForm = $loginForm;
-        $this->authenticationService = $authenticationService;
-        $this->authenticationAdapter = $authenticationAdapter;
     }
 
 
@@ -59,18 +43,6 @@ class LoginController extends AbstractController
         $this->loginForm->setData($request->getPost());
         if (!$this->loginForm->isValid()) {
             return new ViewModel($viewParans);
-        }
-
-        $data = $this->loginForm->getData();
-
-        $this->authenticationAdapter->setIdentity($data['email']);
-        $this->authenticationAdapter->setCredential($data['password']);
-
-        $result = $this->authenticationService->authenticate($this->authenticationAdapter);
-
-        if (!$result->isValid()) {
-            $this->flashMessenger()->addErrorMessage('Usuário ou senha inválido.');
-            return $this->redirect()->toRoute('site-login');
         }
 
         $this->flashMessenger()->addSuccessMessage('Authenticado com sucesso.');

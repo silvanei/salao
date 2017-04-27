@@ -8,6 +8,7 @@
 
 namespace Site\Form;
 
+use Site\Form\Validator\AuthenticationValidator;
 use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;
 use Zend\InputFilter\InputFilter;
@@ -16,8 +17,9 @@ use Zend\Validator\StringLength;
 
 class LoginInputFilter extends InputFilter
 {
-    public function __construct()
-    {
+
+    public function __construct(AuthenticationValidator $authenticationValidator) {
+
 
         $this->add([
             'name' => 'email',
@@ -46,7 +48,8 @@ class LoginInputFilter extends InputFilter
                         'min' => 5,
                         'max' => 10,
                     ],
-                ]
+                ],
+                $authenticationValidator
             ]
         ]);
     }

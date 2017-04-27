@@ -9,6 +9,9 @@
 namespace Site\Form;
 
 use Interop\Container\ContainerInterface;
+use Site\Form\Validator\AuthenticationValidator;
+use Zend\Authentication\Adapter\AbstractAdapter;
+use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\Form\FormInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
@@ -28,7 +31,11 @@ final class LoginFormFactory implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null) : FormInterface
     {
 
-        $validator = new LoginInputFilter();
+        $authenticationService = $container->get(AuthenticationServiceInterface::class);
+        $authenticationAdapter = $container->get(AbstractAdapter::class);
+        $authenticationValidator = new AuthenticationValidator($authenticationService, $authenticationAdapter);
+
+        $validator = new LoginInputFilter($authenticationValidator);
         $form = new LoginForm('loginForm');
         $form->setInputFilter($validator);
 
