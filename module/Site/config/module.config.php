@@ -5,12 +5,12 @@ namespace Site;
 use Site\Controller\CadastroController;
 use Site\Controller\CadastroControllerFactory;
 use Site\Controller\LoginController;
+use Site\Controller\LoginControllerFactory;
 use Site\Form\CadastroForm;
 use Site\Form\CadastroFormFactory;
-use Site\Service\CadastroServiceFactory;
 use Site\Service\CadastroService;
+use Site\Service\CadastroServiceFactory;
 use Zend\Router\Http\Literal;
-use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
     'router' => [
@@ -39,7 +39,7 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            LoginController::class => InvokableFactory::class,
+            LoginController::class => LoginControllerFactory::class,
             CadastroController::class => CadastroControllerFactory::class,
         ],
     ],

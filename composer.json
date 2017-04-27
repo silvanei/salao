@@ -32,11 +32,11 @@
     },
     "autoload": {
         "psr-4": {
-            "Acesso\\": "module/Acesso/src/",
             "Site\\": "module/Site/src/",
             "Common\\": "module/Common/src/",
             "Salao\\": "module/Salao/src/",
-            "Application\\": "module/Application/src/"
+            "Security\\": "module/Security/src/"
+
         }
     },
     "autoload-dev": {
