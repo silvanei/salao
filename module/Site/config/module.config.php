@@ -8,6 +8,8 @@ use Site\Controller\LoginController;
 use Site\Controller\LoginControllerFactory;
 use Site\Form\CadastroForm;
 use Site\Form\CadastroFormFactory;
+use Site\Form\LoginForm;
+use Site\Form\LoginFormFactory;
 use Site\Service\CadastroService;
 use Site\Service\CadastroServiceFactory;
 use Zend\Router\Http\Literal;
@@ -49,6 +51,9 @@ return [
             // Cadastro
             CadastroForm::class => CadastroFormFactory::class,
             CadastroService::class => CadastroServiceFactory::class,
+
+            // Login
+            LoginForm::class => LoginFormFactory::class
         ],
     ],
 

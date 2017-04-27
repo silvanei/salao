@@ -8,17 +8,15 @@
 
 namespace Site\Form;
 
-use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
-use Salao\Entity\Acesso;
 use Zend\Form\FormInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
- * Class CadastroFormFactory
+ * Class LoginFormFactory
  * @package Site\Form
  */
-final class CadastroFormFactory implements FactoryInterface
+final class LoginFormFactory implements FactoryInterface
 {
 
     /**
@@ -30,11 +28,9 @@ final class CadastroFormFactory implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null) : FormInterface
     {
 
-        /** @var EntityManager $entityManager */
-        $entityManager = $container->get('doctrine.entitymanager.orm_default');
-
-        $form = new CadastroForm('registroForm');
-        $form->setInputFilter(new CadastroInputFilter($entityManager->getRepository(Acesso::class)));
+        $validator = new LoginInputFilter();
+        $form = new LoginForm('loginForm');
+        $form->setInputFilter($validator);
 
         return $form;
     }

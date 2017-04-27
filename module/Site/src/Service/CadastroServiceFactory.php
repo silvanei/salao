@@ -15,9 +15,19 @@ use Salao\Repository\ProfissionalRepositoryInterface;
 use Salao\Repository\SalaoRepositoryInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
-class CadastroServiceFactory implements FactoryInterface
+/**
+ * Class CadastroServiceFactory
+ * @package Site\Service
+ */
+final class CadastroServiceFactory implements FactoryInterface
 {
 
+    /**
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
+     * @return CadastroService
+     */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null): CadastroService
     {
 

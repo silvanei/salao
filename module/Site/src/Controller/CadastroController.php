@@ -8,15 +8,15 @@
 
 namespace Site\Controller;
 
+use Common\Controller\AbstractController;
 use Salao\Entity\Acesso;
 use Salao\Entity\Profissional;
 use Salao\Entity\Salao;
 use Site\Service\CadastroService;
 use Zend\Form\FormInterface;
-use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class CadastroController extends AbstractActionController
+class CadastroController extends AbstractController
 {
 
     /**

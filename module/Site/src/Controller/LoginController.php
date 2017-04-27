@@ -8,33 +8,42 @@
 
 namespace Site\Controller;
 
+use Common\Controller\AbstractController;
 use Site\Form\LoginForm;
-use Site\Form\LoginInputFilter;
 use Zend\Authentication\Adapter\AbstractAdapter;
-use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\AuthenticationServiceInterface;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ModelInterface;
 use Zend\View\Model\ViewModel;
 
-class LoginController extends AbstractActionController
+/**
+ * Class LoginController
+ * @package Site\Controller
+ */
+class LoginController extends AbstractController
 {
 
     /** @var  LoginForm */
     private $loginForm;
 
-    /** @var  AbstractAdapter */
+    /** @var  AuthenticationServiceInterface */
     private $authenticationService;
+
+    /** @var  AbstractAdapter */
+    private $authenticationAdapter;
 
     /**
      * LoginController constructor.
      * @param LoginForm $loginForm
-     * @param AbstractAdapter $authenticationService
+     * @param AuthenticationServiceInterface $authenticationService
+     * @param AbstractAdapter $authenticationAdapter
      */
-    public function __construct(LoginForm $loginForm, AbstractAdapter $authenticationService)
-    {
+    public function __construct(
+        LoginForm $loginForm,
+        AuthenticationServiceInterface $authenticationService,
+        AbstractAdapter $authenticationAdapter
+    ) {
         $this->loginForm = $loginForm;
         $this->authenticationService = $authenticationService;
+        $this->authenticationAdapter = $authenticationAdapter;
     }
 
 
@@ -54,20 +63,18 @@ class LoginController extends AbstractActionController
 
         $data = $this->loginForm->getData();
 
-        $this->authenticationService->setIdentity($data['email']);
-        $this->authenticationService->setCredential($data['password']);
+        $this->authenticationAdapter->setIdentity($data['email']);
+        $this->authenticationAdapter->setCredential($data['password']);
 
-        $auth = new AuthenticationService();
+        $result = $this->authenticationService->authenticate($this->authenticationAdapter);
 
-        $result = $auth->authenticate($this->authenticationService);
-
-        if ($result->isValid()) {
-            $this->flashMessenger()->addSuccessMessage('Authenticado com sucesso.');
-        } else {
+        if (!$result->isValid()) {
             $this->flashMessenger()->addErrorMessage('Usuário ou senha inválido.');
+            return $this->redirect()->toRoute('site-login');
         }
 
-        return $this->redirect()->toRoute('site-login');
+        $this->flashMessenger()->addSuccessMessage('Authenticado com sucesso.');
+        return $this->redirect()->toRoute('site-cadastro');
 
     }
 }
