@@ -20,6 +20,7 @@ use Salao\Controller\CadastroController;
 class LoginController extends AbstractController
 {
 
+    const ROUTE_NAME = 'site-login';
     /** @var  LoginForm */
     private $loginForm;
 

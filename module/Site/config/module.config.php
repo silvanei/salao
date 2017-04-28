@@ -6,6 +6,8 @@ use Site\Controller\CadastroController;
 use Site\Controller\CadastroControllerFactory;
 use Site\Controller\LoginController;
 use Site\Controller\LoginControllerFactory;
+use Site\Controller\LogoutController;
+use Site\Controller\LogoutControllerFactory;
 use Site\Form\CadastroForm;
 use Site\Form\CadastroFormFactory;
 use Site\Form\LoginForm;
@@ -17,12 +19,22 @@ use Zend\Router\Http\Literal;
 return [
     'router' => [
         'routes' => [
-            'site-login' => [
+            LoginController::ROUTE_NAME => [
                 'type' => Literal::class,
                 'options' => [
                     'route' => '/',
                     'defaults' => [
                         'controller' => LoginController::class,
+                        'action' => 'index',
+                    ],
+                ],
+            ],
+            LogoutController::ROUTE_NAME => [
+                'type' => Literal::class,
+                'options' => [
+                    'route' => '/logout',
+                    'defaults' => [
+                        'controller' => LogoutController::class,
                         'action' => 'index',
                     ],
                 ],
@@ -42,6 +54,7 @@ return [
     'controllers' => [
         'factories' => [
             LoginController::class => LoginControllerFactory::class,
+            LogoutController::class => LogoutControllerFactory::class,
             CadastroController::class => CadastroControllerFactory::class,
         ],
     ],
