@@ -28,8 +28,10 @@ return [
     'DoctrineORMModule',
 
     'Common',
-    'Site',
+    'Agenda',
     'Salao',
+    'Profissional',
+    'Cliente',
+    'Site',
     'Security',
-    #'Acesso',
 ];

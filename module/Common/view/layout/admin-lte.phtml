@@ -13,7 +13,6 @@
     <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath('application/img/favicon.ico')])
         ->prependStylesheet($this->basePath('vendor/admin-lte/bootstrap/css/bootstrap-theme.min.css'))
         ->prependStylesheet($this->basePath('vendor/admin-lte/bootstrap/css/bootstrap.min.css'))
-
         ->prependStylesheet($this->basePath('vendor/admin-lte/dist/css/AdminLTE.min.css'))
         ->prependStylesheet($this->basePath('vendor/admin-lte/dist/css/skins/_all-skins.min.css'))
         ->prependStylesheet($this->basePath('vendor/admin-lte/dist/css/AdminLTE.min.css'))
@@ -23,7 +22,9 @@
     <!-- Scripts -->
     <?= $this->headScript()
         ->appendFile($this->basePath('vendor/admin-lte/plugins/jQuery/jquery-2.2.3.min.js'))
+        ->appendFile($this->basePath('vendor/jquery-mask-plugin/dist/jquery.mask.min.js'))
         ->appendFile($this->basePath('vendor/admin-lte/bootstrap/js/bootstrap.min.js'))
+        ->appendFile($this->basePath('common/js/jquery-mask-set.js'))
         ->appendScript('
             $(function () {
                 var AdminLTEOptions = {
@@ -35,45 +36,48 @@
     ?>
 
 </head>
-<body class="hold-transition skin-blue layout-top-nav" >
+<body class="hold-transition skin-blue layout-top-nav">
 
-<div class="wrapper">
-    <header class="main-header">
-        <nav class="navbar navbar-static-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a href="/" class="navbar-brand"><b>{{nomeSalao}}</b></a>
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-                        <i class="fa fa-bars"></i>
-                    </button>
-                </div>
+    <div class="wrapper">
+        <header class="main-header">
+            <nav class="navbar navbar-static-top">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a href="/" class="navbar-brand"><b>{{nomeSalao}}</b></a>
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#navbar-collapse">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </div>
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="navbar-collapse">
-                    <?  $this->navigation('default')->menu()->setPartial('navigation/default'); ?>
-                    <?= $this->navigation('default')->menu()->render() ?>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="navbar-collapse">
+                        <? $this->navigation('default')->menu()->setPartial('navigation/default'); ?>
+                        <?= $this->navigation('default')->menu()->render() ?>
 
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- User Account: style can be found in dropdown.less -->
-                        <li>
-                            <a href="logout"><i class="fa fa-sign-out margin-r-5"></i> Sair</a>
-                        </li>
-                    </ul>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-        </nav>
-    </header>
-    <div class="content-wrapper">
-        <?= $this->content ?>
-    </div>
-
-    <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-            <b>Version</b> 2.3.0
+                        <ul class="nav navbar-nav navbar-right">
+                            <!-- User Account: style can be found in dropdown.less -->
+                            <li>
+                                <a href="logout"><i class="fa fa-sign-out margin-r-5"></i> Sair</a>
+                            </li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+        </header>
+        <div class="content-wrapper">
+            <?= $this->content ?>
         </div>
-        <strong>Copyright &copy; <?php echo date('Y') ?> <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
-    </footer>
-</div>
-<?= $this->inlineScript() ?>
+
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 2.3.0
+            </div>
+            <strong>Copyright &copy; <?php echo date('Y') ?> <a href="http://almsaeedstudio.com">Almsaeed
+                    Studio</a>.</strong> All rights reserved.
+        </footer>
+    </div>
+    <?= $this->flashNotify(); ?>
+    <?= $this->inlineScript() ?>
 </body>
 </html>

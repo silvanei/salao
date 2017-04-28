@@ -1,20 +1,22 @@
+<? use \Site\Form\LoginForm; ?>
+<? /** @var LoginForm $form */ ?>
+
 <div class="login-box">
     <div class="login-box-body">
         <p class="login-box-msg">
             Entre com o Login e Senha ou <a href="<?=$this->url('site-cadastro')?>" class="text-center">Registre-se</a>
         </p>
-        <? /** @var \Site\Form\LoginForm $form */ ?>
         <? $form->prepare(); ?>
         <?= $this->form()->openTag($form) ?>
-            <div class="form-group has-feedback <?= $form->getMessages('email') ? 'has-error' : '' ?>">
-                <?= $this->formInput($form->get('email')->setAttribute('class', 'form-control')) ?>
+            <div class="form-group has-feedback <?= $form->getMessages(LoginForm::EMAIL) ? 'has-error' : '' ?>">
+                <?= $this->formInput($form->get(LoginForm::EMAIL)->setAttribute('class', 'form-control')) ?>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                <?=$this->formElementErrors($form->get('email'))?>
+                <?=$this->formElementErrors($form->get(LoginForm::EMAIL))?>
             </div>
-            <div class="form-group has-feedback <?= $form->getMessages('password') ? 'has-error' : '' ?>">
-                <?= $this->formInput($form->get('password')->setAttribute('class', 'form-control')) ?>
+            <div class="form-group has-feedback <?= $form->getMessages(LoginForm::PASSWORD) ? 'has-error' : '' ?>">
+                <?= $this->formInput($form->get(LoginForm::PASSWORD)->setAttribute('class', 'form-control')) ?>
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                <?=$this->formElementErrors($form->get('password'))?>
+                <?=$this->formElementErrors($form->get(LoginForm::PASSWORD))?>
             </div>
             <div class="row">
                 <div class="col-xs-12">

@@ -11,6 +11,7 @@ namespace Site\Controller;
 use Common\Controller\AbstractController;
 use Site\Form\LoginForm;
 use Zend\View\Model\ViewModel;
+use Salao\Controller\CadastroController;
 
 /**
  * Class LoginController
@@ -46,7 +47,7 @@ class LoginController extends AbstractController
         }
 
         $this->flashMessenger()->addSuccessMessage('Authenticado com sucesso.');
-        return $this->redirect()->toRoute('site-cadastro');
+        return $this->redirect()->toRoute(CadastroController::ROUTE_NAME);
 
     }
 }

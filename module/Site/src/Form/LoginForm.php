@@ -12,13 +12,25 @@ use Zend\Form\Element\Password;
 use Zend\Form\Element\Text;
 use Zend\Form\Form;
 
+/**
+ * Class LoginForm
+ * @package Site\Form
+ */
 class LoginForm extends Form
 {
+
+    const EMAIL = 'email';
+    const PASSWORD = 'password';
+
+    /**
+     * LoginForm constructor.
+     * @param string|null $name
+     */
     public function __construct(string $name = null)
     {
         parent::__construct($name);
 
-        $email = new Text('email');
+        $email = new Text(self::EMAIL);
         $email->setAttributes([
             'id' => 'email',
             'placeholder' => 'E-mail',
@@ -26,7 +38,7 @@ class LoginForm extends Form
         ]);
         $this->add($email);
 
-        $password = new Password('password');
+        $password = new Password(self::PASSWORD);
         $password->setAttributes([
             'id' => 'password',
             'placeholder' => 'Password',

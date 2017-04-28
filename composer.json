@@ -32,11 +32,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Site\\": "module/Site/src/",
             "Common\\": "module/Common/src/",
+            "Agenda\\": "module/Agenda/src/",
             "Salao\\": "module/Salao/src/",
+            "Profissional\\": "module/Profissional/src/",
+            "Cliente\\": "module/Cliente/src/",
+            "Site\\": "module/Site/src/",
             "Security\\": "module/Security/src/"
-
         }
     },
     "autoload-dev": {

@@ -1,0 +1,167 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>Clientes</h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body">
+                    <div>
+                        <a class="btn btn-primary" ng-click="adicionar()"><i class="fa fa-fw fa-plus-circle"></i>Novo Cliente</a>
+                    </div>
+                    <br />
+                    <table id="cliente-table" class="table table-condensed table-hover">
+                        <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Telefone</th>
+                            <th>E-mail</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="cliente in clientes">
+                            <td>{{cliente.nome}}</td>
+                            <td>{{cliente.telefone}}</td>
+                            <td>{{cliente.email}}</td>
+                            <td>
+                                <a ng-click="editar(cliente)" ><i class="fa fa-fw fa-edit"></i></a>
+                                <a ng-click="confirmExcluir(cliente)"><i class="fa fa-fw fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div ng-show="clientes.length > 0">
+                        <ul uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage" max-size="maxSize" ng-change="pageChanged()"></ul>
+                    </div>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</section><!-- /.content -->
+
+<div class="fade modal" id="excluir-cliente">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="excluir-profissional-title">Excluir Cliente</h4>
+            </div>
+            <div class="modal-body">
+                <p>Deseja excluir este cliente ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" ng-click="excluir(cliente)">Sim</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="fade modal" id="modal-cliente">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form class="form-horizontal" name="dadosClienteForm">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">Novo Cliente</h4>
+                </div>
+                <div class="modal-body no-padding">
+                    <div class="nav-tabs-custom" style="margin-bottom: 0;">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#dados" data-toggle="tab">Dados</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="active tab-pane" id="dados">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group" ng-class="{'has-error': (dadosClienteForm.nome.$invalid && dadosClienteForm.nome.$dirty)}">
+                                            <label for="nome" class="col-sm-2 control-label">Nome</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome do cliente" ng-model="cliente.nome" ng-required="true" ng-minlength="5" ng-maxlength="255">
+                                                <div ng-messages="dadosClienteForm.nome.$error" ng-show="dadosClienteForm.nome.$dirty">
+                                                    <div ng-message="required" class="help-block">
+                                                        Por favor, preencher o campo nome
+                                                    </div>
+                                                    <div ng-message="minlength" class="help-block">
+                                                        O campo descrição deve ter no mínimo 5 caracteres
+                                                    </div>
+                                                    <div ng-message="maxlength" class="help-block">
+                                                        O campo descrição de ter no máximo 255 caracteres
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-class="{'has-error': (dadosClienteForm.telefone.$invalid && dadosClienteForm.telefone.$dirty)}">
+                                            <label for="telefone" class="col-sm-2 control-label" >Telefone</label>
+                                            <div class="col-sm-3">
+                                                <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="Telefone do cliente" ng-model="cliente.telefone" mask='(99) 9?9999-9999' mask-restrict='reject' mask-clean='true'>
+                                                <div ng-messages="dadosClienteForm.telefone.$error" ng-show="dadosClienteForm.telefone.$dirty">
+                                                    <div ng-message="mask" class="help-block">
+                                                        Por favor, informe um telefone válido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-class="{'has-error': (dadosClienteForm.email.$invalid && dadosClienteForm.email.$dirty)}">
+                                            <label for="email" class="col-sm-2 control-label" >E-mail</label>
+                                            <div class="col-sm-5">
+                                                <input type="email" class="form-control" id="email" name="email" placeholder="E-mail do cliente" ng-model="cliente.email">
+                                                <div ng-messages="dadosClienteForm.email.$error" ng-show="dadosClienteForm.email.$dirty">
+                                                    <div ng-message="email" class="help-block">
+                                                        Por favor, informe um e-mail válido
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="input-estado" class="col-sm-2 control-label">Estado</label>
+                                            <div class="col-sm-4">
+                                                <select class="form-control" id="input-estado" ng-change="changeEstado(cliente.endereco.estado.id)" ng-model="cliente.endereco.estado.id" ng-options="estado.id as estado.nome for estado in estados"  >
+                                                    <option value="">Selecione</option>
+                                                </select>
+                                            </div>
+
+                                            <label for="input-cidade" class="col-sm-1 control-label">Cidade</label>
+                                            <div class="col-sm-4">
+                                                <select class="form-control" id="input-cidade" ng-model="cliente.endereco.cidade.id" ng-options="cidade.id as cidade.nome for cidade in cidades">
+                                                    <option value="">Selecione</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="input-endereco" class="col-sm-2 control-label">Endereço</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="input-endereco" placeholder="Endereço" ng-model="cliente.endereco.rua">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="input-numero" class="col-sm-2 control-label" >Número</label>
+                                            <div class="col-sm-3">
+                                                <input type="text" class="form-control" id="input-numero" placeholder="Número" ng-model="cliente.endereco.numero">
+                                            </div>
+                                        </div>
+
+                                    </div><!-- /.col -->
+                                </div>
+
+                            </div>
+                        </div><!-- /.tab-content -->
+                    </div><!-- /.nav-tabs-custom -->
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-default" data-dismiss="modal">Cancelar</a>
+                    <button type="button" class="btn btn-primary" ng-hide="!cliente.id" ng-click="atualizar(cliente)" ng-disabled="dadosClienteForm.$invalid" >Atualizar</button>
+                    <button type="button" class="btn btn-primary" ng-hide="cliente.id" ng-click="salvar(cliente)" ng-disabled="dadosClienteForm.$invalid" >Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

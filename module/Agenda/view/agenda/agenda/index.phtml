@@ -1,0 +1,241 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>Agenda</h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body no-padding">
+                    <div style="padding: 10px">
+                        <a class="btn btn-primary" ng-click="novoAgendamento()" ><i class="fa fa-fw fa-plus-circle"></i>Novo Agendamento</a>
+                        <a class="btn btn-primary" data-toggle="modal" data-target="#modal-novo-cliente"><i class="fa fa-fw fa-plus-circle"></i>Novo Cliente</a>
+                    </div>
+                    <!-- THE CALENDAR -->
+                    <!--<div id="calendar"></div>-->
+                    <div id="calendar" ui-calendar="uiConfig.calendar" ng-model="eventSources"> </div>
+                </div><!-- /.box-body -->
+            </div><!-- /. box -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</section><!-- /.content -->
+
+
+<div class="fade modal" id="modal-agendamento">
+    <div class="modal-dialog">
+        <form class="form-horizontal" role="form" name="agendamentoForm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">Novo Agendamento</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group" ng-class="{'has-error': (agendamentoForm.data.$invalid && agendamentoForm.data.$dirty)}">
+                        <div class="col-sm-2">
+                            <label for="data" class="control-label">Data</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" name="data" id="data" ng-model="agendamento.data" ng-required="true" min="{{currentDate}}" >
+                            <div ng-messages="agendamentoForm.data.$error" ng-show="agendamentoForm.data.$dirty">
+                                <div ng-message="required" class="help-block">
+                                    Por favor, preencher o campo data
+                                </div>
+                                <div ng-message="date" class="help-block">
+                                    Data inválida
+                                </div>
+                                <div ng-message="min" class="help-block">
+                                    Não é possível agendar para uma data menor que hoje
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error': (agendamentoForm.cliente.$invalid && agendamentoForm.cliente.$dirty)}" ng-hide="agendamento.id">
+                        <div class="col-sm-2">
+                            <label for="cliente" class="control-label">Cliente</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <ui-select name="cliente" id="cliente" ng-model="agendamento.clienteId" ng-required="true" skip-focusser="true">
+                                <ui-select-match placeholder="Selecione um cliente" allow-clear="true">{{$select.selected.nome}}</ui-select-match>
+                                <ui-select-choices repeat="item.id as item in clientes | filter: $select.search">
+                                    <div ng-bind-html="item.nome | highlight: $select.search"></div>
+                                    <small ng-bind-html="item.telefone | highlight: $select.search"></small>
+                                </ui-select-choices>
+                                <ui-select-no-choice>
+                                    Não foi possível encontrar o cliente...
+                                </ui-select-no-choice>
+                            </ui-select>
+                            <div ng-messages="agendamentoForm.cliente.$error" ng-show="agendamentoForm.cliente.$dirty">
+                                <div ng-message="required" class="help-block">
+                                    Por favor, preencher o campo cliente
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" ng-class="{'has-error': (agendamentoForm.servico.$invalid && agendamentoForm.servico.$dirty)}">
+                        <div class="col-sm-2">
+                            <label for="servico" class="control-label">Serviço</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <ui-select name="servico" id="servico" ng-model="agendamento.servicoId" on-select="onSelectServico($item)" ng-required="true" skip-focusser="true">
+                                <ui-select-match placeholder="Selecione um serviço" allow-clear="true">{{$select.selected.descricao}}</ui-select-match>
+                                <ui-select-choices repeat="item.id as item in servicos | filter: $select.search">
+                                    <div ng-bind-html="item.descricao | highlight: $select.search"></div>
+                                </ui-select-choices>
+                                <ui-select-no-choice>
+                                    Não foi possível encontrar o serviço...
+                                </ui-select-no-choice>
+                            </ui-select>
+                            <div ng-messages="agendamentoForm.servico.$error" ng-show="agendamentoForm.servico.$dirty">
+                                <div ng-message="required" class="help-block">
+                                    Por favor, preencher o campo serviço
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': (agendamentoForm.profissional.$invalid && agendamentoForm.profissional.$dirty)}">
+                        <div class="col-sm-2">
+                            <label for="profissional" class="control-label">Profissional</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <ui-select name="profissional" id="profissional" ng-model="agendamento.profissionalId" ng-required="true" skip-focusser="true">
+                                <ui-select-match placeholder="Selecione um profissional" allow-clear="true">{{$select.selected.apelido}}</ui-select-match>
+                                <ui-select-choices repeat="item.id as item in profissionais | filter: $select.search">
+                                    <div ng-bind-html="item.apelido | highlight: $select.search"></div>
+                                </ui-select-choices>
+                                <ui-select-no-choice>
+                                    Não foi possível encontrar o profissional...
+                                </ui-select-no-choice>
+                            </ui-select>
+                            <div ng-messages="agendamentoForm.profissional.$error" ng-show="agendamentoForm.profissional.$dirty">
+                                <div ng-message="required" class="help-block">
+                                    Por favor, preencher o campo profissional
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': (agendamentoForm.hora.$invalid && agendamentoForm.hora.$dirty)}">
+                        <div class="col-sm-2">
+                            <label for="hora" class="control-label">Hora</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="hora" id="hora" time-input time-min="{{minTime}}" time-max="{{maxTime}}" ng-model="agendamento.hora" ng-required="true">
+                            <div ng-messages="agendamentoForm.hora.$error" ng-show="agendamentoForm.hora.$dirty">
+                                <div ng-message="required" class="help-block">
+                                    Por favor, preencher o campo hora
+                                </div>
+                                <div ng-message="parse" class="help-block">
+                                    Por favor, informe um horario válido
+                                </div>
+                                <div ng-message="timeMin" class="help-block">
+                                    Não é possível agendar para uma hora menor que {{minTime}}
+                                </div>
+                                <div ng-message="timeMax" class="help-block">
+                                    Não é possível agendar para uma data maior que {{maxTime}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="agendamento.id">
+                        <div class="form-group" ng-class="{'has-error': (agendamentoForm.status.$invalid && agendamentoForm.status.$dirty)}">
+                            <div class="col-sm-2">
+                                <label for="status" class="control-label">Status</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="status" id="status" ng-model="agendamento.status" ng-options="status.id as status.label for status in statusAgendamento" ng-required="true">
+                                    <option value="">Selecione um status</option>
+                                </select>
+                                <div ng-messages="agendamentoForm.status.$error" ng-show="agendamentoForm.status.$dirty">
+                                    <div ng-message="required" class="help-block">
+                                        Por favor, preencher o campo status
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label for="observacao" class="control-label">Observação</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <textarea id="observacao" name="observacao" class="form-control" ng-model="agendamento.observacao"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <span ng-if="agendamento.id" >
+                        <button type="button" class="btn btn-primary" ng-click="atualizar(agendamento)" ng-disabled="agendamentoForm.$invalid" >Atualizar</button>
+                    </span>
+                    <span ng-if="!agendamento.id">
+                        <button type="button" class="btn btn-primary" ng-hide="agendamento.id" ng-click="salvar(agendamento)" ng-disabled="agendamentoForm.$invalid" >Salvar</button>
+                    </span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="fade modal" id="modal-novo-cliente">
+    <div class="modal-dialog">
+        <form class="form-horizontal" role="form" name="novoClienteForm" ng-controller="novoClienteController">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Novo Cliente</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group" ng-class="{'has-error': (novoClienteForm.nome.$invalid && novoClienteForm.nome.$dirty)}">
+                        <label for="nome" class="col-sm-3 control-label">Nome</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome do cliente" ng-model="cliente.nome" ng-required="true" ng-minlength="5" ng-maxlength="255">
+                            <div ng-messages="novoClienteForm.nome.$error" ng-show="novoClienteForm.nome.$dirty">
+                                <div ng-message="required" class="help-block">
+                                    Por favor, preencher o campo nome
+                                </div>
+                                <div ng-message="minlength" class="help-block">
+                                    O campo descrição deve ter no mínimo 5 caracteres
+                                </div>
+                                <div ng-message="maxlength" class="help-block">
+                                    O campo descrição de ter no máximo 255 caracteres
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': (novoClienteForm.telefone.$invalid && novoClienteForm.telefone.$dirty)}">
+                        <label for="telefone" class="col-sm-3 control-label" >Telefone</label>
+                        <div class="col-sm-8">
+                            <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="Telefone do cliente" ng-model="cliente.telefone" mask='(99) 9?9999-9999' mask-restrict='reject' mask-clean='true'>
+                            <div ng-messages="novoClienteForm.telefone.$error" ng-show="novoClienteForm.telefone.$dirty">
+                                <div ng-message="mask" class="help-block">
+                                    Por favor, informe um telefone válido
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': (novoClienteForm.email.$invalid && novoClienteForm.email.$dirty)}">
+                        <label for="email" class="col-sm-3 control-label" >E-mail</label>
+                        <div class="col-sm-8">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="E-mail do cliente" ng-model="cliente.email">
+                            <div ng-messages="novoClienteForm.email.$error" ng-show="novoClienteForm.email.$dirty">
+                                <div ng-message="email" class="help-block">
+                                    Por favor, informe um e-mail válido
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-default" data-dismiss="modal">Cancelar</a>
+                    <button type="button" class="btn btn-primary" ng-click="salvar(cliente)" ng-disabled="novoClienteForm.$invalid" >Salvar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

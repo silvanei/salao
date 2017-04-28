@@ -22,7 +22,7 @@ class LoginInputFilter extends InputFilter
 
 
         $this->add([
-            'name' => 'email',
+            'name' => LoginForm::EMAIL,
             'required' => true,
             'filters' => [
                 ['name' => StripTags::class],
@@ -34,7 +34,7 @@ class LoginInputFilter extends InputFilter
         ]);
 
         $this->add([
-            'name' => 'password',
+            'name' => LoginForm::PASSWORD,
             'required' => true,
             'filters' => [
                 ['name' => StripTags::class],
