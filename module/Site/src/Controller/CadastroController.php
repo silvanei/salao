@@ -12,6 +12,7 @@ use Common\Controller\AbstractController;
 use Salao\Entity\Acesso;
 use Salao\Entity\Profissional;
 use Salao\Entity\Salao;
+use Security\Authorization\Role;
 use Site\Service\CadastroService;
 use Zend\Form\FormInterface;
 use Zend\View\Model\ViewModel;
@@ -68,7 +69,7 @@ class CadastroController extends AbstractController
         $acesso = new Acesso();
         $acesso->setEmail($data['emailAdministradorSalao']);
         $acesso->setSenha($data['senhaAdministradorSalao']);
-        $acesso->setPerfil('SALAO_ADMIN');
+        $acesso->setPerfil(Role::SALAO_ADMIN);
 
         $this->cadastroService->cadastrarSalao($salao, $acesso, $profissional);
 
