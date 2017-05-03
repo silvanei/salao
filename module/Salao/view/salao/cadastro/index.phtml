@@ -1,3 +1,6 @@
+<? use \Salao\Form\SalaoForm; ?>
+<? /** @var SalaoForm $form */ ?>
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>Perfil do Salão</h1>
@@ -33,7 +36,9 @@
                     <div class="active tab-pane" id="dados">
                         <div class="row">
                             <div class="col-md-12">
-                                <form class="form-horizontal" name="dadosForm">
+                                <? $form->setAttribute('class', 'form-horizontal'); ?>
+                                <? $form->prepare(); ?>
+                                <?= $this->form()->openTag($form) ?>
 
                                     <div class="form-group">
                                         <label for="input-nome" class="col-sm-2 control-label">Imagen</label>
@@ -42,36 +47,20 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group <?= $form->getMessages(SalaoForm::NOME) ? 'has-error' : '' ?>">
                                         <label for="input-nome" class="col-sm-2 control-label">Nome</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="input-nome" placeholder="Nome do salão" ng-model="dados.nome" >
+                                            <? $nome = $form->get(SalaoForm::NOME)->setAttribute('class', 'form-control'); ?>
+                                            <?= $this->formInput($nome) ?>
+                                            <?=$this->formElementErrors($nome)?>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group <?= $form->getMessages(SalaoForm::DIAS_FUNCIONAMENTO) ? 'has-error' : '' ?>">
                                         <label class="col-sm-2 control-label">Dias de funcionamento</label>
                                         <div class="col-sm-9">
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox" value="option1" ng-model="dados.horarioDeFuncionamento.domingo"> Dom
-                                            </label>
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox" value="option2" ng-model="dados.horarioDeFuncionamento.segunda"> Seg
-                                            </label>
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox" value="option3" ng-model="dados.horarioDeFuncionamento.terca"> Ter
-                                            </label>
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox" value="option3" ng-model="dados.horarioDeFuncionamento.quarta"> Qua
-                                            </label>
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox" value="option3" ng-model="dados.horarioDeFuncionamento.quinta"> Qui
-                                            </label>
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox" value="option3" ng-model="dados.horarioDeFuncionamento.sexta"> Sex
-                                            </label>
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox" value="option3" ng-model="dados.horarioDeFuncionamento.sabado"> Sáb
-                                            </label>
+                                            <? $diasDeFuncionamento = $form->get(SalaoForm::DIAS_FUNCIONAMENTO)->setLabelAttributes(['class' => 'checkbox-inline']) ?>
+                                            <?= $this->formMultiCheckbox($diasDeFuncionamento) ?>
+                                            <?=$this->formElementErrors($diasDeFuncionamento)?>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -129,7 +118,7 @@
                                             <button type="submit" class="btn btn-primary" ng-click="atualizarDados(dados)" >Salvar</button>
                                         </div>
                                     </div>
-                                </form>
+                                <?= $this->form()->closeTag($form) ?>
                             </div><!-- /.col -->
                         </div>
                     </div>

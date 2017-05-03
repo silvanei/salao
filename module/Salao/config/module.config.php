@@ -4,6 +4,9 @@ namespace Salao;
 
 use Doctrine\ORM\Mapping\Driver\XmlDriver;
 use Salao\Controller\CadastroController;
+use Salao\Controller\CadastroControllerFactory;
+use Salao\Form\SalaoForm;
+use Salao\Form\SalaoFormFactory;
 use Salao\Infra\Repository\AcessoRepositoryFactory;
 use Salao\Infra\Repository\ProfissionalRepositoryFactory;
 use Salao\Infra\Repository\SalaoRepositoryFactory;
@@ -30,7 +33,7 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            CadastroController::class => InvokableFactory::class,
+            CadastroController::class => CadastroControllerFactory::class,
         ],
     ],
     'navigation' => [
@@ -45,6 +48,7 @@ return [
 
     'service_manager' => [
         'factories' => [
+            SalaoForm::class => SalaoFormFactory::class,
             AcessoRepositoryInterface::class => AcessoRepositoryFactory::class,
             ProfissionalRepositoryInterface::class => ProfissionalRepositoryFactory::class,
             SalaoRepositoryInterface::class => SalaoRepositoryFactory::class,

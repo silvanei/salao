@@ -2,6 +2,7 @@
 
 namespace Security;
 
+use Cliente\Controller\ClienteController;
 use Security\Authentication\AuthenticationAdapterFactory;
 use Security\Authentication\AuthenticationServiceFactory;
 use Security\Authorization\AclBuilder;
@@ -35,6 +36,7 @@ return [
             sprintf(Role::RESOURCE_FORMAT, CadastroController::class, 'index'),
             sprintf(Role::RESOURCE_FORMAT, LogoutController::class, 'index'),
             sprintf(Role::RESOURCE_FORMAT, \Salao\Controller\CadastroController::class, 'index'),
+            sprintf(Role::RESOURCE_FORMAT, ClienteController::class, 'index'),
         ],
         'privilege' => [
             Role::GUEST => [
@@ -47,6 +49,7 @@ return [
             Role::SALAO_ADMIN => [
                 'allow' => [
                     sprintf(Role::RESOURCE_FORMAT, \Salao\Controller\CadastroController::class, 'index'),
+                    sprintf(Role::RESOURCE_FORMAT, ClienteController::class, 'index'),
                 ]
             ]
         ]
