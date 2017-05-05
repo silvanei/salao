@@ -9,7 +9,7 @@
 namespace Salao\Controller;
 
 use Common\Controller\AbstractController;
-use Salao\Entity\Profissional;
+use Salao\Entity\Identity;
 use Salao\Service\SalaoService;
 use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\Form\FormInterface;
@@ -33,8 +33,8 @@ class CadastroController extends AbstractController
      */
     protected $salaoForm;
 
-    /** @var  AuthenticationServiceInterface */
-    protected $authenticationService;
+    /** @var  Identity */
+    protected $identity;
 
     /**
      * CadastroController constructor.
@@ -49,18 +49,21 @@ class CadastroController extends AbstractController
     ) {
         $this->salaoService = $salaoService;
         $this->salaoForm = $salaoForm;
-        $this->authenticationService = $authenticationService;
+        $this->identity = $authenticationService->getIdentity();
     }
 
     public function indexAction()
     {
 
-        var_dump($this->authenticationService->getIdentity());
-
         $request = $this->getRequest();
         $viewParans = ['form' => $this->salaoForm];
 
         if ($request->isGet()) {
+
+            $salao = $this->salaoService->byId($this->identity->getSalaoId());
+            $this->salaoForm->setHydrator(new ClassMethods());
+            $this->salaoForm->bind($salao);
+
             return new ViewModel($viewParans);
         }
 

@@ -10,6 +10,8 @@ namespace Salao\Service;
 
 
 use Common\Persistence\TransactionManager;
+use Salao\Entity\Salao;
+use Salao\Infra\Repository\SalaoRepository;
 use Salao\Repository\SalaoRepositoryInterface;
 
 class SalaoService
@@ -18,7 +20,7 @@ class SalaoService
     /** @var  TransactionManager */
     private $transactionManager;
 
-    /** @var  SalaoRepositoryInterface */
+    /** @var  SalaoRepository */
     private $salaoRepository;
 
     /**
@@ -33,4 +35,8 @@ class SalaoService
     }
 
 
+    public function byId($id): Salao
+    {
+        return $this->salaoRepository->find($id);
+    }
 }
