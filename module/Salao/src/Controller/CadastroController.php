@@ -9,6 +9,8 @@
 namespace Salao\Controller;
 
 use Common\Controller\AbstractController;
+use Salao\Service\SalaoService;
+use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\Form\FormInterface;
 use Zend\View\Model\ViewModel;
 
@@ -21,20 +23,32 @@ class CadastroController extends AbstractController
 
     const ROUTE_NAME = 'salao-cadastro';
 
+    /** @var  SalaoService */
+    protected $salaoService;
+
     /**
      * @var FormInterface
      */
     protected $salaoForm;
 
+    /** @var  AuthenticationServiceInterface */
+    protected $authenticationService;
+
     /**
      * CadastroController constructor.
+     * @param SalaoService $salaoService
      * @param FormInterface $salaoForm
+     * @param AuthenticationServiceInterface $authenticationService
      */
-    public function __construct(FormInterface $salaoForm)
-    {
+    public function __construct(
+        SalaoService $salaoService,
+        FormInterface $salaoForm,
+        AuthenticationServiceInterface $authenticationService
+    ) {
+        $this->salaoService = $salaoService;
         $this->salaoForm = $salaoForm;
+        $this->authenticationService = $authenticationService;
     }
-
 
     public function indexAction()
     {

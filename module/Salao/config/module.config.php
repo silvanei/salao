@@ -13,6 +13,8 @@ use Salao\Infra\Repository\SalaoRepositoryFactory;
 use Salao\Repository\AcessoRepositoryInterface;
 use Salao\Repository\ProfissionalRepositoryInterface;
 use Salao\Repository\SalaoRepositoryInterface;
+use Salao\Service\SalaoService;
+use Salao\Service\SalaoServiceFactory;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
@@ -52,6 +54,7 @@ return [
             AcessoRepositoryInterface::class => AcessoRepositoryFactory::class,
             ProfissionalRepositoryInterface::class => ProfissionalRepositoryFactory::class,
             SalaoRepositoryInterface::class => SalaoRepositoryFactory::class,
+            SalaoService::class => SalaoServiceFactory::class,
         ],
     ],
 

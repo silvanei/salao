@@ -9,6 +9,7 @@
 namespace Salao\Form;
 
 
+use Zend\Form\Element\Checkbox;
 use Zend\Form\Element\MultiCheckbox;
 use Zend\Form\Element\Text;
 use Zend\Form\Form;
@@ -18,6 +19,9 @@ class SalaoForm extends Form
 
     const NOME = 'nome';
     const DIAS_FUNCIONAMENTO = 'dias_funcionamento';
+    const TELEFONE = 'telefone';
+    const CELULAR = 'celular';
+    const VISIVAL_NO_APP = 'visivel_no_app';
 
     public function __construct(string $name = null)
     {
@@ -43,5 +47,26 @@ class SalaoForm extends Form
             '6' => 'Sábado',
         ]);
         $this->add($diasFuncionamento);
+
+
+        $telefone = new Text(self::TELEFONE);
+        $telefone->setAttributes([
+            'id' => self::TELEFONE,
+            'placeholder' => 'Telefone fixo do salão'
+        ]);
+        $this->add($telefone);
+
+        $celular = new Text(self::CELULAR);
+        $celular->setAttributes([
+            'id' => self::CELULAR,
+            'placeholder' => 'Telefone celular do salão'
+        ]);
+        $this->add($celular);
+
+        $visivalNoApp = new Checkbox(self::VISIVAL_NO_APP);
+        $visivalNoApp->setAttributes([
+            'id' => self::VISIVAL_NO_APP
+        ]);
+        $this->add($visivalNoApp);
     }
 }
