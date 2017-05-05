@@ -9,9 +9,11 @@
 namespace Salao\Controller;
 
 use Common\Controller\AbstractController;
+use Salao\Entity\Profissional;
 use Salao\Service\SalaoService;
 use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\Form\FormInterface;
+use Zend\Hydrator\ClassMethods;
 use Zend\View\Model\ViewModel;
 
 /**
@@ -53,10 +55,12 @@ class CadastroController extends AbstractController
     public function indexAction()
     {
 
+        var_dump($this->authenticationService->getIdentity());
+
         $request = $this->getRequest();
         $viewParans = ['form' => $this->salaoForm];
 
-        if (!$request->isPost()) {
+        if ($request->isGet()) {
             return new ViewModel($viewParans);
         }
 

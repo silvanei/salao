@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 
 namespace Salao\Entity;
 
@@ -38,11 +38,6 @@ class Profissional
     private $id;
 
     /**
-     * @var \Salao\Entity\Acesso
-     */
-    private $acesso;
-
-    /**
      * @var \Salao\Entity\Salao
      */
     private $salao;
@@ -55,7 +50,7 @@ class Profissional
      *
      * @return Profissional
      */
-    public function setNome(string $nome): Profissional
+    public function setNome($nome)
     {
         $this->nome = $nome;
 
@@ -67,7 +62,7 @@ class Profissional
      *
      * @return string
      */
-    public function getNome(): string
+    public function getNome()
     {
         return $this->nome;
     }
@@ -79,7 +74,7 @@ class Profissional
      *
      * @return Profissional
      */
-    public function setApelido(string $apelido): Profissional
+    public function setApelido($apelido)
     {
         $this->apelido = $apelido;
 
@@ -91,7 +86,7 @@ class Profissional
      *
      * @return string
      */
-    public function getApelido(): string
+    public function getApelido()
     {
         return $this->apelido;
     }
@@ -103,7 +98,7 @@ class Profissional
      *
      * @return Profissional
      */
-    public function setTelefone(string $telefone): Profissional
+    public function setTelefone($telefone)
     {
         $this->telefone = $telefone;
 
@@ -115,7 +110,7 @@ class Profissional
      *
      * @return string
      */
-    public function getTelefone(): string
+    public function getTelefone()
     {
         return $this->telefone;
     }
@@ -127,7 +122,7 @@ class Profissional
      *
      * @return Profissional
      */
-    public function setCelular(string $celular): Profissional
+    public function setCelular($celular)
     {
         $this->celular = $celular;
 
@@ -139,7 +134,7 @@ class Profissional
      *
      * @return string
      */
-    public function getCelular(): string
+    public function getCelular()
     {
         return $this->celular;
     }
@@ -151,7 +146,7 @@ class Profissional
      *
      * @return Profissional
      */
-    public function setDeletado(bool $deletado): Profissional
+    public function setDeletado($deletado)
     {
         $this->deletado = $deletado;
 
@@ -163,7 +158,7 @@ class Profissional
      *
      * @return boolean
      */
-    public function getDeletado(): bool
+    public function getDeletado()
     {
         return $this->deletado;
     }
@@ -173,43 +168,19 @@ class Profissional
      *
      * @return integer
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * Set acesso
-     *
-     * @param Acesso $acesso
-     *
-     * @return Profissional
-     */
-    public function setAcesso(Acesso $acesso = null): Profissional
-    {
-        $this->acesso = $acesso;
-
-        return $this;
-    }
-
-    /**
-     * Get acesso
-     *
-     * @return Acesso
-     */
-    public function getAcesso(): Acesso
-    {
-        return $this->acesso;
-    }
-
-    /**
      * Set salao
      *
-     * @param Salao $salao
+     * @param \Salao\Entity\Salao $salao
      *
      * @return Profissional
      */
-    public function setSalao(Salao $salao = null): Profissional
+    public function setSalao(\Salao\Entity\Salao $salao = null)
     {
         $this->salao = $salao;
 
@@ -219,9 +190,9 @@ class Profissional
     /**
      * Get salao
      *
-     * @return Salao
+     * @return \Salao\Entity\Salao
      */
-    public function getSalao(): Salao
+    public function getSalao()
     {
         return $this->salao;
     }

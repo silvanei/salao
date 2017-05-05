@@ -8,6 +8,7 @@
 
 namespace Security\Listener;
 
+use Salao\Entity\Profissional;
 use Security\Authorization\AclBuilder;
 use Security\Authorization\Role;
 use Site\Controller\LoginController;
@@ -43,6 +44,8 @@ class DispatchEventListener
          * @var Acl $acl
          */
         $auth = $event->getApplication()->getServiceManager()->get(AuthenticationServiceInterface::class);
+        /** @var Profissional $identity */
+        $identity = $auth->getIdentity();
         $acl = $event->getApplication()->getServiceManager()->get(AclBuilder::class);
 
         if ($acl->isAllowed(Role::GUEST, $resource)) {
@@ -51,7 +54,7 @@ class DispatchEventListener
         }
 
         if ($auth->hasIdentity()) {
-            $event->setParam(Role::USER_ROLE_PARAN, $auth->getIdentity()->getPerfil());
+            $event->setParam(Role::USER_ROLE_PARAN, $identity->getPerfil());
             return null;
         }
 

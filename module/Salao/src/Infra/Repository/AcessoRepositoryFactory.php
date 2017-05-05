@@ -10,7 +10,7 @@ namespace Salao\Infra\Repository;
 
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
-use Salao\Entity\Acesso;
+use Salao\Entity\AcessoProfissional;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
 class AcessoRepositoryFactory implements FactoryInterface
@@ -21,7 +21,7 @@ class AcessoRepositoryFactory implements FactoryInterface
         /** @var EntityManager $em */
         $em = $container->get('doctrine.entitymanager.orm_default');
 
-        return $em->getRepository(Acesso::class);
+        return $em->getRepository(AcessoProfissional::class);
     }
 
 }

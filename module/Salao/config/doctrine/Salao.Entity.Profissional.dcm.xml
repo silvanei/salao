@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="Salao\Entity\Profissional" table="profissional" repository-class="Salao\Infra\Repository\ProfissionalRepository">
+  <entity name="Salao\Entity\Profissional" table="profissional">
     <indexes>
       <index name="IDX_E41A66E54B1D64E0" columns="salao_id"/>
-      <index name="IDX_E41A66E5E37A5B54" columns="acesso_id"/>
     </indexes>
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
@@ -33,11 +32,6 @@
         <option name="default">0</option>
       </options>
     </field>
-    <many-to-one field="acesso" target-entity="Salao\Entity\Acesso" fetch="LAZY">
-      <join-columns>
-        <join-column name="acesso_id" referenced-column-name="id"/>
-      </join-columns>
-    </many-to-one>
     <many-to-one field="salao" target-entity="Salao\Entity\Salao" fetch="LAZY">
       <join-columns>
         <join-column name="salao_id" referenced-column-name="id"/>

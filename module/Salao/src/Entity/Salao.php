@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 
 namespace Salao\Entity;
 
@@ -15,7 +15,7 @@ class Salao
     /**
      * @var boolean
      */
-    private $visivelNoApp = false;
+    private $visivelNoApp = '0';
 
     /**
      * @var string
@@ -40,7 +40,7 @@ class Salao
      *
      * @return Salao
      */
-    public function setNome(string $nome): Salao
+    public function setNome($nome)
     {
         $this->nome = $nome;
 
@@ -52,7 +52,7 @@ class Salao
      *
      * @return string
      */
-    public function getNome() : string
+    public function getNome()
     {
         return $this->nome;
     }
@@ -64,7 +64,7 @@ class Salao
      *
      * @return Salao
      */
-    public function setVisivelNoApp(bool $visivelNoApp): Salao
+    public function setVisivelNoApp($visivelNoApp)
     {
         $this->visivelNoApp = $visivelNoApp;
 
@@ -76,7 +76,7 @@ class Salao
      *
      * @return boolean
      */
-    public function getVisivelNoApp(): bool
+    public function getVisivelNoApp()
     {
         return $this->visivelNoApp;
     }
@@ -88,7 +88,7 @@ class Salao
      *
      * @return Salao
      */
-    public function setTelefone(string $telefone): Salao
+    public function setTelefone($telefone)
     {
         $this->telefone = $telefone;
 
@@ -100,7 +100,7 @@ class Salao
      *
      * @return string
      */
-    public function getTelefone(): string
+    public function getTelefone()
     {
         return $this->telefone;
     }
@@ -112,7 +112,7 @@ class Salao
      *
      * @return Salao
      */
-    public function setCelular(string $celular): Salao
+    public function setCelular($celular)
     {
         $this->celular = $celular;
 
@@ -124,7 +124,7 @@ class Salao
      *
      * @return string
      */
-    public function getCelular(): string
+    public function getCelular()
     {
         return $this->celular;
     }
@@ -134,7 +134,7 @@ class Salao
      *
      * @return integer
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }

@@ -9,7 +9,7 @@
 namespace Site\Controller;
 
 use Common\Controller\AbstractController;
-use Salao\Entity\Acesso;
+use Salao\Entity\AcessoProfissional;
 use Salao\Entity\Profissional;
 use Salao\Entity\Salao;
 use Security\Authorization\Role;
@@ -66,12 +66,13 @@ class CadastroController extends AbstractController
         $profissional = new Profissional();
         $profissional->setNome($data['nomeAdministradorSalao']);
 
-        $acesso = new Acesso();
-        $acesso->setEmail($data['emailAdministradorSalao']);
-        $acesso->setSenha($data['senhaAdministradorSalao']);
-        $acesso->setPerfil(Role::SALAO_ADMIN);
+        $acessoProfissional = new AcessoProfissional();
+        $acessoProfissional->setEmail($data['emailAdministradorSalao']);
+        $acessoProfissional->setSenha($data['senhaAdministradorSalao']);
+        $acessoProfissional->setProfissional($profissional);
+        $acessoProfissional->setPerfil(Role::SALAO_ADMIN);
 
-        $this->cadastroService->cadastrarSalao($salao, $acesso, $profissional);
+        $this->cadastroService->cadastrarSalao($salao, $acessoProfissional);
 
         $this->flashMessenger()->addSuccessMessage('Salão cadastrado com sucesso.');
 

@@ -9,9 +9,7 @@
 namespace Security\Authentication;
 
 use Doctrine\ORM\EntityManager;
-use DoctrineModule\Authentication\Adapter\ObjectRepository;
 use Interop\Container\ContainerInterface;
-use Salao\Entity\Acesso;
 use Zend\Authentication\Adapter\AbstractAdapter;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
@@ -32,16 +30,6 @@ final class AuthenticationAdapterFactory implements FactoryInterface
     {
         /** @var EntityManager $entityManager */
         $entityManager = $container->get('doctrine.entitymanager.orm_default');
-        $acessoRepository = $entityManager->getRepository(Acesso::class);
-
-        return new ObjectRepository([
-            'objectManager' => $entityManager,
-            'objectRepository' => $acessoRepository,
-            'identityProperty' => 'email', // optional, default shown
-            'credentialProperty' => 'senha',  // optional, default shown,
-            'credentialCallable' => function ($identity, $credential) { // optional callable
-                return password_verify($credential, $identity->getSenha());
-            }
-        ]);
+        return new AuthenticationAdapter($entityManager);
     }
 }

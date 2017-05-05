@@ -9,7 +9,7 @@
 namespace Site\Service;
 
 use Common\Persistence\TransactionManager;
-use Salao\Entity\Acesso;
+use Salao\Entity\AcessoProfissional;
 use Salao\Entity\Profissional;
 use Salao\Entity\Salao;
 use Salao\Repository\AcessoRepositoryInterface;
@@ -36,20 +36,18 @@ class CadastroService
         $this->acessoRepository = $acessoRepository;
     }
 
-    public function cadastrarSalao(Salao $salao, Acesso $acesso, Profissional $profissional)
+    public function cadastrarSalao(Salao $salao, AcessoProfissional $acessoProfissional)
     {
 
         try {
 
             $this->transactionManager->beginTransaction();
-            
+
             $salao = $this->salaoRepository->add($salao);
-            $acesso = $this->acessoRepository->add($acesso);
 
-            $profissional->setSalao($salao);
-            $profissional->setAcesso($acesso);
-
+            $profissional = $acessoProfissional->getProfissional()->setSalao($salao);
             $this->profissionalRepository->add($profissional);
+            $this->acessoRepository->add($acessoProfissional);
 
             $this->transactionManager->commit();
         } catch (\Exception $exception) {

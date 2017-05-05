@@ -64,6 +64,9 @@ class SalaoForm extends Form
         $this->add($celular);
 
         $visivalNoApp = new Checkbox(self::VISIVAL_NO_APP);
+//        $visivalNoApp->setUseHiddenElement(false);
+//        $visivalNoApp->setCheckedValue(true);
+//        $visivalNoApp->setUnCheckedValue(false);
         $visivalNoApp->setAttributes([
             'id' => self::VISIVAL_NO_APP
         ]);

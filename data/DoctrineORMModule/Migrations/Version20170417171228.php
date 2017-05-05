@@ -10,18 +10,22 @@ use Doctrine\DBAL\Schema\Schema;
  */
 class Version20170417171228 extends AbstractMigration
 {
+
     /**
      * @param Schema $schema
      */
     public function up(Schema $schema)
     {
-        $table = $schema->createTable('acesso');
+        $table = $schema->createTable('profissional');
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
-        $table->addColumn('email', 'string');
-        $table->addColumn('senha', 'string');
-        $table->addColumn('perfil', 'string');
+        $table->addColumn('salao_id', 'integer');
+        $table->addColumn('nome', 'string');
+        $table->addColumn('apelido', 'string', ['notnull' => false]);
+        $table->addColumn('telefone', 'string', ['notnull' => false]);
+        $table->addColumn('celular', 'string', ['notnull' => false]);
+        $table->addColumn('deletado', 'boolean', ['notnull' => true, 'default' => false]);
         $table->setPrimaryKey(['id'], 'primary');
-        $table->addUniqueIndex(['email'], 'email_unique');
+        $table->addForeignKeyConstraint('salao', ['salao_id'], ['id'], ["onUpdate" => "NO ACTION", "onDelete" => "NO ACTION"], 'fk_funcionario_salao');
 
     }
 
@@ -30,6 +34,8 @@ class Version20170417171228 extends AbstractMigration
      */
     public function down(Schema $schema)
     {
-        $schema->dropTable('acesso');
+        $table = $schema->getTable('profissional');
+        $table->removeForeignKey('fk_funcionario_salao');
+        $schema->dropTable('profissional');
     }
 }

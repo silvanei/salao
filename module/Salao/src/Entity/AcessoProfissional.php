@@ -3,9 +3,9 @@
 namespace Salao\Entity;
 
 /**
- * Acesso
+ * AcessoProfissional
  */
-class Acesso
+class AcessoProfissional
 {
     /**
      * @var string
@@ -27,15 +27,20 @@ class Acesso
      */
     private $id;
 
+    /**
+     * @var \Salao\Entity\Profissional
+     */
+    private $profissional;
+
 
     /**
      * Set email
      *
      * @param string $email
      *
-     * @return Acesso
+     * @return AcessoProfissional
      */
-    public function setEmail( string $email): Acesso
+    public function setEmail($email) : AcessoProfissional
     {
         $this->email = $email;
 
@@ -47,7 +52,7 @@ class Acesso
      *
      * @return string
      */
-    public function getEmail(): string
+    public function getEmail() : string
     {
         return $this->email;
     }
@@ -57,9 +62,9 @@ class Acesso
      *
      * @param string $senha
      *
-     * @return Acesso
+     * @return AcessoProfissional
      */
-    public function setSenha(string $senha): Acesso
+    public function setSenha($senha): AcessoProfissional
     {
         $this->senha = $senha;
 
@@ -81,9 +86,9 @@ class Acesso
      *
      * @param string $perfil
      *
-     * @return Acesso
+     * @return AcessoProfissional
      */
-    public function setPerfil(string $perfil): Acesso
+    public function setPerfil($perfil): AcessoProfissional
     {
         $this->perfil = $perfil;
 
@@ -105,9 +110,33 @@ class Acesso
      *
      * @return integer
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set profissional
+     *
+     * @param \Salao\Entity\Profissional $profissional
+     *
+     * @return AcessoProfissional
+     */
+    public function setProfissional(\Salao\Entity\Profissional $profissional = null)
+    {
+        $this->profissional = $profissional;
+
+        return $this;
+    }
+
+    /**
+     * Get profissional
+     *
+     * @return \Salao\Entity\Profissional
+     */
+    public function getProfissional()
+    {
+        return $this->profissional;
     }
 }
 

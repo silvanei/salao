@@ -10,7 +10,7 @@ namespace Site\Form;
 
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
-use Salao\Entity\Acesso;
+use Salao\Entity\AcessoProfissional;
 use Zend\Form\FormInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
@@ -34,7 +34,7 @@ final class CadastroFormFactory implements FactoryInterface
         $entityManager = $container->get('doctrine.entitymanager.orm_default');
 
         $form = new CadastroForm('registroForm');
-        $form->setInputFilter(new CadastroInputFilter($entityManager->getRepository(Acesso::class)));
+        $form->setInputFilter(new CadastroInputFilter($entityManager->getRepository(AcessoProfissional::class)));
 
         return $form;
     }
