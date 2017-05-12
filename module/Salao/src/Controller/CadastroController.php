@@ -68,8 +68,8 @@ class CadastroController extends AbstractController
         }
 
         $this->salaoForm->setData($request->getPost());
-        if (!$this->salaoForm->isValid()) {
-            return new ViewModel($viewParans);
+        if ($this->salaoForm->isValid()) {
+            return $this->redirect()->toRoute(self::ROUTE_NAME);
         }
 
         return new ViewModel($viewParans);
