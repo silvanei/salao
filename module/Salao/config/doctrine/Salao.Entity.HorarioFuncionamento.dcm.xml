@@ -4,7 +4,10 @@
     <indexes>
       <index name="fk_horario_funcionamento_salao_id" columns="salao_id"/>
     </indexes>
-    <id name="id" type="integer" column="id"/>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <id name="salao" association-key="true"/>
     <field name="horaInicio" type="time" column="hora_inicio" nullable="false"/>
     <field name="horaFim" type="time" column="hora_fim" nullable="false"/>
     <field name="segunda" type="boolean" column="segunda" nullable="false"/>
