@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Salao\Entity\HorarioFuncionamento" table="horario_funcionamento">
+    <indexes>
+      <index name="fk_horario_funcionamento_salao_id" columns="salao_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id"/>
+    <field name="horaInicio" type="time" column="hora_inicio" nullable="false"/>
+    <field name="horaFim" type="time" column="hora_fim" nullable="false"/>
+    <field name="segunda" type="boolean" column="segunda" nullable="false"/>
+    <field name="terca" type="boolean" column="terca" nullable="false"/>
+    <field name="quarta" type="boolean" column="quarta" nullable="false"/>
+    <field name="quinta" type="boolean" column="quinta" nullable="false"/>
+    <field name="sexta" type="boolean" column="sexta" nullable="false"/>
+    <field name="sabado" type="boolean" column="sabado" nullable="false"/>
+    <field name="domingo" type="boolean" column="domingo" nullable="false"/>
+  </entity>
+</doctrine-mapping>

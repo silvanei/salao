@@ -8,7 +8,6 @@
 
 namespace Salao\Infra\Repository;
 
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Salao\Entity\Salao;
 use Salao\Repository\SalaoRepositoryInterface;
@@ -24,5 +23,11 @@ class SalaoRepository extends EntityRepository  implements SalaoRepositoryInterf
         return $salao;
     }
 
+    public function update(Salao $salao)
+    {
+        $this->getEntityManager()->persist($salao);
+        $this->getEntityManager()->flush();
 
+        return $salao;
+    }
 }

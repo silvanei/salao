@@ -24,5 +24,13 @@
         <option name="fixed"/>
       </options>
     </field>
+
+    <one-to-one field="horario" target-entity="Salao\Entity\HorarioFuncionamento" fetch="EAGER">
+      <cascade><cascade-all/></cascade>
+      <join-columns>
+        <join-column name="id" referenced-column-name="id"/>
+      </join-columns>
+    </one-to-one>
+
   </entity>
 </doctrine-mapping>

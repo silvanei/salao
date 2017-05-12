@@ -32,6 +32,11 @@ class Salao
      */
     private $id;
 
+    /**
+     * @var HorarioFuncionamento
+     */
+    private $horario;
+
 
     /**
      * Set nome
@@ -137,6 +142,22 @@ class Salao
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return HorarioFuncionamento
+     */
+    public function getHorario(): HorarioFuncionamento
+    {
+        return $this->horario;
+    }
+
+    /**
+     * @param HorarioFuncionamento $horario
+     */
+    public function setHorario(HorarioFuncionamento $horario)
+    {
+        $this->horario = $horario;
     }
 }
 

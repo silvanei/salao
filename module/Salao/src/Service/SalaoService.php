@@ -39,4 +39,9 @@ class SalaoService
     {
         return $this->salaoRepository->find($id);
     }
+
+    public function update(Salao $salao)
+    {
+        return $this->salaoRepository->update($salao);
+    }
 }
