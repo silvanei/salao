@@ -9,9 +9,7 @@
 namespace Salao\Controller;
 
 use Common\Controller\AbstractController;
-use Salao\Entity\HorarioFuncionamento;
 use Salao\Entity\Identity;
-use Salao\Entity\Salao;
 use Salao\Form\SalaoForm;
 use Salao\Service\SalaoService;
 use Zend\Authentication\AuthenticationServiceInterface;
@@ -66,7 +64,6 @@ class CadastroController extends AbstractController
             $salao = $this->salaoService->byId($this->identity->getSalaoId());
             $this->salaoForm->setHydrator(new ClassMethods());
             $this->salaoForm->bind($salao);
-            var_dump($salao);
             return new ViewModel($viewParans);
         }
 
@@ -77,23 +74,20 @@ class CadastroController extends AbstractController
 
             $salao = $this->salaoService->byId($this->identity->getSalaoId());
 
-            $horario = $salao->getHorario();
-            foreach ($data[SalaoForm::DIAS_FUNCIONAMENTO] as $dia) {
-                switch ($dia) {
-                    case '0': $horario->setDomingo(true); break;
-                    case '1': $horario->setSegunda(true); break;
-                    case '2': $horario->setTerca(true); break;
-                    case '3': $horario->setQuarta(true); break;
-                    case '4': $horario->setQuinta(true); break;
-                    case '5': $horario->setSexta(true); break;
-                    case '6': $horario->setSabado(true); break;
-                }
-            }
-
             $salao->setNome($data[SalaoForm::NOME]);
             $salao->setVisivelNoApp($data[SalaoForm::VISIVAL_NO_APP]);
             $salao->setTelefone($data[SalaoForm::TELEFONE]);
             $salao->setCelular($data[SalaoForm::CELULAR]);
+
+            $diasDeFuncionamento = $data[SalaoForm::DIAS_FUNCIONAMENTO];
+            $horario = $salao->getHorario();
+            $horario->setDomingo(in_array('0', $diasDeFuncionamento));
+            $horario->setSegunda(in_array('1', $diasDeFuncionamento));
+            $horario->setTerca(in_array('2', $diasDeFuncionamento));
+            $horario->setQuarta(in_array('3', $diasDeFuncionamento));
+            $horario->setQuinta(in_array('4', $diasDeFuncionamento));
+            $horario->setSexta(in_array('5', $diasDeFuncionamento));
+            $horario->setSabado(in_array('6', $diasDeFuncionamento));
             $salao->setHorario($horario);
 
             $this->salaoService->update($salao);

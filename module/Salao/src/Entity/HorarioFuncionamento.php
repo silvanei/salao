@@ -58,6 +58,11 @@ class HorarioFuncionamento
     private $id;
 
     /**
+     * @var Salao
+     */
+    private $salao;
+
+    /**
      * Set horaInicio
      *
      * @param \DateTime $horaInicio
@@ -296,5 +301,23 @@ class HorarioFuncionamento
     {
         return $this->id;
     }
+
+    /**
+     * @return Salao
+     */
+    public function getSalao(): Salao
+    {
+        return $this->salao;
+    }
+
+    /**
+     * @param Salao $salao
+     */
+    public function setSalao(Salao $salao)
+    {
+        $this->salao = $salao;
+    }
+
+
 }
 

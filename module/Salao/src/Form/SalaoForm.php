@@ -9,10 +9,12 @@
 namespace Salao\Form;
 
 
+use Salao\Entity\Salao;
 use Zend\Form\Element\Checkbox;
 use Zend\Form\Element\MultiCheckbox;
 use Zend\Form\Element\Text;
 use Zend\Form\Form;
+use Zend\Form\FormInterface;
 
 class SalaoForm extends Form
 {
@@ -38,14 +40,15 @@ class SalaoForm extends Form
 
         $diasFuncionamento = new MultiCheckbox(self::DIAS_FUNCIONAMENTO);
         $diasFuncionamento->setValueOptions([
-            '0' => 'Domingo',
-            '1' => 'Segunda',
-            '2' => 'Terça',
-            '3' => 'Quarta',
-            '4' => 'Quinta',
-            '5' => 'Sexta',
-            '6' => 'Sábado',
+            ['value' => '0', 'label' => 'Domingo', 'selected' => false],
+            ['value' => '1', 'label' => 'Segunda', 'selected' => false],
+            ['value' => '2', 'label' => 'Terça', 'selected' => false],
+            ['value' => '3', 'label' => 'Quarta', 'selected' => false],
+            ['value' => '4', 'label' => 'Quinta', 'selected' => false],
+            ['value' => '5', 'label' => 'Sexta', 'selected' => false],
+            ['value' => '6', 'label' => 'Sábado', 'selected' => false]
         ]);
+        $diasFuncionamento->setChecked('0');
         $this->add($diasFuncionamento);
 
 
@@ -68,5 +71,31 @@ class SalaoForm extends Form
             'id' => self::VISIVAL_NO_APP
         ]);
         $this->add($visivalNoApp);
+    }
+
+    /**
+     * @param Salao $object
+     * @param int $flags
+     * @return Form
+     */
+    public function bind($object, $flags = FormInterface::VALUES_NORMALIZED)
+    {
+
+        /** @var MultiCheckbox $diasDeFuncionamento */
+        $diasDeFuncionamento = $this->get(self::DIAS_FUNCIONAMENTO);
+        $diasDeFuncionamento->setValueOptions(array_map(function ($horario) use($object){
+            switch ($horario['value']) {
+                case '0': $horario['selected'] = $object->getHorario()->getDomingo(); break;
+                case '1': $horario['selected'] = $object->getHorario()->getSegunda(); break;
+                case '2': $horario['selected'] = $object->getHorario()->getTerca(); break;
+                case '3': $horario['selected'] = $object->getHorario()->getQuarta(); break;
+                case '4': $horario['selected'] = $object->getHorario()->getQuinta(); break;
+                case '5': $horario['selected'] = $object->getHorario()->getSexta(); break;
+                case '6': $horario['selected'] = $object->getHorario()->getSabado(); break;
+            }
+            return $horario;
+        }, $diasDeFuncionamento->getValueOptions()));
+
+        return parent::bind($object, $flags);
     }
 }

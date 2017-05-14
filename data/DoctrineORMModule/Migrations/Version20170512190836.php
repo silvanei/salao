@@ -21,14 +21,14 @@ class Version20170512190836 extends AbstractMigration
         $table->addColumn('salao_id', 'integer');
         $table->addColumn('hora_inicio', 'time');
         $table->addColumn('hora_fim', 'time');
-        $table->addColumn('segunda', 'boolean');
-        $table->addColumn('terca', 'boolean');
-        $table->addColumn('quarta', 'boolean');
-        $table->addColumn('quinta', 'boolean');
-        $table->addColumn('sexta', 'boolean');
-        $table->addColumn('sabado', 'boolean');
-        $table->addColumn('domingo', 'boolean');
-        $table->setPrimaryKey(['id', 'salao_id'], 'primary');
+        $table->addColumn('segunda', 'boolean')->setDefault(false);
+        $table->addColumn('terca', 'boolean')->setDefault(false);
+        $table->addColumn('quarta', 'boolean')->setDefault(false);
+        $table->addColumn('quinta', 'boolean')->setDefault(false);
+        $table->addColumn('sexta', 'boolean')->setDefault(false);
+        $table->addColumn('sabado', 'boolean')->setDefault(false);
+        $table->addColumn('domingo', 'boolean')->setDefault(false);
+        $table->setPrimaryKey(['id'], 'primary');
         $table->addIndex(['salao_id'], 'fk_horario_funcionamento_salao_id');
         $table->addForeignKeyConstraint('salao', ['salao_id'], ['id'], ["onUpdate" => "NO ACTION", "onDelete" => "NO ACTION"], 'fk_horario_funcionamento_salao');
 

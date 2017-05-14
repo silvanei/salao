@@ -5,17 +5,52 @@
       <index name="fk_horario_funcionamento_salao_id" columns="salao_id"/>
     </indexes>
     <id name="id" type="integer" column="id">
-      <generator strategy="IDENTITY"/>
+      <generator strategy="IDENTITY" />
     </id>
-    <id name="salao" association-key="true"/>
     <field name="horaInicio" type="time" column="hora_inicio" nullable="false"/>
     <field name="horaFim" type="time" column="hora_fim" nullable="false"/>
-    <field name="segunda" type="boolean" column="segunda" nullable="false"/>
-    <field name="terca" type="boolean" column="terca" nullable="false"/>
-    <field name="quarta" type="boolean" column="quarta" nullable="false"/>
-    <field name="quinta" type="boolean" column="quinta" nullable="false"/>
-    <field name="sexta" type="boolean" column="sexta" nullable="false"/>
-    <field name="sabado" type="boolean" column="sabado" nullable="false"/>
-    <field name="domingo" type="boolean" column="domingo" nullable="false"/>
+    <field name="segunda" type="boolean" column="segunda" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="terca" type="boolean" column="terca" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="quarta" type="boolean" column="quarta" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="quinta" type="boolean" column="quinta" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="sexta" type="boolean" column="sexta" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="sabado" type="boolean" column="sabado" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="domingo" type="boolean" column="domingo" nullable="false">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <one-to-one field="salao" target-entity="Salao\Entity\Salao" fetch="LAZY" inversed-by="horario">
+      <cascade>
+        <cascade-all/>
+      </cascade>
+      <join-columns>
+        <join-column name="salao_id" referenced-column-name="id"/>
+      </join-columns>
+    </one-to-one>
   </entity>
 </doctrine-mapping>
