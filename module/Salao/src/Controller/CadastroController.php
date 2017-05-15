@@ -81,6 +81,8 @@ class CadastroController extends AbstractController
 
             $diasDeFuncionamento = $data[SalaoForm::DIAS_FUNCIONAMENTO];
             $horario = $salao->getHorario();
+            $horario->setHoraInicio(new \DateTime($data[SalaoForm::HORARIO_INICIO]));
+            $horario->setHoraFim(new \DateTime($data[SalaoForm::HORARIO_FIM]));
             $horario->setDomingo(in_array('0', $diasDeFuncionamento));
             $horario->setSegunda(in_array('1', $diasDeFuncionamento));
             $horario->setTerca(in_array('2', $diasDeFuncionamento));

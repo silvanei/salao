@@ -13,6 +13,7 @@ use Salao\Entity\Salao;
 use Zend\Form\Element\Checkbox;
 use Zend\Form\Element\MultiCheckbox;
 use Zend\Form\Element\Text;
+use Zend\Form\Element\Time;
 use Zend\Form\Form;
 use Zend\Form\FormInterface;
 
@@ -21,6 +22,8 @@ class SalaoForm extends Form
 
     const NOME = 'nome';
     const DIAS_FUNCIONAMENTO = 'dias_funcionamento';
+    const HORARIO_INICIO = 'horario_inicio';
+    const HORARIO_FIM = 'horario_fim';
     const TELEFONE = 'telefone';
     const CELULAR = 'celular';
     const VISIVAL_NO_APP = 'visivel_no_app';
@@ -50,6 +53,18 @@ class SalaoForm extends Form
         ]);
         $diasFuncionamento->setChecked('0');
         $this->add($diasFuncionamento);
+
+        /**
+        <input type="time" class="form-control inline" style="width: 100px; display: inline" id="horario-inicio" /> Até
+        <input type="time" class="form-control inline" style="width: 100px; display: inline"  id="horario-fim" />
+         */
+        $horarioInicio = new Time(self::HORARIO_INICIO);
+        $horarioInicio->setFormat('H:i');
+        $this->add($horarioInicio);
+
+        $horarioFim = new Time(self::HORARIO_FIM);
+        $horarioFim->setFormat('H:i');
+        $this->add($horarioFim);
 
 
         $telefone = new Text(self::TELEFONE);
@@ -95,6 +110,14 @@ class SalaoForm extends Form
             }
             return $horario;
         }, $diasDeFuncionamento->getValueOptions()));
+
+        /** @var Time $horarioInicio */
+        $horarioInicio = $this->get(self::HORARIO_INICIO);
+        $horarioInicio->setValue($object->getHorario()->getHoraInicio());
+
+        /** @var Time $horarioInicio */
+        $horarioFim = $this->get(self::HORARIO_FIM);
+        $horarioFim->setValue($object->getHorario()->getHoraFim());
 
         return parent::bind($object, $flags);
     }
