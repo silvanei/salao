@@ -40,10 +40,12 @@
                                 <? $form->prepare(); ?>
                                 <?= $this->form()->openTag($form) ?>
 
-                                    <div class="form-group">
+                                    <div class="form-group <?= $form->getMessages(SalaoForm::FILE) ? 'has-error' : '' ?>">
                                         <label for="input-nome" class="col-sm-2 control-label">Imagen</label>
                                         <div class="col-sm-9">
-                                            <input type="file" onchange="angular.element(this).scope().uploadFile(this.files)" class="file" />
+                                            <? $file = $form->get(SalaoForm::FILE)->setAttribute('class', 'form-control'); ?>
+                                            <?= $this->formFile($file) ?>
+                                            <?=$this->formElementErrors($file)?>
                                         </div>
                                     </div>
 

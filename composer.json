@@ -23,7 +23,8 @@
         "evandotpro/edp-module-layouts": "^1.0",
         "zendframework/zend-mvc-i18n": "^1.0",
         "zendframework/zend-mvc-plugin-flashmessenger": "^1.0",
-        "zendframework/zend-permissions-acl": "^2.6"
+        "zendframework/zend-permissions-acl": "^2.6",
+        "cloudinary/cloudinary_php": "^1.8"
     },
     "require-dev": {
         "zendframework/zend-developer-tools": "^1.1",

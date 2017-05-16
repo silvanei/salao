@@ -11,6 +11,7 @@ namespace Salao\Form;
 
 use Salao\Entity\Salao;
 use Zend\Form\Element\Checkbox;
+use Zend\Form\Element\File;
 use Zend\Form\Element\MultiCheckbox;
 use Zend\Form\Element\Text;
 use Zend\Form\Element\Time;
@@ -20,6 +21,7 @@ use Zend\Form\FormInterface;
 class SalaoForm extends Form
 {
 
+    const FILE = 'file';
     const NOME = 'nome';
     const DIAS_FUNCIONAMENTO = 'dias_funcionamento';
     const HORARIO_INICIO = 'horario_inicio';
@@ -31,6 +33,9 @@ class SalaoForm extends Form
     public function __construct(string $name = null)
     {
         parent::__construct($name);
+
+        $file = new File(self::FILE);
+        $this->add($file);
 
         $nomeSalao = new Text(self::NOME);
         $nomeSalao->setAttributes([
