@@ -62,6 +62,7 @@ class CadastroController extends AbstractController
         $salao = new Salao();
         $salao->setNome($data['nomeSalao']);
         $salao->setTelefone($data['telefoneSalao']);
+        $salao->setImage('http://res.cloudinary.com/dqdfcpk0x/image/upload/v1494982228/imagem-nao-disponivel.jpg');
 
         $profissional = new Profissional();
         $profissional->setNome($data['nomeAdministradorSalao']);

@@ -67,28 +67,6 @@ class CadastroController extends AbstractController
             return new ViewModel($viewParans);
         }
 
-        \Cloudinary::config(array(
-            "cloud_name" => "dqdfcpk0x",
-            "api_key" => "243932797457739",
-            "api_secret" => "fwWcJa4Wkr-PCENKIV3tHLxXIiQ"
-        ));
-
-//        var_dump($_FILES);
-//
-//        \Cloudinary\Uploader::upload($_FILES["file"]["tmp_name"],
-//            array(
-//                "public_id" => "sample_id",
-//                "crop" => "limit", "width" => "2000", "height" => "2000",
-//                "eager" => array(
-//                    array( "width" => 200, "height" => 200,
-//                        "crop" => "thumb", "gravity" => "face",
-//                        "radius" => 20, "effect" => "sepia" ),
-//                    array( "width" => 100, "height" => 150,
-//                        "crop" => "fit", "format" => "png" )
-//                ),
-//                "tags" => array( "special", "for_homepage" )
-//            ));
-
         $post = array_merge_recursive(
             $request->getPost()->toArray(),
             $request->getFiles()->toArray()
@@ -99,12 +77,21 @@ class CadastroController extends AbstractController
 
             $data = $this->salaoForm->getData();
 
+            //$image = \Cloudinary\Uploader::destroy('sample_id');
+
             $salao = $this->salaoService->byId($this->identity->getSalaoId());
 
             $salao->setNome($data[SalaoForm::NOME]);
             $salao->setVisivelNoApp($data[SalaoForm::VISIVAL_NO_APP]);
             $salao->setTelefone($data[SalaoForm::TELEFONE]);
             $salao->setCelular($data[SalaoForm::CELULAR]);
+            if (!empty($data[SalaoForm::IMAGE]["tmp_name"])) {
+                $image = \Cloudinary\Uploader::upload(
+                    $data["image"]["tmp_name"],
+                    ["public_id" => "sample_id", "crop" => "limit", "width" => "150", "height" => "150"]
+                );
+                $salao->setImage($image['url']);
+            }
 
             $diasDeFuncionamento = $data[SalaoForm::DIAS_FUNCIONAMENTO];
             $horario = $salao->getHorario();

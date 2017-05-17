@@ -29,6 +29,12 @@ class Module implements ConfigProviderInterface, BootstrapListenerInterface
             'pt_BR'
         );
         AbstractValidator::setDefaultTranslator(new \Zend\Mvc\I18n\Translator($translator), 'default');
+
+        \Cloudinary::config(array(
+            "cloud_name" => "dqdfcpk0x",
+            "api_key" => "243932797457739",
+            "api_secret" => "fwWcJa4Wkr-PCENKIV3tHLxXIiQ"
+        ));
     }
 
     public function getConfig(): array

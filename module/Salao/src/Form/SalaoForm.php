@@ -21,7 +21,7 @@ use Zend\Form\FormInterface;
 class SalaoForm extends Form
 {
 
-    const FILE = 'file';
+    const IMAGE = 'image';
     const NOME = 'nome';
     const DIAS_FUNCIONAMENTO = 'dias_funcionamento';
     const HORARIO_INICIO = 'horario_inicio';
@@ -34,8 +34,9 @@ class SalaoForm extends Form
     {
         parent::__construct($name);
 
-        $file = new File(self::FILE);
-        $this->add($file);
+        $image = new File(self::IMAGE);
+        $image->setAttribute('accept', 'image/*');
+        $this->add($image);
 
         $nomeSalao = new Text(self::NOME);
         $nomeSalao->setAttributes([

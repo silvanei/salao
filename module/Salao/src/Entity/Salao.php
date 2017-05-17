@@ -28,6 +28,11 @@ class Salao
     private $celular;
 
     /**
+     * @var string
+     */
+    private $image;
+
+    /**
      * @var integer
      */
     private $id;
@@ -158,6 +163,22 @@ class Salao
     public function setHorario(HorarioFuncionamento $horario)
     {
         $this->horario = $horario;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage(): string
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage(string $image)
+    {
+        $this->image = $image;
     }
 }
 

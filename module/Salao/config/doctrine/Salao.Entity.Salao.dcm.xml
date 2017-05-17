@@ -25,6 +25,12 @@
       </options>
     </field>
 
+    <field name="image" type="string" column="image" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+
     <one-to-one field="horario" target-entity="Salao\Entity\HorarioFuncionamento" fetch="EAGER" mapped-by="salao">
       <cascade>
         <cascade-all/>
