@@ -15,14 +15,16 @@ class Version20170417121647 extends AbstractMigration
      */
     public function up(Schema $schema)
     {
-        $table = $schema->createTable('salao');
-        $table->addColumn('id', 'integer', ['autoincrement' => true]);
-        $table->addColumn('nome', 'string');
-        $table->addColumn('visivel_no_app', 'boolean', ['notnull' => false, 'default' => false]);
-        $table->addColumn('telefone', 'string');
-        $table->addColumn('celular', 'string', ['notnull' => false]);
-        $table->addColumn('image', 'string');
-        $table->setPrimaryKey(['id'], 'primary');
+        $salao = $schema->createTable('salao');
+        $salao->addColumn('id', 'integer', ['autoincrement' => true]);
+        $salao->addColumn('nome', 'string');
+        $salao->addColumn('visivel_no_app', 'boolean', ['notnull' => false, 'default' => false]);
+        $salao->addColumn('telefone', 'string');
+        $salao->addColumn('celular', 'string', ['notnull' => false]);
+        $salao->addColumn('image', 'string');
+        $salao->addColumn('endereco_id', 'integer', ['notnull' => false]);
+        $salao->setPrimaryKey(['id'], 'primary');
+        $salao->addForeignKeyConstraint('endereco', ['endereco_id'], ['id'], ["onUpdate" => "NO ACTION", "onDelete" => "NO ACTION"], 'fk_salao_endereco');
 
     }
 
@@ -31,6 +33,8 @@ class Version20170417121647 extends AbstractMigration
      */
     public function down(Schema $schema)
     {
+        $salao = $schema->getTable('salao');
+        $salao->removeForeignKey('fk_salao_endereco');
         $schema->dropTable('salao');
     }
 }
