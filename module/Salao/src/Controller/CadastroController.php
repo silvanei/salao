@@ -104,7 +104,13 @@ class CadastroController extends AbstractController
             $horario->setQuinta(in_array('4', $diasDeFuncionamento));
             $horario->setSexta(in_array('5', $diasDeFuncionamento));
             $horario->setSabado(in_array('6', $diasDeFuncionamento));
-            $salao->setHorario($horario);
+            //$salao->setHorario($horario);
+
+            // (NULL, 'Shopping Iguatemi Porto Alegre', 'Av. João Wallig, 1800 - Passo da Areia, Porto Alegre - RS', '-30.027668', '-51.163269'),
+            $endereco = $salao->getEndereco();
+            $endereco->setEndereco('Av. João Wallig, 1800 - Passo da Areia, Porto Alegre - RS');
+            $endereco->setLat(-30.027668);
+            $endereco->setLng(-51.163269);
 
             $this->salaoService->update($salao);
 

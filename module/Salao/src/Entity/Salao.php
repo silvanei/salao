@@ -42,6 +42,19 @@ class Salao
      */
     private $horario;
 
+    /**
+     * @var Endereco
+     */
+    private $endereco;
+
+    /**
+     * Salao constructor.
+     */
+    public function __construct()
+    {
+        $this->endereco = new Endereco();
+    }
+
 
     /**
      * Set nome
@@ -160,7 +173,7 @@ class Salao
     /**
      * @param HorarioFuncionamento $horario
      */
-    public function setHorario(HorarioFuncionamento $horario)
+    public function setHorario(HorarioFuncionamento $horario): void
     {
         $this->horario = $horario;
     }
@@ -179,6 +192,22 @@ class Salao
     public function setImage(string $image)
     {
         $this->image = $image;
+    }
+
+    /**
+     * @return Endereco
+     */
+    public function getEndereco() :? Endereco
+    {
+        return $this->endereco;
+    }
+
+    /**
+     * @param Endereco $endereco
+     */
+    public function setEndereco(Endereco $endereco): void
+    {
+        $this->endereco = $endereco;
     }
 }
 
