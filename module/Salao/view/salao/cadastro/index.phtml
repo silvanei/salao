@@ -14,8 +14,7 @@
                 <div class="box-body box-profile">
                     <div class="row">
                         <div class="col-md-12">
-                            <? $image = $form->get(SalaoForm::IMAGE)->setAttribute('class', 'form-control');?>
-                            <img class="profile-user-img img-responsive img-circle" src="<?=$image->getValue()?>" alt="User profile picture">
+                            <img class="profile-user-img img-responsive img-circle" src="<?=$this->image?>" alt="User profile picture">
                             <br/>
                             <br/>
                             <button ng-click="excluirImg()" class="btn btn-primary btn-block">Excluir</button>
@@ -40,7 +39,7 @@
                                 <? $form->setAttribute('class', 'form-horizontal'); ?>
                                 <? $form->prepare(); ?>
                                 <?= $this->form()->openTag($form) ?>
-
+                                <? $image = $form->get(SalaoForm::IMAGE)->setAttribute('class', 'form-control');?>
                                     <div class="form-group <?= $form->getMessages(SalaoForm::IMAGE) ? 'has-error' : '' ?>">
                                         <label for="input-nome" class="col-sm-2 control-label">Imagen</label>
                                         <div class="col-sm-9">

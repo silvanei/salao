@@ -9,11 +9,13 @@
 namespace Salao\Controller;
 
 use Common\Controller\AbstractController;
+use Salao\Entity\Endereco;
 use Salao\Entity\Identity;
 use Salao\Form\SalaoForm;
 use Salao\Service\SalaoService;
 use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\Form\FormInterface;
+use Zend\Http\Request;
 use Zend\Hydrator\ClassMethods;
 use Zend\View\Model\ViewModel;
 
@@ -56,12 +58,17 @@ class CadastroController extends AbstractController
     public function indexAction()
     {
 
+        /** @var Request $request */
         $request = $this->getRequest();
-        $viewParans = ['form' => $this->salaoForm];
+
+        $salao = $this->salaoService->byId($this->identity->getSalaoId());
+
+        $viewParans = [
+            'form' => $this->salaoForm,
+            'image' => $salao->getImage()
+        ];
 
         if ($request->isGet()) {
-
-            $salao = $this->salaoService->byId($this->identity->getSalaoId());
             $this->salaoForm->setHydrator(new ClassMethods());
             $this->salaoForm->bind($salao);
             return new ViewModel($viewParans);
@@ -76,10 +83,6 @@ class CadastroController extends AbstractController
         if ($this->salaoForm->isValid()) {
 
             $data = $this->salaoForm->getData();
-
-            //$image = \Cloudinary\Uploader::destroy('sample_id');
-
-            $salao = $this->salaoService->byId($this->identity->getSalaoId());
 
             $salao->setNome($data[SalaoForm::NOME]);
             $salao->setVisivelNoApp($data[SalaoForm::VISIVAL_NO_APP]);
@@ -104,9 +107,7 @@ class CadastroController extends AbstractController
             $horario->setQuinta(in_array('4', $diasDeFuncionamento));
             $horario->setSexta(in_array('5', $diasDeFuncionamento));
             $horario->setSabado(in_array('6', $diasDeFuncionamento));
-            //$salao->setHorario($horario);
 
-            // (NULL, 'Shopping Iguatemi Porto Alegre', 'Av. João Wallig, 1800 - Passo da Areia, Porto Alegre - RS', '-30.027668', '-51.163269'),
             $endereco = $salao->getEndereco();
             $endereco->setEndereco('Av. João Wallig, 1800 - Passo da Areia, Porto Alegre - RS');
             $endereco->setLat(-30.027668);

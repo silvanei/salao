@@ -48,15 +48,6 @@ class Salao
     private $endereco;
 
     /**
-     * Salao constructor.
-     */
-    public function __construct()
-    {
-        $this->endereco = new Endereco();
-    }
-
-
-    /**
      * Set nome
      *
      * @param string $nome
@@ -183,6 +174,11 @@ class Salao
      */
     public function getImage(): string
     {
+
+        if (empty($this->image)) {
+            $this->image = 'http://res.cloudinary.com/dqdfcpk0x/image/upload/v1494982228/imagem-nao-disponivel.jpg';
+        }
+
         return $this->image;
     }
 
@@ -197,8 +193,13 @@ class Salao
     /**
      * @return Endereco
      */
-    public function getEndereco() :? Endereco
+    public function getEndereco() : Endereco
     {
+
+        if (empty($this->endereco)) {
+            $this->endereco = new Endereco();
+        }
+
         return $this->endereco;
     }
 

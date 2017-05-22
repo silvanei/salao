@@ -21,7 +21,7 @@ class Version20170417121647 extends AbstractMigration
         $salao->addColumn('visivel_no_app', 'boolean', ['notnull' => false, 'default' => false]);
         $salao->addColumn('telefone', 'string');
         $salao->addColumn('celular', 'string', ['notnull' => false]);
-        $salao->addColumn('image', 'string');
+        $salao->addColumn('image', 'string', ['notnull' => false]);
         $salao->addColumn('endereco_id', 'integer', ['notnull' => false]);
         $salao->setPrimaryKey(['id'], 'primary');
         $salao->addForeignKeyConstraint('endereco', ['endereco_id'], ['id'], ["onUpdate" => "NO ACTION", "onDelete" => "NO ACTION"], 'fk_salao_endereco');
