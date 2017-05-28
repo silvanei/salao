@@ -37,6 +37,7 @@ return [
             sprintf(Role::RESOURCE_FORMAT, CadastroController::class, 'index'),
             sprintf(Role::RESOURCE_FORMAT, LogoutController::class, 'index'),
             sprintf(Role::RESOURCE_FORMAT, \Salao\Controller\CadastroController::class, 'index'),
+            sprintf(Role::RESOURCE_FORMAT, \Salao\Controller\CadastroController::class, 'delete-image'),
             sprintf(Role::RESOURCE_FORMAT, ClienteController::class, 'index'),
 
             // Gerador de grafico Doctrine
@@ -56,6 +57,7 @@ return [
             Role::SALAO_ADMIN => [
                 'allow' => [
                     sprintf(Role::RESOURCE_FORMAT, \Salao\Controller\CadastroController::class, 'index'),
+                    sprintf(Role::RESOURCE_FORMAT, \Salao\Controller\CadastroController::class, 'delete-image'),
                     sprintf(Role::RESOURCE_FORMAT, ClienteController::class, 'index'),
                 ]
             ]

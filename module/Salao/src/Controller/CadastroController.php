@@ -91,7 +91,7 @@ class CadastroController extends AbstractController
             if (!empty($data[SalaoForm::IMAGE]["tmp_name"])) {
                 $image = \Cloudinary\Uploader::upload(
                     $data["image"]["tmp_name"],
-                    ["public_id" => "sample_id", "crop" => "limit", "width" => "150", "height" => "150"]
+                    ["public_id" => md5((string)$salao->getId()), "crop" => "limit", "width" => "150", "height" => "150"]
                 );
                 $salao->setImage($image['url']);
             }
@@ -119,5 +119,24 @@ class CadastroController extends AbstractController
         }
 
         return new ViewModel($viewParans);
+    }
+
+    public function deleteImageAction()
+    {
+
+        /** @var Request $request */
+        $request = $this->getRequest();
+
+        $salao = $this->salaoService->byId($this->identity->getSalaoId());
+
+        if ($request->isPost()) {
+
+            \Cloudinary\Uploader::destroy(md5((string)$salao->getId()));
+            $salao->setImage('');
+
+            $this->salaoService->update($salao);
+        }
+
+        return $this->redirect()->toRoute(self::ROUTE_NAME);
     }
 }

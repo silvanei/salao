@@ -24,7 +24,7 @@ return [
             CadastroController::ROUTE_NAME => [
                 'type' => Segment::class,
                 'options' => [
-                    'route' => '/salao[/:id]',
+                    'route' => '/salao[/:action][/:id]',
                     'defaults' => [
                         'controller' => CadastroController::class,
                         'action' => 'index',
