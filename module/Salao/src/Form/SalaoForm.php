@@ -12,6 +12,7 @@ namespace Salao\Form;
 use Salao\Entity\Salao;
 use Zend\Form\Element\Checkbox;
 use Zend\Form\Element\File;
+use Zend\Form\Element\Hidden;
 use Zend\Form\Element\MultiCheckbox;
 use Zend\Form\Element\Text;
 use Zend\Form\Element\Time;
@@ -28,6 +29,9 @@ class SalaoForm extends Form
     const HORARIO_FIM = 'horario_fim';
     const TELEFONE = 'telefone';
     const CELULAR = 'celular';
+    const ENDERECO = 'endereco_text';
+    const LAT = 'lat';
+    const LNG = 'lng';
     const VISIVAL_NO_APP = 'visivel_no_app';
 
     public function __construct(string $name = null)
@@ -87,6 +91,25 @@ class SalaoForm extends Form
         ]);
         $this->add($celular);
 
+        $endereco = new Text(self::ENDERECO);
+        $endereco->setAttributes([
+            'id' => self::ENDERECO,
+            'placeholder' => 'Endereço do salão'
+        ]);
+        $this->add($endereco);
+
+        $latitude = new Hidden(self::LAT);
+        $latitude->setAttributes([
+            'id' => self::LAT
+        ]);
+        $this->add($latitude);
+
+        $longitude = new Hidden(self::LNG);
+        $longitude->setAttributes([
+            'id' => self::LNG
+        ]);
+        $this->add($longitude);
+
         $visivalNoApp = new Checkbox(self::VISIVAL_NO_APP);
         $visivalNoApp->setAttributes([
             'id' => self::VISIVAL_NO_APP
@@ -124,6 +147,18 @@ class SalaoForm extends Form
         /** @var Time $horarioInicio */
         $horarioFim = $this->get(self::HORARIO_FIM);
         $horarioFim->setValue($object->getHorario()->getHoraFim());
+
+        /** @var Text $endereco */
+        $endereco = $this->get(self::ENDERECO);
+        $endereco->setValue($object->getEndereco()->getEndereco());
+
+        /** @var Text $latitude */
+        $latitude = $this->get(self::LAT);
+        $latitude->setValue($object->getEndereco()->getLat());
+
+        /** @var Text $longitude */
+        $longitude = $this->get(self::LNG);
+        $longitude->setValue($object->getEndereco()->getLng());
 
         return parent::bind($object, $flags);
     }

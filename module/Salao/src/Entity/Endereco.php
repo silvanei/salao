@@ -75,7 +75,7 @@ class Endereco
      *
      * @return float
      */
-    public function getLat(): float
+    public function getLat(): ?float
     {
         return $this->lat;
     }
@@ -99,7 +99,7 @@ class Endereco
      *
      * @return float
      */
-    public function getLng(): float
+    public function getLng(): ?float
     {
         return $this->lng;
     }

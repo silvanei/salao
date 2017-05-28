@@ -9,7 +9,6 @@
 namespace Salao\Controller;
 
 use Common\Controller\AbstractController;
-use Salao\Entity\Endereco;
 use Salao\Entity\Identity;
 use Salao\Form\SalaoForm;
 use Salao\Service\SalaoService;
@@ -109,9 +108,9 @@ class CadastroController extends AbstractController
             $horario->setSabado(in_array('6', $diasDeFuncionamento));
 
             $endereco = $salao->getEndereco();
-            $endereco->setEndereco('Av. João Wallig, 1800 - Passo da Areia, Porto Alegre - RS');
-            $endereco->setLat(-30.027668);
-            $endereco->setLng(-51.163269);
+            $endereco->setEndereco($data[SalaoForm::ENDERECO]);
+            $endereco->setLat($data[SalaoForm::LAT]);
+            $endereco->setLng($data[SalaoForm::LNG]);
 
             $this->salaoService->update($salao);
 

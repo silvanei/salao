@@ -1,6 +1,5 @@
 <? use \Salao\Form\SalaoForm; ?>
 <? /** @var SalaoForm $form */ ?>
-
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>Perfil do Salão</h1>
@@ -9,24 +8,7 @@
 <!-- Main content -->
 <section class="content">
     <div class="row">
-        <div class="col-md-2">
-            <div class="box box-primary">
-                <div class="box-body box-profile">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <img class="profile-user-img img-responsive img-circle" src="<?=$this->image?>" alt="User profile picture">
-                            <br/>
-                            <br/>
-                            <form method="post" action="<?= $this->url(\Salao\Controller\CadastroController::ROUTE_NAME, ['action' => 'delete-image'])?>">
-                                <button class="btn btn-primary btn-block">Excluir</button>
-                            </form>
-                        </div><!-- /.col -->
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#dados" data-toggle="tab">Dados do Salão</a></li>
@@ -36,6 +18,22 @@
                 <div class="tab-content">
                     <!-- DADOS -->
                     <div class="active tab-pane" id="dados">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form method="post" id="form-excluir-imagem" action="<?= $this->url(\Salao\Controller\CadastroController::ROUTE_NAME, ['action' => 'delete-image'])?>">
+                                    <div class="form-group">
+                                        <div class="col-sm-2"></div>
+                                        <div class="col-sm-9">
+                                            <img class="profile-user-img img-responsive img-circle" src="<?=$this->image?>" alt="Imagen do Salão">
+                                            <br/>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-12">
                                 <? $form->setAttribute('class', 'form-horizontal'); ?>
@@ -43,9 +41,14 @@
                                 <?= $this->form()->openTag($form) ?>
                                 <? $image = $form->get(SalaoForm::IMAGE)->setAttribute('class', 'form-control');?>
                                     <div class="form-group <?= $form->getMessages(SalaoForm::IMAGE) ? 'has-error' : '' ?>">
-                                        <label for="input-nome" class="col-sm-2 control-label">Imagen</label>
+                                        <label for="<?=SalaoForm::IMAGE?>" class="col-sm-2 control-label">Imagen</label>
                                         <div class="col-sm-9">
-                                            <?= $this->formFile($image) ?>
+                                            <div class="input-group">
+                                                <?= $this->formFile($image) ?>
+                                                <span class="input-group-btn">
+                                                  <span class="btn btn-primary" id="excluir-imagem">Excluir Imagem</span>
+                                                </span>
+                                            </div>
                                             <?=$this->formElementErrors($image)?>
                                         </div>
                                     </div>
@@ -95,31 +98,25 @@
                                             <?=$this->formElementErrors($celular)?>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="input-estado" class="col-sm-2 control-label">Estado</label>
-                                        <div class="col-sm-3">
-                                            <select class="form-control" ng-change="changeEstado(dados.endereco.estado.id)" ng-model="dados.endereco.estado.id" ng-options="estado.id as estado.nome for estado in estados" id="input-estado">
-                                                <option value="">Selecione um Estado</option>
-                                            </select>
-                                        </div>
 
-                                        <label for="input-cidade" class="col-sm-2 control-label">Cidade</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" ng-model="dados.endereco.cidade.id" ng-options="cidade.id as cidade.nome for cidade in cidades" id="input-cidade">
-                                                <option value="">Selecione uma Cidade</option>
-                                            </select>
+                                    <div class="form-group <?= $form->getMessages(SalaoForm::ENDERECO) ? 'has-error' : '' ?>">
+                                        <label for="<?=SalaoForm::ENDERECO?>" class="col-sm-2 control-label">Endereço</label>
+                                        <div class="col-sm-9">
+                                            <div class="input-group">
+                                                <? $endereco = $form->get(SalaoForm::ENDERECO)->setAttribute('class', 'form-control'); ?>
+                                                <?=$this->formInput($endereco) ?>
+                                                <span class="input-group-btn">
+                                                  <button type="button" id="mostrar-no-mapa" class="btn btn-primary">Mostrar no mapa</button>
+                                                </span>
+                                            </div>
+                                            <?=$this->formInput($form->get(SalaoForm::LAT)) ?>
+                                            <?=$this->formInput($form->get(SalaoForm::LNG)) ?>
+                                            <?=$this->formElementErrors($endereco)?>
+                                            <br>
+                                            <div id="mapa" style="height: 250px; width: 100%"></div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="input-endereco" class="col-sm-2 control-label">Endereço</label>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="input-endereco" placeholder="Endereço" ng-model="dados.endereco.rua">
-                                        </div>
-                                        <label for="input-numero" class="col-sm-1 control-label">Número</label>
-                                        <div class="col-sm-1">
-                                            <input type="number" class="form-control" id="input-numero" placeholder="Número" ng-model="dados.endereco.numero">
-                                        </div>
-                                    </div>
+
                                     <div class="form-group <?= $form->getMessages(SalaoForm::VISIVAL_NO_APP) ? 'has-error' : '' ?>">
                                         <label for="<?=SalaoForm::VISIVAL_NO_APP?>" class="col-sm-2 control-label">Visível no APP</label>
                                         <div class="col-sm-9">
@@ -128,9 +125,10 @@
                                             <?=$this->formElementErrors($visivalNoApp)?>
                                         </div>
                                     </div>
+
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-9">
-                                            <button type="submit" class="btn btn-primary" ng-click="atualizarDados(dados)" >Salvar</button>
+                                            <button type="submit" class="btn btn-primary" >Salvar</button>
                                         </div>
                                     </div>
                                 <?= $this->form()->closeTag($form) ?>
@@ -348,9 +346,17 @@
                             </div>
                         </div>
                     </div>
-                </div><!-- /.tab-content -->
-            </div><!-- /.nav-tabs-custom -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
-</section><!-- /.content -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<?$this->inlineScript()
+    ->appendFile('http://maps.googleapis.com/maps/api/js?key=AIzaSyAZVrwadhJEzcuUX3lOC63T9Ymplx8xpGU')
+    ->appendFile($this->basePath('js/salao-endereco.js'))
+?>
+<?$this->headLink()
+    ->appendStylesheet($this->basePath('css/salao-endereco.css'))
+?>
+
 

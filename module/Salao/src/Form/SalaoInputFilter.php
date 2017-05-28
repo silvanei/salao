@@ -10,6 +10,8 @@ namespace Salao\Form;
 
 use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;
+use Zend\I18n\Filter\NumberFormat;
+use Zend\I18n\Validator\IsFloat;
 use Zend\InputFilter\InputFilter;
 use Zend\Validator\StringLength;
 
@@ -34,6 +36,41 @@ class SalaoInputFilter extends InputFilter
                         'max' => 255,
                     ],
                 ]
+            ]
+        ]);
+
+        $this->add([
+            'name' => SalaoForm::ENDERECO,
+            'required' => true,
+            'filters' => [
+                ['name' => StripTags::class],
+                ['name' => StringTrim::class],
+            ]
+        ]);
+
+        $this->add([
+            'name' => SalaoForm::LAT,
+            'required' => true,
+            'filters' => [
+                ['name' => StripTags::class],
+                ['name' => StringTrim::class],
+                ['name' => NumberFormat::class],
+            ],
+            'validators' => [
+                ['name' => IsFloat::class]
+            ]
+        ]);
+
+        $this->add([
+            'name' => SalaoForm::LNG,
+            'required' => true,
+            'filters' => [
+                ['name' => StripTags::class],
+                ['name' => StringTrim::class],
+                ['name' => NumberFormat::class],
+            ],
+            'validators' => [
+                ['name' => IsFloat::class]
             ]
         ]);
     }
