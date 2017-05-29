@@ -1,0 +1,36 @@
+<aside class="main-sidebar">
+    <section class="sidebar">
+        <ul class="sidebar-menu">
+            <li class="header">Navegação</li>
+            <? foreach ($this->container as $page):  /** @var Zend\Navigation\Page\AbstractPage $page */ ?>
+                <li class="<?= $page->isActive() ? 'active' : '' ?> <?= $page->hasPages() ? 'treeview active menu-open' : '' ?>">
+                    <a href="<?= $page->getHref() ?>">
+                        <i class="<?=$page->get('ico')?>"></i>
+                        <span><?= $page->getLabel() ?></span>
+                        <? if ($page->hasPages()): ?>
+                            <span class="pull-right-container">
+                              <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        <? endif; ?>
+
+                    </a>
+                    <? if ($page->hasPages()): ?>
+                        <ul class="treeview-menu">
+                            <? foreach ($page->getPages() as $child): /** @var Zend\Navigation\Page\AbstractPage $child */ ?>
+                                <li class="<?= $child->isActive() ? 'active' : '' ?>">
+                                    <a href="<?= $child->getHref() ?>">
+                                        <i class="<?=$child->get('ico')?>"></i>
+                                        <?= $child->getLabel() ?>
+                                    </a>
+                                </li>
+                            <? endforeach; ?>
+                        </ul>
+                    <? endif; ?>
+                </li>
+            <? endforeach; ?>
+        </ul>
+    </section>
+</aside>
+
+
+

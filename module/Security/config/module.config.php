@@ -4,6 +4,7 @@ namespace Security;
 
 use Cliente\Controller\ClienteController;
 use DoctrineORMModule\Yuml\YumlController;
+use Salao\Controller\ServicoController;
 use Security\Authentication\AuthenticationAdapterFactory;
 use Security\Authentication\AuthenticationServiceFactory;
 use Security\Authorization\AclBuilder;
@@ -39,6 +40,7 @@ return [
             sprintf(Role::RESOURCE_FORMAT, \Salao\Controller\CadastroController::class, 'index'),
             sprintf(Role::RESOURCE_FORMAT, \Salao\Controller\CadastroController::class, 'delete-image'),
             sprintf(Role::RESOURCE_FORMAT, ClienteController::class, 'index'),
+            sprintf(Role::RESOURCE_FORMAT, ServicoController::class, 'index'),
 
             // Gerador de grafico Doctrine
             sprintf(Role::RESOURCE_FORMAT, YumlController::class, 'index')
@@ -59,6 +61,7 @@ return [
                     sprintf(Role::RESOURCE_FORMAT, \Salao\Controller\CadastroController::class, 'index'),
                     sprintf(Role::RESOURCE_FORMAT, \Salao\Controller\CadastroController::class, 'delete-image'),
                     sprintf(Role::RESOURCE_FORMAT, ClienteController::class, 'index'),
+                    sprintf(Role::RESOURCE_FORMAT, ServicoController::class, 'index'),
                 ]
             ]
         ]

@@ -1,0 +1,107 @@
+<div>
+    <a class="btn btn-primary" data-toggle="modal" ng-click="adicionar()"><i class="fa fa-fw fa-plus-circle"></i>Novo Serviço</a>
+</div>
+<br />
+<table class="table table-condensed" ng-show="servicos.length > 0">
+    <tr>
+        <th>Serviço</th>
+        <th>Duração</th>
+        <th>Valor (R$)</th>
+        <th></th>
+    </tr>
+    <tr ng-repeat="servico in servicos">
+        <td>{{servico.descricao}}</td>
+        <td>{{servico.duracao | minutesToHours}}</td>
+        <td>{{servico.valor | currency: 'R$ '}}</td>
+        <td>
+            <a data-toggle="modal" ng-click="editar(servico)" ><i class="fa fa-fw fa-edit"></i></a>
+            <a data-toggle="modal" ng-click="confirmExcluir(servico)"><i class="fa fa-fw fa-trash"></i></a>
+        </td>
+    </tr>
+</table>
+<div ng-show="servicos.length > 0">
+    <ul uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage" max-size="maxSize" ng-change="pageChanged()"></ul>
+</div>
+
+<div class="fade modal" id="modal-servico">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="modal-servico-title">Serviço</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" name="servicoForm">
+                    <div class="form-group" ng-class="{'has-error': (servicoForm.descricao.$invalid && servicoForm.descricao.$dirty)}" >
+                        <div class="col-sm-3">
+                            <label class="control-label">Serviço</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Nome do serviço" name="descricao" ng-model="servico.descricao" ng-required="true" ng-minlength="5">
+                            <div ng-messages="servicoForm.descricao.$error" ng-show="servicoForm.descricao.$dirty">
+                                <div ng-message="required" class="help-block">
+                                    Por favor, preencher o campo descrição
+                                </div>
+                                <div ng-message="minlength" class="help-block">
+                                    O campo descrição deve ter no mínimo 5 caracteres
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': (servicoForm.duracao.$invalid && servicoForm.duracao.$dirty)}">
+                        <div class="col-sm-3">
+                            <label class="control-label">Duração</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" name="duracao" ng-model="servico.duracao" ng-required="true" min="0">
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="control-label left">{{servico.duracao | minutesToHours}}</label>
+                        </div>
+                        <div ng-messages="servicoForm.duracao.$error" ng-show="servicoForm.duracao.$dirty" class="col-sm-9 col-lg-offset-3">
+                            <div ng-message="required" class="help-block">
+                                Por favor, preencher o campo duração
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': (servicoForm.valor.$invalid && servicoForm.valor.$dirty)}">
+                        <div class="col-sm-3">
+                            <label class="control-label">Valor (R$)</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Valor em Reais" name="valor" ng-model="servico.valor" ng-currency currency-symbol="" ng-required="true">
+                            <div ng-messages="servicoForm.valor.$error" ng-show="servicoForm.valor.$dirty">
+                                <div ng-message="required" class="help-block">
+                                    Por favor, preencher o campo valor.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" ng-hide="!servico.id" ng-click="atualizar(servico)" ng-disabled="servicoForm.$invalid" >Atualizar</button>
+                <button type="button" class="btn btn-primary" ng-hide="servico.id" ng-click="salvar(servico)" ng-disabled="servicoForm.$invalid" >Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="fade modal" id="excluir-servico">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="excluir-servico-title">Excluir Serviço</h4>
+            </div>
+            <div class="modal-body">
+                <p>Deseja excluir este serviço ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" ng-click="excluir(servico)">Sim</button>
+            </div>
+        </div>
+    </div>
+</div>

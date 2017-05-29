@@ -37,24 +37,17 @@
     ?>
 
 </head>
-<body class="hold-transition skin-blue layout-top-nav">
+<body class="hold-transition skin-purple sidebar-mini">
 
     <div class="wrapper">
         <header class="main-header">
+            <a href="/" class="logo"><span class="logo-lg"><b>{{nomeSalao}}</b></span></a>
             <nav class="navbar navbar-static-top">
                 <div class="container-fluid">
-                    <div class="navbar-header">
-                        <a href="/" class="navbar-brand"><b>{{nomeSalao}}</b></a>
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                                data-target="#navbar-collapse">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                    </div>
-
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="navbar-collapse">
-                        <? $this->navigation('default')->menu()->setPartial('navigation/default'); ?>
-                        <?= $this->navigation('default')->menu()->render() ?>
+                        <?// $this->navigation('default')->menu()->setPartial('navigation/default'); ?>
+                        <?// $this->navigation('default')->menu()->render() ?>
 
                         <ul class="nav navbar-nav navbar-right">
                             <!-- User Account: style can be found in dropdown.less -->
@@ -62,10 +55,14 @@
                                 <a href="<?=$this->url(\Site\Controller\LogoutController::ROUTE_NAME)?>"><i class="fa fa-sign-out margin-r-5"></i> Sair</a>
                             </li>
                         </ul>
-                    </div><!-- /.navbar-collapse -->
-                </div><!-- /.container-fluid -->
+                    </div>
+                </div>
             </nav>
         </header>
+
+        <? $this->navigation('default')->menu()->setPartial('navigation/side-menu-default'); ?>
+        <?= $this->navigation('default')->menu()->render() ?>
+
         <div class="content-wrapper">
             <?= $this->content ?>
         </div>

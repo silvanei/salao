@@ -5,6 +5,7 @@ namespace Salao;
 use Doctrine\ORM\Mapping\Driver\XmlDriver;
 use Salao\Controller\CadastroController;
 use Salao\Controller\CadastroControllerFactory;
+use Salao\Controller\ServicoController;
 use Salao\Form\SalaoForm;
 use Salao\Form\SalaoFormFactory;
 use Salao\Infra\Repository\AcessoRepositoryFactory;
@@ -31,11 +32,23 @@ return [
                     ],
                 ],
             ],
+
+            ServicoController::ROUTE_NAME => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/salao/servico[/:action][/:id]',
+                    'defaults' => [
+                        'controller' => ServicoController::class,
+                        'action' => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
         'factories' => [
             CadastroController::class => CadastroControllerFactory::class,
+            ServicoController::class => InvokableFactory::class,
         ],
     ],
     'navigation' => [
@@ -43,7 +56,21 @@ return [
             [
                 'label' => 'Salão',
                 'route' => CadastroController::ROUTE_NAME,
-                'ico'   => 'fa fa-cogs margin-r-5',
+                'ico'   => 'fa fa-cogs',
+                'pages' => [
+                    [
+                        'label' => 'Dados do Salão',
+                        'route' => CadastroController::ROUTE_NAME
+                    ],
+                    [
+                        'label' => 'Serviços',
+                        'route' => ServicoController::ROUTE_NAME
+                    ],
+//                    [
+//                        'label' => 'Acessos',
+//                        'route' => CadastroController::ROUTE_NAME
+//                    ]
+                ]
             ],
         ],
     ],
