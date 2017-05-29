@@ -1,352 +1,123 @@
 <? use \Salao\Form\SalaoForm; ?>
 <? /** @var SalaoForm $form */ ?>
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <h1>Perfil do Salão</h1>
-</section>
-
+<? $this->layout()->header = 'Cadastro do Salao' ?>
 <!-- Main content -->
 <section class="content">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="nav-tabs-custom">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="#dados" data-toggle="tab">Dados do Salão</a></li>
-                    <li><a href="#servicos" data-toggle="tab">Serviços</a></li>
-                    <li><a href="#acessos" data-toggle="tab">Acessos</a></li>
-                </ul>
-                <div class="tab-content">
-                    <!-- DADOS -->
-                    <div class="active tab-pane" id="dados">
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <form method="post" id="form-excluir-imagem" action="<?= $this->url(\Salao\Controller\CadastroController::ROUTE_NAME, ['action' => 'delete-image'])?>">
-                                    <div class="form-group">
-                                        <div class="col-sm-2"></div>
-                                        <div class="col-sm-9">
-                                            <img class="profile-user-img img-responsive img-circle" src="<?=$this->image?>" alt="Imagen do Salão">
-                                            <br/>
-                                        </div>
-                                    </div>
-
-                                </form>
+    <div class="box box-primary">
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form method="post" id="form-excluir-imagem" action="<?= $this->url(\Salao\Controller\CadastroController::ROUTE_NAME, ['action' => 'delete-image'])?>">
+                        <div class="form-group">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-9">
+                                <img class="profile-user-img img-responsive img-circle" src="<?=$this->image?>" alt="Imagen do Salão">
+                                <br/>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <? $form->setAttribute('class', 'form-horizontal'); ?>
-                                <? $form->prepare(); ?>
-                                <?= $this->form()->openTag($form) ?>
-                                <? $image = $form->get(SalaoForm::IMAGE)->setAttribute('class', 'form-control');?>
-                                    <div class="form-group <?= $form->getMessages(SalaoForm::IMAGE) ? 'has-error' : '' ?>">
-                                        <label for="<?=SalaoForm::IMAGE?>" class="col-sm-2 control-label">Imagen</label>
-                                        <div class="col-sm-9">
-                                            <div class="input-group">
-                                                <?= $this->formFile($image) ?>
-                                                <span class="input-group-btn">
-                                                  <span class="btn btn-primary" id="excluir-imagem">Excluir Imagem</span>
-                                                </span>
-                                            </div>
-                                            <?=$this->formElementErrors($image)?>
-                                        </div>
-                                    </div>
+                    </form>
+                </div>
+            </div>
 
-                                    <div class="form-group <?= $form->getMessages(SalaoForm::NOME) ? 'has-error' : '' ?>">
-                                        <label for="<?=SalaoForm::NOME?>" class="col-sm-2 control-label">Nome</label>
-                                        <div class="col-sm-9">
-                                            <? $nome = $form->get(SalaoForm::NOME)->setAttribute('class', 'form-control'); ?>
-                                            <?= $this->formInput($nome) ?>
-                                            <?=$this->formElementErrors($nome)?>
-                                        </div>
-                                    </div>
-                                    <div class="form-group <?= $form->getMessages(SalaoForm::DIAS_FUNCIONAMENTO) ? 'has-error' : '' ?>">
-                                        <label class="col-sm-2 control-label">Dias de funcionamento</label>
-                                        <div class="col-sm-9">
-                                            <? $diasDeFuncionamento = $form->get(SalaoForm::DIAS_FUNCIONAMENTO)->setLabelAttributes(['class' => 'checkbox-inline']) ?>
-                                            <?= $this->formMultiCheckbox($diasDeFuncionamento) ?>
-                                            <?=$this->formElementErrors($diasDeFuncionamento)?>
-                                        </div>
-                                    </div>
-                                    <div class="form-group <?= ($form->getMessages(SalaoForm::HORARIO_INICIO) || $form->getMessages(SalaoForm::HORARIO_INICIO)) ? 'has-error' : '' ?>"">
-                                        <label for="horario-inicio" class="col-sm-2 control-label">Horário</label>
-                                        <div class="col-sm-10">
-                                            <? $horarioInicio = $form->get(SalaoForm::HORARIO_INICIO)->setAttribute('class', 'form-control')->setAttribute('style', 'width: 100px; display: inline;'); ?>
-                                            <?= $this->formTime($horarioInicio) ?>
-                                            Até
-                                            <? $horarioFim = $form->get(SalaoForm::HORARIO_FIM)->setAttribute('class', 'form-control')->setAttribute('style', 'width: 100px; display: inline;'); ?>
-                                            <?= $this->formTime($horarioFim) ?>
-
-                                            <?=$this->formElementErrors($horarioInicio)?>
-                                            <?=$this->formElementErrors($horarioFim)?>
-                                        </div>
-                                    </div>
-                                    <div class="form-group <?= $form->getMessages(SalaoForm::TELEFONE) ? 'has-error' : '' ?>">
-                                        <label for="<?=SalaoForm::TELEFONE?>" class="col-sm-2 control-label" >Telefone fixo</label>
-                                        <div class="col-sm-2">
-                                            <? $telefone = $form->get(SalaoForm::TELEFONE)->setAttribute('class', 'form-control mask-phone') ?>
-                                            <?=$this->formInput($telefone) ?>
-                                            <?=$this->formElementErrors($telefone)?>
-                                        </div>
-                                    </div>
-                                    <div class="form-group <?= $form->getMessages(SalaoForm::CELULAR) ? 'has-error' : '' ?>">
-                                        <label for="<?=SalaoForm::CELULAR?>" class="col-sm-2 control-label">Telefone celular </label>
-                                        <div class="col-sm-2">
-                                            <? $celular = $form->get(SalaoForm::CELULAR)->setAttribute('class', 'form-control mask-phone') ?>
-                                            <?=$this->formInput($celular) ?>
-                                            <?=$this->formElementErrors($celular)?>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group <?= $form->getMessages(SalaoForm::ENDERECO) ? 'has-error' : '' ?>">
-                                        <label for="<?=SalaoForm::ENDERECO?>" class="col-sm-2 control-label">Endereço</label>
-                                        <div class="col-sm-9">
-                                            <div class="input-group">
-                                                <? $endereco = $form->get(SalaoForm::ENDERECO)->setAttribute('class', 'form-control'); ?>
-                                                <?=$this->formInput($endereco) ?>
-                                                <span class="input-group-btn">
-                                                  <button type="button" id="mostrar-no-mapa" class="btn btn-primary">Mostrar no mapa</button>
-                                                </span>
-                                            </div>
-                                            <?=$this->formInput($form->get(SalaoForm::LAT)) ?>
-                                            <?=$this->formInput($form->get(SalaoForm::LNG)) ?>
-                                            <?=$this->formElementErrors($endereco)?>
-                                            <br>
-                                            <div id="mapa" style="height: 250px; width: 100%"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group <?= $form->getMessages(SalaoForm::VISIVAL_NO_APP) ? 'has-error' : '' ?>">
-                                        <label for="<?=SalaoForm::VISIVAL_NO_APP?>" class="col-sm-2 control-label">Visível no APP</label>
-                                        <div class="col-sm-9">
-                                            <? $visivalNoApp = $form->get(SalaoForm::VISIVAL_NO_APP) ?>
-                                            <?=$this->formCheckbox($visivalNoApp) ?>
-                                            <?=$this->formElementErrors($visivalNoApp)?>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-9">
-                                            <button type="submit" class="btn btn-primary" >Salvar</button>
-                                        </div>
-                                    </div>
-                                <?= $this->form()->closeTag($form) ?>
-                            </div><!-- /.col -->
+            <div class="row">
+                <div class="col-md-12">
+                    <? $form->setAttribute('class', 'form-horizontal'); ?>
+                    <? $form->prepare(); ?>
+                    <?= $this->form()->openTag($form) ?>
+                    <? $image = $form->get(SalaoForm::IMAGE)->setAttribute('class', 'form-control');?>
+                    <div class="form-group <?= $form->getMessages(SalaoForm::IMAGE) ? 'has-error' : '' ?>">
+                        <label for="<?=SalaoForm::IMAGE?>" class="col-sm-2 control-label">Imagen</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <?= $this->formFile($image) ?>
+                                <span class="input-group-btn">
+                                          <span class="btn btn-primary" id="excluir-imagem">Excluir Imagem</span>
+                                        </span>
+                            </div>
+                            <?=$this->formElementErrors($image)?>
                         </div>
                     </div>
 
-                    <!-- SERVIÇOS -->
-                    <div class="tab-pane" id="servicos" ng-controller="servicoController">
-                        <div>
-                            <a class="btn btn-primary" data-toggle="modal" ng-click="adicionar()"><i class="fa fa-fw fa-plus-circle"></i>Novo Serviço</a>
+                    <div class="form-group <?= $form->getMessages(SalaoForm::NOME) ? 'has-error' : '' ?>">
+                        <label for="<?=SalaoForm::NOME?>" class="col-sm-2 control-label">Nome</label>
+                        <div class="col-sm-9">
+                            <? $nome = $form->get(SalaoForm::NOME)->setAttribute('class', 'form-control'); ?>
+                            <?= $this->formInput($nome) ?>
+                            <?=$this->formElementErrors($nome)?>
                         </div>
-                        <br />
-                        <table class="table table-condensed" ng-show="servicos.length > 0">
-                            <tr>
-                                <th>Serviço</th>
-                                <th>Duração</th>
-                                <th>Valor (R$)</th>
-                                <th></th>
-                            </tr>
-                            <tr ng-repeat="servico in servicos">
-                                <td>{{servico.descricao}}</td>
-                                <td>{{servico.duracao | minutesToHours}}</td>
-                                <td>{{servico.valor | currency: 'R$ '}}</td>
-                                <td>
-                                    <a data-toggle="modal" ng-click="editar(servico)" ><i class="fa fa-fw fa-edit"></i></a>
-                                    <a data-toggle="modal" ng-click="confirmExcluir(servico)"><i class="fa fa-fw fa-trash"></i></a>
-                                </td>
-                            </tr>
-                        </table>
-                        <div ng-show="servicos.length > 0">
-                            <ul uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage" max-size="maxSize" ng-change="pageChanged()"></ul>
-                        </div>
-
-                        <div class="fade modal" id="modal-servico">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                        <h4 class="modal-title" id="modal-servico-title">Serviço</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form class="form-horizontal" role="form" name="servicoForm">
-                                            <div class="form-group" ng-class="{'has-error': (servicoForm.descricao.$invalid && servicoForm.descricao.$dirty)}" >
-                                                <div class="col-sm-3">
-                                                    <label class="control-label">Serviço</label>
-                                                </div>
-                                                <div class="col-sm-9">
-                                                    <input type="text" class="form-control" placeholder="Nome do serviço" name="descricao" ng-model="servico.descricao" ng-required="true" ng-minlength="5">
-                                                    <div ng-messages="servicoForm.descricao.$error" ng-show="servicoForm.descricao.$dirty">
-                                                        <div ng-message="required" class="help-block">
-                                                            Por favor, preencher o campo descrição
-                                                        </div>
-                                                        <div ng-message="minlength" class="help-block">
-                                                            O campo descrição deve ter no mínimo 5 caracteres
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group" ng-class="{'has-error': (servicoForm.duracao.$invalid && servicoForm.duracao.$dirty)}">
-                                                <div class="col-sm-3">
-                                                    <label class="control-label">Duração</label>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <input type="number" class="form-control" name="duracao" ng-model="servico.duracao" ng-required="true" min="0">
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label class="control-label left">{{servico.duracao | minutesToHours}}</label>
-                                                </div>
-                                                <div ng-messages="servicoForm.duracao.$error" ng-show="servicoForm.duracao.$dirty" class="col-sm-9 col-lg-offset-3">
-                                                    <div ng-message="required" class="help-block">
-                                                        Por favor, preencher o campo duração
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group" ng-class="{'has-error': (servicoForm.valor.$invalid && servicoForm.valor.$dirty)}">
-                                                <div class="col-sm-3">
-                                                    <label class="control-label">Valor (R$)</label>
-                                                </div>
-                                                <div class="col-sm-9">
-                                                    <input type="text" class="form-control" placeholder="Valor em Reais" name="valor" ng-model="servico.valor" ng-currency currency-symbol="" ng-required="true">
-                                                    <div ng-messages="servicoForm.valor.$error" ng-show="servicoForm.valor.$dirty">
-                                                        <div ng-message="required" class="help-block">
-                                                            Por favor, preencher o campo valor.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary" ng-hide="!servico.id" ng-click="atualizar(servico)" ng-disabled="servicoForm.$invalid" >Atualizar</button>
-                                        <button type="button" class="btn btn-primary" ng-hide="servico.id" ng-click="salvar(servico)" ng-disabled="servicoForm.$invalid" >Salvar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="fade modal" id="excluir-servico">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                        <h4 class="modal-title" id="excluir-servico-title">Excluir Serviço</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>Deseja excluir este serviço ?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary" ng-click="excluir(servico)">Sim</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
-
-                    <!-- ACESSOS -->
-                    <div class="tab-pane" id="acessos" ng-controller="acessoController">
-                        <div>
-                            <a class="btn btn-primary" data-toggle="modal" ng-click="novoAcesso()"><i class="fa fa-fw fa-plus-circle"></i>Novo Acesso</a>
+                    <div class="form-group <?= $form->getMessages(SalaoForm::DIAS_FUNCIONAMENTO) ? 'has-error' : '' ?>">
+                        <label class="col-sm-2 control-label">Dias de funcionamento</label>
+                        <div class="col-sm-9">
+                            <? $diasDeFuncionamento = $form->get(SalaoForm::DIAS_FUNCIONAMENTO)->setLabelAttributes(['class' => 'checkbox-inline']) ?>
+                            <?= $this->formMultiCheckbox($diasDeFuncionamento) ?>
+                            <?=$this->formElementErrors($diasDeFuncionamento)?>
                         </div>
-                        <br />
-                        <table class="table table-condensed">
-                            <tr>
-                                <th>Perfil</th>
-                                <th>E-mail de Acesso</th>
-                                <th></th>
-                            </tr>
-                            <tr ng-repeat="acesso in acessos">
-                                <td>{{acesso.perfil | perfilToLabel}}</td>
-                                <td>{{acesso.email}}</td>
-                                <td>
-                                    <a ng-click="remover(acesso)"><i class="fa fa-fw fa-trash"></i></a>
-                                </td>
-                            </tr>
-                        </table>
-                        <div class="fade modal" id="novo-acesso">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                        <h4 class="modal-title" id="novo-acesso-title">Novo Acesso</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form class="form-horizontal" name="acessoForm">
-                                            <div class="form-group" ng-hide="acesso.profissionalId">
-                                                <div class="col-sm-3">
-                                                    <label class="control-label">Profissional</label>
-                                                </div>
-                                                <div class="col-sm-8">
-                                                    <select class="form-control"  ng-model="profissional.selecionado" ng-options="profissional.id as profissional.nome for profissional in profissionais">
-                                                        <option value="">Selecione um Profissional</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+                    </div>
+                    <div class="form-group <?= ($form->getMessages(SalaoForm::HORARIO_INICIO) || $form->getMessages(SalaoForm::HORARIO_INICIO)) ? 'has-error' : '' ?>"">
+                    <label for="horario-inicio" class="col-sm-2 control-label">Horário</label>
+                    <div class="col-sm-10">
+                        <? $horarioInicio = $form->get(SalaoForm::HORARIO_INICIO)->setAttribute('class', 'form-control')->setAttribute('style', 'width: 100px; display: inline;'); ?>
+                        <?= $this->formTime($horarioInicio) ?>
+                        Até
+                        <? $horarioFim = $form->get(SalaoForm::HORARIO_FIM)->setAttribute('class', 'form-control')->setAttribute('style', 'width: 100px; display: inline;'); ?>
+                        <?= $this->formTime($horarioFim) ?>
 
-                                            <div class="form-group">
-                                                <div class="col-sm-3">
-                                                    <label class="control-label">Perfil</label>
-                                                </div>
-                                                <div class="col-sm-8">
-                                                    <select class="form-control" ng-model="acesso.perfil">
-                                                        <option value="">Selecione um Perfil</option>
-                                                        <option value="SALAO_ADMIN">Administrador</option>
-                                                        <option value="SALAO_PROFISSIONAL">Profissional</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-3">
-                                                    <label class="control-label">E-mail</label>
-                                                </div>
-                                                <div class="col-sm-8">
-                                                    <input type="email" class="form-control" placeholder="E-mail de acesso ao sistema" ng-model="acesso.email">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-3">
-                                                    <label class="control-label">Senha</label>
-                                                </div>
-                                                <div class="col-sm-8">
-                                                    <input type="password" class="form-control" placeholder="Senha do usuario" ng-model="acesso.senha">
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary" ng-hide="acesso.profissionalId" ng-click="adicionar(profissional.selecionado, acesso)">Salvar</button>
-                                        <button type="button" class="btn btn-primary" ng-show="acesso.profissionalId" ng-click="atualizar(acesso)">Atualizar</button>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="fade modal" id="modal-excluir-acesso">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                        <h4 class="modal-title" id="myModalLabel">Excluir Acesso</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>Deseja excluir este acesso ?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary" ng-click="excluir(acessoConfirm)">Sim</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <?=$this->formElementErrors($horarioInicio)?>
+                        <?=$this->formElementErrors($horarioFim)?>
                     </div>
                 </div>
+                <div class="form-group <?= $form->getMessages(SalaoForm::TELEFONE) ? 'has-error' : '' ?>">
+                    <label for="<?=SalaoForm::TELEFONE?>" class="col-sm-2 control-label" >Telefone fixo</label>
+                    <div class="col-sm-2">
+                        <? $telefone = $form->get(SalaoForm::TELEFONE)->setAttribute('class', 'form-control mask-phone') ?>
+                        <?=$this->formInput($telefone) ?>
+                        <?=$this->formElementErrors($telefone)?>
+                    </div>
+                </div>
+                <div class="form-group <?= $form->getMessages(SalaoForm::CELULAR) ? 'has-error' : '' ?>">
+                    <label for="<?=SalaoForm::CELULAR?>" class="col-sm-2 control-label">Telefone celular </label>
+                    <div class="col-sm-2">
+                        <? $celular = $form->get(SalaoForm::CELULAR)->setAttribute('class', 'form-control mask-phone') ?>
+                        <?=$this->formInput($celular) ?>
+                        <?=$this->formElementErrors($celular)?>
+                    </div>
+                </div>
+
+                <div class="form-group <?= $form->getMessages(SalaoForm::ENDERECO) ? 'has-error' : '' ?>">
+                    <label for="<?=SalaoForm::ENDERECO?>" class="col-sm-2 control-label">Endereço</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <? $endereco = $form->get(SalaoForm::ENDERECO)->setAttribute('class', 'form-control'); ?>
+                            <?=$this->formInput($endereco) ?>
+                            <span class="input-group-btn">
+                                          <button type="button" id="mostrar-no-mapa" class="btn btn-primary">Mostrar no mapa</button>
+                                        </span>
+                        </div>
+                        <?=$this->formInput($form->get(SalaoForm::LAT)) ?>
+                        <?=$this->formInput($form->get(SalaoForm::LNG)) ?>
+                        <?=$this->formElementErrors($endereco)?>
+                        <br>
+                        <div id="mapa" style="height: 250px; width: 100%"></div>
+                    </div>
+                </div>
+
+                <div class="form-group <?= $form->getMessages(SalaoForm::VISIVAL_NO_APP) ? 'has-error' : '' ?>">
+                    <label for="<?=SalaoForm::VISIVAL_NO_APP?>" class="col-sm-2 control-label">Visível no APP</label>
+                    <div class="col-sm-9">
+                        <? $visivalNoApp = $form->get(SalaoForm::VISIVAL_NO_APP) ?>
+                        <?=$this->formCheckbox($visivalNoApp) ?>
+                        <?=$this->formElementErrors($visivalNoApp)?>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-9">
+                        <button type="submit" class="btn btn-primary" >Salvar</button>
+                    </div>
+                </div>
+                <?= $this->form()->closeTag($form) ?>
             </div>
         </div>
     </div>

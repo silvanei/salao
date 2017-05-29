@@ -1,0 +1,10 @@
+<ol class="breadcrumb">
+    <? foreach ($this->pages as $page):  /** @var Zend\Navigation\Page\AbstractPage $page */ ?>
+        <li <?= $page->isActive() ? 'active' : '' ?>>
+            <a href="<?=$page->getHref()?>">
+                <i class="<?=$page->get('ico')?>"></i>
+                <?=$page->getLabel()?>
+            </a>
+        </li>
+    <? endforeach;?>
+</ol>
