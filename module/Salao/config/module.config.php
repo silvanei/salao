@@ -7,16 +7,21 @@ use Salao\Controller\AcessoController;
 use Salao\Controller\CadastroController;
 use Salao\Controller\CadastroControllerFactory;
 use Salao\Controller\ServicoController;
+use Salao\Controller\ServicoControllerFactory;
 use Salao\Form\SalaoForm;
 use Salao\Form\SalaoFormFactory;
 use Salao\Infra\Repository\AcessoRepositoryFactory;
 use Salao\Infra\Repository\ProfissionalRepositoryFactory;
 use Salao\Infra\Repository\SalaoRepositoryFactory;
+use Salao\Infra\Repository\ServicoRepositoryFactory;
 use Salao\Repository\AcessoRepositoryInterface;
 use Salao\Repository\ProfissionalRepositoryInterface;
 use Salao\Repository\SalaoRepositoryInterface;
+use Salao\Repository\ServicoRepositoryInterface;
 use Salao\Service\SalaoService;
 use Salao\Service\SalaoServiceFactory;
+use Salao\Service\ServicoService;
+use Salao\Service\ServicoServiceFactory;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
@@ -60,7 +65,7 @@ return [
     'controllers' => [
         'factories' => [
             CadastroController::class => CadastroControllerFactory::class,
-            ServicoController::class => InvokableFactory::class,
+            ServicoController::class => ServicoControllerFactory::class,
             AcessoController::class => InvokableFactory::class,
         ],
     ],
@@ -95,6 +100,9 @@ return [
             ProfissionalRepositoryInterface::class => ProfissionalRepositoryFactory::class,
             SalaoRepositoryInterface::class => SalaoRepositoryFactory::class,
             SalaoService::class => SalaoServiceFactory::class,
+
+            ServicoRepositoryInterface::class => ServicoRepositoryFactory::class,
+            ServicoService::class => ServicoServiceFactory::class,
         ],
     ],
 
