@@ -10,6 +10,7 @@ namespace Salao\Service;
 
 use Interop\Container\ContainerInterface;
 use Salao\Repository\ServicoRepositoryInterface;
+use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
@@ -29,7 +30,8 @@ class ServicoServiceFactory implements FactoryInterface
     {
 
         $servicoRepository = $container->get(ServicoRepositoryInterface::class);
+        $authenticationService = $container->get(AuthenticationServiceInterface::class);
 
-        return new ServicoService($servicoRepository);
+        return new ServicoService($servicoRepository, $authenticationService->getIdentity());
     }
 }

@@ -9,6 +9,7 @@
 namespace Salao\Service;
 
 
+use Salao\Entity\Identity;
 use Salao\Repository\ServicoRepositoryInterface;
 
 class ServicoService
@@ -17,17 +18,25 @@ class ServicoService
     /** @var  ServicoRepositoryInterface */
     private $servicoRepository;
 
+    /** @var  Identity */
+    protected $identity;
+
     /**
      * ServicoService constructor.
      * @param ServicoRepositoryInterface $servicoRepository
+     * @param Identity $identity
      */
-    public function __construct(ServicoRepositoryInterface $servicoRepository)
+    public function __construct(ServicoRepositoryInterface $servicoRepository, Identity $identity)
     {
         $this->servicoRepository = $servicoRepository;
+        $this->identity = $identity;
     }
+
 
     public function findAll()
     {
-        return $this->servicoRepository->findAll();
+        $salaoId = $this->identity->getSalaoId();
+
+        return $this->servicoRepository->findBySaloonId($salaoId);
     }
 }

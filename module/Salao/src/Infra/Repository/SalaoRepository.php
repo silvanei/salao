@@ -38,7 +38,7 @@ class SalaoRepository extends EntityRepository  implements SalaoRepositoryInterf
         return $salao;
     }
 
-    public function update(Salao $salao)
+    public function update(Salao $salao): Salao
     {
         $this->getEntityManager()->persist($salao);
         $this->getEntityManager()->flush();

@@ -11,4 +11,5 @@ namespace Salao\Repository;
 interface ServicoRepositoryInterface
 {
 
+    public function findBySaloonId(int $saloonId): array;
 }

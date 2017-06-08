@@ -14,4 +14,6 @@ interface SalaoRepositoryInterface
 {
 
     public function add(Salao $salao): Salao;
+
+    public function update(Salao $salao): Salao;
 }

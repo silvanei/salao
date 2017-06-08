@@ -46,5 +46,7 @@
       </join-columns>
     </one-to-one>
 
+    <one-to-many field="servicos" mapped-by="salao" target-entity="Salao\Entity\Servico" fetch="LAZY" />
+
   </entity>
 </doctrine-mapping>

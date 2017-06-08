@@ -70,7 +70,7 @@ class Servico
 
     public function getValor(): float
     {
-        return $this->valor;
+        return floatval($this->valor);
     }
 
     public function setDeletado(bool $deletado): Servico

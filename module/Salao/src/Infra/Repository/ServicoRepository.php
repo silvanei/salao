@@ -14,4 +14,14 @@ use Salao\Repository\ServicoRepositoryInterface;
 class ServicoRepository extends EntityRepository implements ServicoRepositoryInterface
 {
 
+    public function findBySaloonId(int $saloonId): array
+    {
+        $servicos = $this->findBy([
+            'salao' => $saloonId
+        ]);
+
+        return $servicos;
+    }
+
+
 }

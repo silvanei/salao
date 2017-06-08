@@ -48,6 +48,11 @@ class Salao
     private $endereco;
 
     /**
+     * @var
+     */
+    private $servicos;
+
+    /**
      * Set nome
      *
      * @param string $nome
@@ -210,5 +215,23 @@ class Salao
     {
         $this->endereco = $endereco;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getServicos()
+    {
+        return $this->servicos;
+    }
+
+    /**
+     * @param mixed $servicos
+     */
+    public function setServicos($servicos)
+    {
+        $this->servicos = $servicos;
+    }
+
+
 }
 

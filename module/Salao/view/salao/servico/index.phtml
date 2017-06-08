@@ -14,15 +14,49 @@
                     <th>Valor (R$)</th>
                     <th></th>
                 </tr>
-                <tr ng-repeat="servico in servicos">
-                    <td>{{servico.descricao}}</td>
-                    <td>{{servico.duracao | minutesToHours}}</td>
-                    <td>{{servico.valor | currency: 'R$ '}}</td>
-                    <td>
-                        <a data-toggle="modal" ng-click="editar(servico)" ><i class="fa fa-fw fa-edit"></i></a>
-                        <a data-toggle="modal" ng-click="confirmExcluir(servico)"><i class="fa fa-fw fa-trash"></i></a>
-                    </td>
-                </tr>
+                <? function m2h($mins) {
+                    // Se os minutos estiverem negativos
+                    if ($mins < 0)
+                        $min = abs($mins);
+                    else
+                        $min = $mins;
+
+                    // Arredonda a hora
+                    $h = floor($min / 60);
+                    $m = ($min - ($h * 60)) / 100;
+                    $horas = $h + $m;
+
+                    // Matemática da quinta série
+                    // Detalhe: Aqui também pode se usar o abs()
+                    if ($mins < 0)
+                        $horas *= -1;
+
+                    // Separa a hora dos minutos
+                    $sep = explode('.', $horas);
+                    $h = $sep[0];
+                    if (empty($sep[1]))
+                        $sep[1] = 00;
+
+                    $m = $sep[1];
+
+                    // Aqui um pequeno artifício pra colocar um zero no final
+                    if (strlen($m) < 2)
+                        $m = $m . 0;
+
+                    return sprintf('%02d:%02d', $h, $m);
+                }  ?>
+                <? /** @var \Salao\Entity\Servico $servico */ ?>
+                <? foreach ($this->servicos as $servico): ?>
+                    <tr>
+                        <td><?=$servico->getDescricao()?></td>
+                        <td><?=m2h($servico->getDuracao())?></td>
+                        <td><?=$servico->getValor()?></td>
+                        <td>
+                            <a data-toggle="modal" ng-click="editar(servico)" ><i class="fa fa-fw fa-edit"></i></a>
+                            <a data-toggle="modal" ng-click="confirmExcluir(servico)"><i class="fa fa-fw fa-trash"></i></a>
+                        </td>
+                    </tr>
+                <? endforeach; ?>
             </table>
             <div ng-show="servicos.length > 0">
                 <ul uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage" max-size="maxSize" ng-change="pageChanged()"></ul>

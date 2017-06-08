@@ -37,8 +37,8 @@ class ServicoController extends AbstractController
     public function indexAction()
     {
 
-        $this->servicoService->findAll();
+        $servicos = $this->servicoService->findAll();
 
-        return new ViewModel();
+        return new ViewModel(['servicos' => $servicos]);
     }
 }

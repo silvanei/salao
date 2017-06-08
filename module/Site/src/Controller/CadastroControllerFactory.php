@@ -9,12 +9,12 @@
 namespace Site\Controller;
 
 use Interop\Container\ContainerInterface;
-use Site\Service\CadastroService;
 use Site\Form\CadastroForm;
+use Site\Service\CadastroService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
-class CadastroControllerFactory implements FactoryInterface
+final class CadastroControllerFactory implements FactoryInterface
 {
 
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null): AbstractActionController

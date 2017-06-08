@@ -45,8 +45,12 @@ class CadastroService
 
             $salao = $this->salaoRepository->add($salao);
 
-            $profissional = $acessoProfissional->getProfissional()->setSalao($salao);
+            $profissional = $acessoProfissional
+                ->getProfissional()
+                ->setSalao($salao)
+            ;
             $this->profissionalRepository->add($profissional);
+
             $this->acessoRepository->add($acessoProfissional);
 
             $this->transactionManager->commit();
