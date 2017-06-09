@@ -40,24 +40,13 @@ return [
                 ],
             ],
 
-            ServicoController::ROUTE_INDEX => [
-                'type' => Literal::class,
+            ServicoController::ROUTE_NAME => [
+                'type' => Segment::class,
                 'options' => [
-                    'route' => '/salao/servico',
+                    'route' => '/salao/servico[/:action][/:id]',
                     'defaults' => [
                         'controller' => ServicoController::class,
                         'action' => 'index',
-                    ],
-                ],
-            ],
-
-            ServicoController::ROUTE_EDIT => [
-                'type' => Segment::class,
-                'options' => [
-                    'route' => '/salao/servico/editar[/:id]',
-                    'defaults' => [
-                        'controller' => ServicoController::class,
-                        'action' => 'edit',
                     ],
                 ],
             ],
@@ -94,11 +83,21 @@ return [
                     ],
                     [
                         'label' => 'Serviços',
-                        'route' => ServicoController::ROUTE_INDEX,
+                        'route' => ServicoController::ROUTE_NAME,
+                        'action' => 'index',
+                        'useRouteMatch' => false,
                         'pages' => [
                             [
-                                'label' => 'Editar dados do serviço',
-                                'route' => ServicoController::ROUTE_EDIT
+                                'label' => 'Criar serviço',
+                                'route' => ServicoController::ROUTE_NAME,
+                                'action' => 'criar',
+                                'useRouteMatch' => true
+                            ],
+                            [
+                                'label' => 'Editar serviço',
+                                'route' => ServicoController::ROUTE_NAME,
+                                'action' => 'editar',
+                                'useRouteMatch' => true
                             ]
                         ]
                     ],

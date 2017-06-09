@@ -10,6 +10,8 @@ namespace Salao\Controller;
 
 use Common\Controller\AbstractController;
 use Salao\Service\ServicoService;
+use Zend\Form\Form;
+use Zend\Http\Request;
 use Zend\View\Model\ViewModel;
 
 /**
@@ -19,19 +21,23 @@ use Zend\View\Model\ViewModel;
 class ServicoController extends AbstractController
 {
 
-    const ROUTE_INDEX = 'salao-servico';
-    const ROUTE_EDIT = 'salao-servico-edit';
+    const ROUTE_NAME = 'salao-servico';
 
     /** @var  ServicoService */
     protected $servicoService;
 
+    /** @var  Form */
+    protected $form;
+
     /**
      * ServicoController constructor.
      * @param ServicoService $servicoService
+     * @param Form $form
      */
-    public function __construct(ServicoService $servicoService)
+    public function __construct(ServicoService $servicoService, Form $form)
     {
         $this->servicoService = $servicoService;
+        $this->form = $form;
     }
 
 
@@ -43,7 +49,26 @@ class ServicoController extends AbstractController
         return new ViewModel(['servicos' => $servicos]);
     }
 
-    public function editAction()
+    public function criarAction()
+    {
+
+        /** @var Request $request */
+        $request = $this->getRequest();
+
+        $viewParans = ['form' => $this->form];
+
+        if ($request->isGet()) {
+            return new ViewModel($viewParans);
+        }
+
+        $this->form->setData($request->getPost()->toArray());
+        if ($this->form->isValid()) {
+
+        }
+        return new ViewModel($viewParans);
+    }
+
+    public function editarAction()
     {
 
         $servicos = $this->servicoService->findAll();

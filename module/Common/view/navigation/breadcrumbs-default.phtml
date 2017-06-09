@@ -2,14 +2,14 @@
 <ol class="breadcrumb">
     <? foreach ($this->pages as $page):  /** @var Zend\Navigation\Page\AbstractPage $page */ ?>
         <? if (! $page->isActive()): ?>
-            <li class="active">
+            <li>
                 <a href="<?=$page->getHref()?>">
                     <i class="<?=$page->get('ico')?>"></i>
                     <?=$page->getLabel()?>
                 </a>
             </li>
         <? else: ?>
-            <li>
+            <li class="active">
                 <? if($container->getLinkLast()): ?> <a href="<?=$page->getHref()?>"> <? endif; ?>
                     <i class="<?=$page->get('ico')?>"></i>
                     <?=$page->getLabel()?>

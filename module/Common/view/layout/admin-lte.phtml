@@ -66,7 +66,7 @@
         <div class="content-wrapper">
             <section class="content-header">
                 <h1><small><?=$this->header?></small></h1>
-                <?php echo $this->navigation('default')->breadcrumbs()->setPartial('navigation/breadcrumbs-default')->render(); ?>
+                <?php echo $this->navigation('default')->breadcrumbs()->setLinkLast(false)->setPartial('navigation/breadcrumbs-default')->render(); ?>
             </section>
             <?= $this->content ?>
         </div>

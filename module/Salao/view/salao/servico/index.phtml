@@ -3,7 +3,7 @@
 <section class="content">
     <div class="box box-primary">
         <div class="box-header with-border">
-            <a class="btn btn-primary" data-toggle="modal" ><i class="fa fa-fw fa-plus-circle"></i>Novo Serviço</a>
+            <a class="btn btn-primary" href="<?=$this->url(\Salao\Controller\ServicoController::ROUTE_NAME, ['action' => 'criar'])?>"><i class="fa fa-fw fa-plus-circle"></i>Novo Serviço</a>
         </div>
 
         <div class="box-body">
@@ -21,7 +21,7 @@
                         <td><?=$this->convertMinutesToHour($servico->getDuracao())?></td>
                         <td><?=$this->currencyFormat($servico->getValor())?></td>
                         <td>
-                            <a href="<?=$this->url(\Salao\Controller\ServicoController::ROUTE_EDIT, ['id' => $servico->getId()])?>" ><i class="fa fa-fw fa-edit"></i></a>
+                            <a href="<?=$this->url(\Salao\Controller\ServicoController::ROUTE_NAME, ['action' => 'editar', 'id' => $servico->getId()])?>" ><i class="fa fa-fw fa-edit"></i></a>
                             <a data-toggle="modal" ng-click="confirmExcluir(servico)"><i class="fa fa-fw fa-trash"></i></a>
                         </td>
                     </tr>
