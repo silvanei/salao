@@ -17,7 +17,8 @@ class ServicoRepository extends EntityRepository implements ServicoRepositoryInt
     public function findBySaloonId(int $saloonId): array
     {
         $servicos = $this->findBy([
-            'salao' => $saloonId
+            'salao' => $saloonId,
+            'deletado' => 0
         ]);
 
         return $servicos;

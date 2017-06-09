@@ -19,7 +19,8 @@ use Zend\View\Model\ViewModel;
 class ServicoController extends AbstractController
 {
 
-    const ROUTE_NAME = 'salao-servico';
+    const ROUTE_INDEX = 'salao-servico';
+    const ROUTE_EDIT = 'salao-servico-edit';
 
     /** @var  ServicoService */
     protected $servicoService;
@@ -35,6 +36,14 @@ class ServicoController extends AbstractController
 
 
     public function indexAction()
+    {
+
+        $servicos = $this->servicoService->findAll();
+
+        return new ViewModel(['servicos' => $servicos]);
+    }
+
+    public function editAction()
     {
 
         $servicos = $this->servicoService->findAll();

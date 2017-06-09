@@ -1,10 +1,20 @@
+<? $container = $this->navigation()->breadcrumbs(); /** @var $container \Zend\View\Helper\Navigation\Breadcrumbs */ ?>
 <ol class="breadcrumb">
     <? foreach ($this->pages as $page):  /** @var Zend\Navigation\Page\AbstractPage $page */ ?>
-        <li <?= $page->isActive() ? 'active' : '' ?>>
-            <a href="<?=$page->getHref()?>">
-                <i class="<?=$page->get('ico')?>"></i>
-                <?=$page->getLabel()?>
-            </a>
-        </li>
+        <? if (! $page->isActive()): ?>
+            <li class="active">
+                <a href="<?=$page->getHref()?>">
+                    <i class="<?=$page->get('ico')?>"></i>
+                    <?=$page->getLabel()?>
+                </a>
+            </li>
+        <? else: ?>
+            <li>
+                <? if($container->getLinkLast()): ?> <a href="<?=$page->getHref()?>"> <? endif; ?>
+                    <i class="<?=$page->get('ico')?>"></i>
+                    <?=$page->getLabel()?>
+                <? if($container->getLinkLast()): ?> </a> <? endif; ?>
+            </li>
+        <? endif; ?>
     <? endforeach;?>
 </ol>

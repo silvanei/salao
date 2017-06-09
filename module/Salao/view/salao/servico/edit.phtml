@@ -1,0 +1,44 @@
+<? $this->layout()->header = 'Serviços do Salao' ?>
+<!-- Main content -->
+<section class="content">
+    <div class="box box-primary">
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form" name="servicoForm">
+                        <div class="form-group" >
+                            <label class="col-sm-2 control-label">Serviço</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="Nome do serviço" name="descricao" ng-model="servico.descricao" ng-required="true" ng-minlength="5">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Duração</label>
+                            <div class="col-sm-3">
+                                <input type="number" class="form-control" name="duracao" ng-model="servico.duracao" ng-required="true" min="0">
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="control-label left">{{servico.duracao | minutesToHours}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Valor (R$)</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" placeholder="Valor em Reais" name="valor" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-9">
+                                <button type="submit" class="btn btn-primary" >Salvar</button>
+                                <a href="<?=$this->url(\Salao\Controller\ServicoController::ROUTE_INDEX)?>" type="button" class="btn btn-default" >Cancelar</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

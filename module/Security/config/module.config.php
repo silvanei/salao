@@ -42,6 +42,7 @@ return [
             sprintf(Role::RESOURCE_FORMAT, \Salao\Controller\CadastroController::class, 'delete-image'),
             sprintf(Role::RESOURCE_FORMAT, ClienteController::class, 'index'),
             sprintf(Role::RESOURCE_FORMAT, ServicoController::class, 'index'),
+            sprintf(Role::RESOURCE_FORMAT, ServicoController::class, 'edit'),
             sprintf(Role::RESOURCE_FORMAT, AcessoController::class, 'index'),
 
             // Gerador de grafico Doctrine
@@ -64,6 +65,7 @@ return [
                     sprintf(Role::RESOURCE_FORMAT, \Salao\Controller\CadastroController::class, 'delete-image'),
                     sprintf(Role::RESOURCE_FORMAT, ClienteController::class, 'index'),
                     sprintf(Role::RESOURCE_FORMAT, ServicoController::class, 'index'),
+                    sprintf(Role::RESOURCE_FORMAT, ServicoController::class, 'edit'),
                     sprintf(Role::RESOURCE_FORMAT, AcessoController::class, 'index'),
                 ]
             ]

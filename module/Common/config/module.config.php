@@ -3,6 +3,8 @@
 namespace Common;
 
 use Common\Persistence\PasswordType;
+use Common\View\Helper\ConvertMinutesToHour;
+use Common\View\Helper\CurrencyFormatCustom;
 use Common\View\Helper\FlashNotifyFactory;
 use Common\View\Helper\FormElementErrorsCustom;
 use Zend\Navigation\Service\DefaultNavigationFactory;
@@ -28,6 +30,8 @@ return [
     'view_helpers' => [
         'invokables' => [
             'formElementErrors' => FormElementErrorsCustom::class,
+            'currencyFormat' => CurrencyFormatCustom::class,
+            'convertMinutesToHour' => ConvertMinutesToHour::class,
         ],
         'factories' => [
             'flashNotify' => FlashNotifyFactory::class,

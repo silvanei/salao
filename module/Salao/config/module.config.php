@@ -22,6 +22,7 @@ use Salao\Service\SalaoService;
 use Salao\Service\SalaoServiceFactory;
 use Salao\Service\ServicoService;
 use Salao\Service\ServicoServiceFactory;
+use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
@@ -39,13 +40,24 @@ return [
                 ],
             ],
 
-            ServicoController::ROUTE_NAME => [
-                'type' => Segment::class,
+            ServicoController::ROUTE_INDEX => [
+                'type' => Literal::class,
                 'options' => [
-                    'route' => '/salao/servico[/:action][/:id]',
+                    'route' => '/salao/servico',
                     'defaults' => [
                         'controller' => ServicoController::class,
                         'action' => 'index',
+                    ],
+                ],
+            ],
+
+            ServicoController::ROUTE_EDIT => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/salao/servico/editar[/:id]',
+                    'defaults' => [
+                        'controller' => ServicoController::class,
+                        'action' => 'edit',
                     ],
                 ],
             ],
@@ -82,7 +94,13 @@ return [
                     ],
                     [
                         'label' => 'Serviços',
-                        'route' => ServicoController::ROUTE_NAME
+                        'route' => ServicoController::ROUTE_INDEX,
+                        'pages' => [
+                            [
+                                'label' => 'Editar dados do serviço',
+                                'route' => ServicoController::ROUTE_EDIT
+                            ]
+                        ]
                     ],
                     [
                         'label' => 'Acessos',
