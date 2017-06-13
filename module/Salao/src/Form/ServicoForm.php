@@ -27,24 +27,24 @@ class ServicoForm extends Form
         $descricao = new Text(self::DESCRICAO);
         $descricao->setAttributes([
             'id' => self::DESCRICAO,
-            //'required' => 'required'
+            'required' => 'required'
         ]);
         $this->add($descricao);
 
-        $duracao = new Text(self::DURACAO);
+        $duracao = new Number(self::DURACAO);
         $duracao->setAttributes([
             'id' => self::DURACAO,
-//            'required' => 'required',
-//            'min' => 0,
-//            'max' => 1439,
-//            'step' => 1
+            'required' => 'required',
+            'min' => 1,
+            'max' => 1439,
+            'step' => 1
         ]);
         $this->add($duracao);
 
         $valor = new Text(self::VALOR);
         $valor->setAttributes([
             'id' => self::VALOR,
-            //'required' => 'required'
+            'required' => 'required'
         ]);
         $this->add($valor);
     }

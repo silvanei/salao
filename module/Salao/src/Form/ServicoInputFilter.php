@@ -11,8 +11,10 @@ namespace Salao\Form;
 use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;
 use Zend\Filter\ToInt;
+use Zend\I18n\Validator\IsFloat;
 use Zend\I18n\Validator\IsInt;
 use Zend\InputFilter\InputFilter;
+use Zend\Validator\Between;
 use Zend\Validator\StringLength;
 
 class ServicoInputFilter extends InputFilter
@@ -48,9 +50,26 @@ class ServicoInputFilter extends InputFilter
                 ['name' => ToInt::class],
             ],
             'validators' => [
+                ['name' => IsInt::class],
                 [
-                    'name' => IsInt::class
+                    'name' => Between::class,
+                    'options' => [
+                        'min' => 1,
+                        'max' => 1439
+                    ]
                 ]
+            ]
+        ]);
+
+        $this->add([
+            'name' => ServicoForm::VALOR,
+            'required' => true,
+            'filters' => [
+                ['name' => StripTags::class],
+                ['name' => StringTrim::class],
+            ],
+            'validators' => [
+                ['name' => IsFloat::class]
             ]
         ]);
     }
