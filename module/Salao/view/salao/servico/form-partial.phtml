@@ -34,7 +34,7 @@
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-9">
-            <button type="submit" class="btn btn-primary" >Salvar</button>
+            <button type="submit" class="btn btn-<?=($this->btn) ? $this->btn : 'primary' ?>" ><?=$this->submitLabel?></button>
             <a href="<?=$this->url(\Salao\Controller\ServicoController::ROUTE_NAME)?>" type="button" class="btn btn-default" >Cancelar</a>
         </div>
     </div>

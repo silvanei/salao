@@ -1,11 +1,12 @@
-<? $this->layout()->header = 'Serviços do Salao' ?>
+<? $this->layout()->header = 'Serviços' ?>
+<? $this->layout()->subHeader = 'Editar serviço' ?>
 <!-- Main content -->
 <section class="content">
     <div class="box box-primary">
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
-                    <?=$this->partial('form-partial')?>
+                    <?=$this->partial('form-partial', ['form' => $this->form, 'submitLabel' => 'Editar'])?>
                 </div>
             </div>
         </div>

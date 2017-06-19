@@ -58,4 +58,11 @@ class ServicoService
 
         return $this->servicoRepository->update($servico);
     }
+
+    public function delete(Servico $servico): bool {
+
+        $servico->setDeletado(true);
+        $this->servicoRepository->update($servico);
+        return true;
+    }
 }

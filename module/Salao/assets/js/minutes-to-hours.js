@@ -15,7 +15,7 @@
             input = 0;
         }
 
-        minutesToHoursLabel.html(moment.duration(parseInt(input), "minutes").format("h[h]mm[min]", { forceLength: true }));
+        minutesToHoursLabel.html(moment.duration(parseInt(input), "minutes").format("h[h] mm[min]", { forceLength: true }));
     });
 
     minutesToHours.trigger('keyup');

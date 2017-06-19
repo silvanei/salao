@@ -45,6 +45,7 @@ return [
             sprintf(Role::RESOURCE_FORMAT, ServicoController::class, 'index'),
             sprintf(Role::RESOURCE_FORMAT, ServicoController::class, 'criar'),
             sprintf(Role::RESOURCE_FORMAT, ServicoController::class, 'editar'),
+            sprintf(Role::RESOURCE_FORMAT, ServicoController::class, 'excluir'),
 
             sprintf(Role::RESOURCE_FORMAT, AcessoController::class, 'index'),
 
@@ -71,6 +72,7 @@ return [
                     sprintf(Role::RESOURCE_FORMAT, ServicoController::class, 'index'),
                     sprintf(Role::RESOURCE_FORMAT, ServicoController::class, 'criar'),
                     sprintf(Role::RESOURCE_FORMAT, ServicoController::class, 'editar'),
+                    sprintf(Role::RESOURCE_FORMAT, ServicoController::class, 'excluir'),
 
                     sprintf(Role::RESOURCE_FORMAT, AcessoController::class, 'index'),
                 ]

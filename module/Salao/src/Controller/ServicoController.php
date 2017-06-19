@@ -12,6 +12,7 @@ use Common\Controller\AbstractController;
 use Salao\Entity\Servico;
 use Salao\Form\ServicoForm;
 use Salao\Service\ServicoService;
+use Zend\Form\Element;
 use Zend\Form\Form;
 use Zend\View\Model\ViewModel;
 
@@ -123,6 +124,39 @@ class ServicoController extends AbstractController
         $this->servicoService->update($servico);
 
         $this->flashMessenger()->addSuccessMessage('Serviço atualizado com sucesso.');
+        return $this->redirect()->toRoute(self::ROUTE_NAME);
+    }
+
+    public function excluirAction()
+    {
+
+        $id = (int)$this->params()->fromRoute('id');
+        if (! $id) {
+            return $this->redirect()->toRoute(self::ROUTE_NAME);
+        }
+
+        try {
+
+            $servico = $this->servicoService->getBy($id);
+
+        } catch (\InvalidArgumentException $exception) {
+
+            $this->flashMessenger()->addInfoMessage('Serviço não encontrado.');
+            return $this->redirect()->toRoute(self::ROUTE_NAME);
+
+        }
+
+        $this->form->bind($servico);
+        $viewModel = new ViewModel(['form' => $this->form]);
+
+        $request = $this->getRequest();
+        if (! $request->isPost()) {
+            return $viewModel;
+        }
+
+        $this->servicoService->delete($servico);
+
+        $this->flashMessenger()->addSuccessMessage('Serviço excluido com sucesso.');
         return $this->redirect()->toRoute(self::ROUTE_NAME);
     }
 }

@@ -68,7 +68,7 @@
 
         <div class="content-wrapper">
             <section class="content-header">
-                <h1><small><?=$this->header?></small></h1>
+                <h1><?=$this->header?><?=($this->subHeader ? sprintf('<small>%s</small>', $this->subHeader) : '')?></h1>
                 <?php echo $this->navigation('default')->breadcrumbs()->setLinkLast(false)->setPartial('navigation/breadcrumbs-default')->render(); ?>
             </section>
             <?= $this->content ?>
