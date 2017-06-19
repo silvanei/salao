@@ -8,7 +8,6 @@ services:
     volumes:
       - .:/var/www/salao
       - ./docker/nginx/site:/etc/nginx/conf.d
-      - ./docker/nginx/log:/var/log/nginx
       - ./docker/nginx/ssl:/usr/local/nginx/ssl
     links:
       - php-fpm

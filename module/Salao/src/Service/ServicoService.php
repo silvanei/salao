@@ -10,6 +10,8 @@ namespace Salao\Service;
 
 
 use Salao\Entity\Identity;
+use Salao\Entity\Salao;
+use Salao\Entity\Servico;
 use Salao\Repository\ServicoRepositoryInterface;
 
 class ServicoService
@@ -35,8 +37,25 @@ class ServicoService
 
     public function findAll()
     {
-        $salaoId = $this->identity->getSalaoId();
+        $saloonId = $this->identity->getSalaoId();
 
-        return $this->servicoRepository->findBySaloonId($salaoId);
+        return $this->servicoRepository->findBySaloonId($saloonId);
+    }
+
+    public function create(Servico $servico)
+    {
+        $saloonId = $this->identity->getSalaoId();
+
+        return $this->servicoRepository->create($servico, $saloonId);
+    }
+
+    public function getBy(int $id): Servico {
+
+        return $this->servicoRepository->getBy($id);
+    }
+
+    public function update(Servico $servico): Servico {
+
+        return $this->servicoRepository->update($servico);
     }
 }

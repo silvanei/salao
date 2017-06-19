@@ -7,6 +7,7 @@ use Common\View\Helper\ConvertMinutesToHour;
 use Common\View\Helper\CurrencyFormatCustom;
 use Common\View\Helper\FlashNotifyFactory;
 use Common\View\Helper\FormElementErrorsCustom;
+use Common\View\Helper\FormExceptionErrors;
 use Zend\Navigation\Service\DefaultNavigationFactory;
 
 return [
@@ -30,6 +31,7 @@ return [
     'view_helpers' => [
         'invokables' => [
             'formElementErrors' => FormElementErrorsCustom::class,
+            'formExceptionErrors' => FormExceptionErrors::class,
             'currencyFormat' => CurrencyFormatCustom::class,
             'convertMinutesToHour' => ConvertMinutesToHour::class,
         ],

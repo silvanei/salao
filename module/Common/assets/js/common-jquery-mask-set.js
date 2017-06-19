@@ -14,6 +14,14 @@ $(document).ready(function(){
             field.mask(SPMaskBehavior.apply({}, arguments), options);
         }
     };
+
     $('.mask-phone').mask(SPMaskBehavior, spOptions);
+    $('.mask-money').maskMoney({
+        prefix:'',
+        allowNegative: false,
+        thousands:'.',
+        decimal:',',
+        affixesStay: false
+    });
 
 });

@@ -8,8 +8,16 @@
 
 namespace Salao\Repository;
 
+use Salao\Entity\Servico;
+
 interface ServicoRepositoryInterface
 {
 
     public function findBySaloonId(int $saloonId): array;
+
+    public function create(Servico $servico, int $saloonId): Servico;
+
+    public function getBy(int $id): Servico;
+
+    public function update(Servico $servico): Servico;
 }

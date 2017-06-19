@@ -8,6 +8,7 @@
 
 namespace Salao\Form;
 
+use Zend\Filter\Callback;
 use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;
 use Zend\Filter\ToInt;
@@ -67,6 +68,17 @@ class ServicoInputFilter extends InputFilter
             'filters' => [
                 ['name' => StripTags::class],
                 ['name' => StringTrim::class],
+                [
+                    'name' => Callback::class,
+                    'options' => [
+                        'callback' => function($value) {
+                            $value = str_replace('.', '', $value);
+                            $value = str_replace(',', '.', $value);
+                            $value = floatval($value);
+                            return $value;
+                        }
+                    ]
+                ]
             ],
             'validators' => [
                 ['name' => IsFloat::class]

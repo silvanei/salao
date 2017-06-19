@@ -6,44 +6,7 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
-                    <? $form->setAttribute('class', 'form-horizontal'); ?>
-                    <? $form->prepare(); ?>
-                    <?= $this->form()->openTag($form) ?>
-                        <div class="form-group <?= $form->getMessages(ServicoForm::DESCRICAO) ? 'has-error' : '' ?>" >
-                            <label for="<?=ServicoForm::DESCRICAO?>" class="col-sm-2 control-label">Serviço</label>
-                            <div class="col-sm-9">
-                                <? $descricao = $form->get(ServicoForm::DESCRICAO)->setAttributes(['class' => 'form-control', 'placeholder' => 'Nome do serviço']); ?>
-                                <?=$this->formInput($descricao) ?>
-                                <?=$this->formElementErrors($descricao)?>
-                            </div>
-                        </div>
-                        <div class="form-group <?= $form->getMessages(ServicoForm::DURACAO) ? 'has-error' : '' ?>">
-                            <label for="<?=ServicoForm::DURACAO?>" class="col-sm-2 control-label">Duração</label>
-                            <div class="col-sm-3">
-                                <? $duracao = $form->get(ServicoForm::DURACAO)->setAttribute('class', 'form-control'); ?>
-                                <?=$this->formInput($duracao) ?>
-                                <?=$this->formElementErrors($duracao)?>
-                            </div>
-                            <div class="col-sm-6">
-                                <label class="control-label left">{{servico.duracao | minutesToHours}}</label>
-                            </div>
-                        </div>
-                        <div class="form-group <?= $form->getMessages(ServicoForm::VALOR) ? 'has-error' : '' ?>">
-                            <label for="<?=ServicoForm::VALOR?>" class="col-sm-2 control-label">Valor (R$)</label>
-                            <div class="col-sm-3">
-                                <? $valor = $form->get(ServicoForm::VALOR)->setAttribute('class', 'form-control'); ?>
-                                <?=$this->formInput($valor) ?>
-                                <?=$this->formElementErrors($valor)?>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-9">
-                                <button type="submit" class="btn btn-primary" >Salvar</button>
-                                <a href="<?=$this->url(\Salao\Controller\ServicoController::ROUTE_NAME)?>" type="button" class="btn btn-default" >Cancelar</a>
-                            </div>
-                        </div>
-                    <?= $this->form()->closeTag($form) ?>
+                    <?=$this->partial('form-partial')?>
                 </div>
             </div>
         </div>

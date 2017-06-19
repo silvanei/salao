@@ -11,6 +11,7 @@ namespace Salao\Form;
 use Zend\Form\Element\Number;
 use Zend\Form\Element\Text;
 use Zend\Form\Form;
+use Zend\Hydrator\ClassMethods;
 
 class ServicoForm extends Form
 {
@@ -23,6 +24,7 @@ class ServicoForm extends Form
     public function __construct(string $name = null)
     {
         parent::__construct($name);
+        $this->setHydrator(new ClassMethods());
 
         $descricao = new Text(self::DESCRICAO);
         $descricao->setAttributes([
@@ -37,7 +39,8 @@ class ServicoForm extends Form
             'required' => 'required',
             'min' => 1,
             'max' => 1439,
-            'step' => 1
+            'step' => 1,
+            'value' => 0
         ]);
         $this->add($duracao);
 

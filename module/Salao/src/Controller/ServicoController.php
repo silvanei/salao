@@ -9,9 +9,10 @@
 namespace Salao\Controller;
 
 use Common\Controller\AbstractController;
+use Salao\Entity\Servico;
+use Salao\Form\ServicoForm;
 use Salao\Service\ServicoService;
 use Zend\Form\Form;
-use Zend\Http\Request;
 use Zend\View\Model\ViewModel;
 
 /**
@@ -52,27 +53,76 @@ class ServicoController extends AbstractController
     public function criarAction()
     {
 
-        /** @var Request $request */
-        $request = $this->getRequest();
+        $request   = $this->getRequest();
+        $viewModel = new ViewModel(['form' => $this->form]);
 
-        $viewParans = ['form' => $this->form];
-
-        if ($request->isGet()) {
-            return new ViewModel($viewParans);
+        if (! $request->isPost()) {
+            return $viewModel;
         }
 
-        $this->form->setData($request->getPost()->toArray());
-        if ($this->form->isValid()) {
-            
+        $this->form->setData($request->getPost());
+
+        if (! $this->form->isValid()) {
+            return $viewModel;
         }
-        return new ViewModel($viewParans);
+
+        $data = $this->form->getData();
+
+        try {
+
+            $servico = new Servico();
+            $servico->setDescricao($data[ServicoForm::DESCRICAO]);
+            $servico->setDuracao($data[ServicoForm::DURACAO]);
+            $servico->setValor($data[ServicoForm::VALOR]);
+
+            $this->servicoService->create($servico);
+        } catch (\Throwable $exception) {
+            $this->form->setMessages(['exception' => $exception->getMessage()]);
+            return $viewModel;
+        }
+
+        $this->flashMessenger()->addSuccessMessage('Serviço cadastrado com sucesso.');
+        return $this->redirect()->toRoute(self::ROUTE_NAME);
+
     }
 
     public function editarAction()
     {
 
-        $servicos = $this->servicoService->findAll();
+        $id = (int)$this->params()->fromRoute('id');
+        if (! $id) {
+            return $this->redirect()->toRoute(self::ROUTE_NAME);
+        }
 
-        return new ViewModel(['servicos' => $servicos]);
+        try {
+
+            $servico = $this->servicoService->getBy($id);
+
+        } catch (\InvalidArgumentException $exception) {
+
+            $this->flashMessenger()->addInfoMessage('Serviço não encontrado.');
+            return $this->redirect()->toRoute(self::ROUTE_NAME);
+
+        }
+
+        $this->form->bind($servico);
+        $viewModel = new ViewModel(['form' => $this->form]);
+
+        $request = $this->getRequest();
+        if (! $request->isPost()) {
+            return $viewModel;
+        }
+
+        $this->form->setData($request->getPost());
+
+        if (! $this->form->isValid()) {
+            return $viewModel;
+        }
+
+
+        $this->servicoService->update($servico);
+
+        $this->flashMessenger()->addSuccessMessage('Serviço atualizado com sucesso.');
+        return $this->redirect()->toRoute(self::ROUTE_NAME);
     }
 }
