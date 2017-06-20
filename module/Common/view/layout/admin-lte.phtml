@@ -16,12 +16,14 @@
         ->prependStylesheet($this->basePath('vendor/admin-lte/dist/css/AdminLTE.min.css'))
         ->prependStylesheet($this->basePath('vendor/admin-lte/dist/css/skins/_all-skins.min.css'))
         ->prependStylesheet($this->basePath('vendor/admin-lte/dist/css/AdminLTE.min.css'))
+        ->prependStylesheet($this->basePath('vendor/admin-lte/plugins/pace/pace.css'))
         ->prependStylesheet($this->basePath('vendor/font-awesome/css/font-awesome.min.css'))
     ?>
 
     <!-- Scripts -->
     <?= $this->headScript()
         ->appendFile($this->basePath('vendor/admin-lte/plugins/jQuery/jquery-2.2.3.min.js'))
+        ->appendFile($this->basePath('vendor/admin-lte/plugins/pace/pace.js'))
         ->appendFile($this->basePath('vendor/jquery-mask-plugin/dist/jquery.mask.min.js'))
         ->appendFile($this->basePath('vendor/jquery-maskmoney/dist/jquery.maskMoney.min.js'))
         ->appendFile($this->basePath('vendor/moment/min/moment.min.js'))
@@ -33,6 +35,8 @@
             $(function () {
                 var AdminLTEOptions = {
                 };
+                
+                $(document).ajaxStart(function() { Pace.restart(); });
             });'
         )
         ->appendFile($this->basePath('vendor/admin-lte/dist/js/app.js'))
