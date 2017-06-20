@@ -13,7 +13,7 @@ use Salao\Entity\Servico;
 interface ServicoRepositoryInterface
 {
 
-    public function findBySaloonId(int $saloonId): array;
+    public function findBySaloonId(int $saloonId, string $serarch): array;
 
     public function create(Servico $servico, int $saloonId): Servico;
 

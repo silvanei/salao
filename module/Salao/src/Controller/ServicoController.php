@@ -12,7 +12,6 @@ use Common\Controller\AbstractController;
 use Salao\Entity\Servico;
 use Salao\Form\ServicoForm;
 use Salao\Service\ServicoService;
-use Zend\Form\Element;
 use Zend\Form\Form;
 use Zend\View\Model\ViewModel;
 
@@ -46,9 +45,11 @@ class ServicoController extends AbstractController
     public function indexAction()
     {
 
-        $servicos = $this->servicoService->findAll();
+        $serarch = $this->params()->fromQuery('search', '');
 
-        return new ViewModel(['servicos' => $servicos]);
+        $servicos = $this->servicoService->findAll($serarch);
+
+        return new ViewModel(['servicos' => $servicos, 'serarch' => $serarch]);
     }
 
     public function criarAction()

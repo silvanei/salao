@@ -35,11 +35,11 @@ class ServicoService
     }
 
 
-    public function findAll()
+    public function findAll(string $serarch): array
     {
         $saloonId = $this->identity->getSalaoId();
 
-        return $this->servicoRepository->findBySaloonId($saloonId);
+        return $this->servicoRepository->findBySaloonId($saloonId, $serarch);
     }
 
     public function create(Servico $servico)

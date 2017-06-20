@@ -98,6 +98,12 @@ return [
                                 'route' => ServicoController::ROUTE_NAME,
                                 'action' => 'editar',
                                 'useRouteMatch' => true
+                            ],
+                            [
+                                'label' => 'Excluir serviço',
+                                'route' => ServicoController::ROUTE_NAME,
+                                'action' => 'excluir',
+                                'useRouteMatch' => true
                             ]
                         ]
                     ],
