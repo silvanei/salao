@@ -29,7 +29,7 @@ class ServicoService
      * @param ServicoRepositoryInterface $servicoRepository
      * @param Identity $identity
      */
-    public function __construct(ServicoRepositoryInterface $servicoRepository, Identity $identity)
+    public function __construct(ServicoRepositoryInterface $servicoRepository, Identity $identity = null)
     {
         $this->servicoRepository = $servicoRepository;
         $this->identity = $identity;
