@@ -23,7 +23,7 @@ class ServicoController extends AbstractController
 {
 
     const ROUTE_NAME = 'salao-servico';
-    const ITEM_COUNT_PER_PAGE = 1;
+    const ITEM_COUNT_PER_PAGE = 25;
 
     /** @var  ServicoService */
     protected $servicoService;
