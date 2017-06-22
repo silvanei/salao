@@ -13,8 +13,6 @@ use Salao\Entity\Salao;
 use Salao\Entity\Servico;
 use Salao\Repository\ServicoRepositoryInterface;
 
-use Doctrine\Common\Collections\Criteria as DoctrineCriteria;
-use DoctrineModule\Paginator\Adapter\Selectable as SelectableAdapter;
 use Zend\Paginator\Paginator;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
@@ -23,7 +21,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 class ServicoRepository extends EntityRepository implements ServicoRepositoryInterface
 {
 
-    public function findBySaloonId(int $saloonId, string $serarch): array
+    public function findBySaloonId(int $saloonId, string $serarch): Paginator
     {
         $query = $this->createQueryBuilder('s');
         $query->where(
@@ -33,25 +31,10 @@ class ServicoRepository extends EntityRepository implements ServicoRepositoryInt
                 $query->expr()->like('s.descricao', sprintf("'%%%s%%'", $serarch))
             )
         );
-        //$query->setFirstResult(3)->setMaxResults(2);
 
-//        $adapter = new DoctrineAdapter(new ORMPaginator($query));
-//
-//
-//        $paginator = new Paginator($adapter);
-//        $paginator->setCurrentPageNumber(3)
-//            ->setItemCountPerPage(1);
-//
-//
-//
-//        foreach ($paginator as $page) {
-//            //var_dump($page->getDescricao());
-//        }
-//
-//        return [];
-//        die;
+        $adapter = new DoctrineAdapter(new ORMPaginator($query, false));
 
-        return $query->getQuery()->getResult();
+        return new Paginator($adapter);
     }
 
     public function create(Servico $servico, int $saloonId): Servico

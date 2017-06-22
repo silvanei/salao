@@ -23,6 +23,7 @@ class ServicoController extends AbstractController
 {
 
     const ROUTE_NAME = 'salao-servico';
+    const ITEM_COUNT_PER_PAGE = 1;
 
     /** @var  ServicoService */
     protected $servicoService;
@@ -46,10 +47,15 @@ class ServicoController extends AbstractController
     {
 
         $serarch = $this->params()->fromQuery('search', '');
+        $pagina = $this->params()->fromQuery('page', 1);
 
         $servicos = $this->servicoService->findAll($serarch);
+        $servicos
+            ->setCurrentPageNumber($pagina)
+            ->setItemCountPerPage(self::ITEM_COUNT_PER_PAGE)
+        ;
 
-        return new ViewModel(['servicos' => $servicos, 'serarch' => $serarch]);
+        return new ViewModel(['servicos' => $servicos, 'serarch' => $serarch, 'query' => $this->params()->fromQuery()]);
     }
 
     public function criarAction()

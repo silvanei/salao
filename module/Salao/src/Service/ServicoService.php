@@ -13,6 +13,7 @@ use Salao\Entity\Identity;
 use Salao\Entity\Salao;
 use Salao\Entity\Servico;
 use Salao\Repository\ServicoRepositoryInterface;
+use Zend\Paginator\Paginator;
 
 class ServicoService
 {
@@ -35,7 +36,7 @@ class ServicoService
     }
 
 
-    public function findAll(string $serarch): array
+    public function findAll(string $serarch): Paginator
     {
         $saloonId = $this->identity->getSalaoId();
 

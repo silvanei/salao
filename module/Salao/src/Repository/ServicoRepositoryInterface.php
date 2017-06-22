@@ -9,11 +9,12 @@
 namespace Salao\Repository;
 
 use Salao\Entity\Servico;
+use Zend\Paginator\Paginator;
 
 interface ServicoRepositoryInterface
 {
 
-    public function findBySaloonId(int $saloonId, string $serarch): array;
+    public function findBySaloonId(int $saloonId, string $serarch): Paginator;
 
     public function create(Servico $servico, int $saloonId): Servico;
 

@@ -1,0 +1,74 @@
+<?php if ($this->pageCount): ?>
+    <nav aria-label="Page navigation">
+        <div class="pull-left pagination">
+            <span>
+                Mostrando
+                <strong><?php echo $this->currentItemCount; ?></strong>
+                de
+                <strong><?php echo $this->currentItemCount > $this->totalItemCount?$this->currentItemCount:$this->totalItemCount; ?></strong>
+                registros.
+            </span>
+        </div>
+
+        <ul class="pull-right pagination">
+
+            <!-- First page link -->
+            <?php if (isset($this->previous)): ?>
+                <?php $query['page'] = $this->first ?>
+                <li>
+                    <a href="<?=$this->url($this->route, ['params' => $this->params], ['query' => $query])?>">
+                        <?php echo $this->translate('First') ?>
+                    </a>
+                </li>
+            <?php endif; ?>
+
+            <!-- Previous page link -->
+            <?php if (isset($this->previous)): ?>
+                <?php $query['page'] = $this->previous ?>
+                <li>
+                    <a href="<?=$this->url($this->route, ['params' => $this->params], ['query' => $query])?>">
+                        <?php echo $this->translate('Previous') ?>
+                    </a>
+                </li>
+            <?php endif; ?>
+
+            <?php foreach ($this->pagesInRange as $item): ?>
+                <?php $query['page'] = $item ?>
+                <?php if($this->current == $item): ?>
+                    <li>
+                        <a class="btn disabled" href="<?=$this->url($this->route, ['params' => $this->params], ['query' => $query])?>">
+                            <?php echo $item;?>
+                        </a>
+                    </li>
+                <?php else: ?>
+                    <li>
+                        <a class="btn" href="<?=$this->url($this->route, ['params' => $this->params], ['query' => $query])?>">
+                            <?php echo $item;?>
+                        </a>
+                    </li>
+                <?php endif; ?>
+            <?php endforeach;?>
+
+            <!-- Next page link -->
+            <?php if (isset($this->next)): ?>
+                <?php $query['page'] = $this->next ?>
+                <li>
+                    <a href="<?=$this->url($this->route, ['params' => $this->params], ['query' => $query])?>">
+                        <?php echo $this->translate('Next') ?>
+                    </a>
+                </li>
+            <?php endif; ?>
+
+            <!-- Last page link -->
+            <?php if (isset($this->next)): ?>
+                <li>
+                    <?php $query['page'] = $this->last ?>
+                    <a href="<?=$this->url($this->route, ['params' => $this->params], ['query' => $query])?>">
+                        <?php echo $this->translate('Last') ?>
+                    </a>
+                </li>
+            <?php endif; ?>
+
+        </ul>
+    </nav>
+<?php endif; ?>

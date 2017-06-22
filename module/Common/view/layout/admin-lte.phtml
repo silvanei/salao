@@ -34,6 +34,7 @@
         ->appendScript('
             $(function () {
                 var AdminLTEOptions = {
+                    
                 };
                 
                 $(document).ajaxStart(function() { Pace.restart(); });
@@ -48,21 +49,22 @@
 
     <div class="wrapper">
         <header class="main-header">
-            <a href="/" class="logo"><span class="logo-lg"><b>{{nomeSalao}}</b></span></a>
-            <nav class="navbar navbar-static-top">
-                <div class="container-fluid">
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="navbar-collapse">
-                        <?// $this->navigation('default')->menu()->setPartial('navigation/default'); ?>
-                        <?// $this->navigation('default')->menu()->render() ?>
-
-                        <ul class="nav navbar-nav navbar-right">
-                            <!-- User Account: style can be found in dropdown.less -->
-                            <li>
-                                <a href="<?=$this->url(\Site\Controller\LogoutController::ROUTE_NAME)?>"><i class="fa fa-sign-out margin-r-5"></i> Sair</a>
-                            </li>
-                        </ul>
-                    </div>
+            <a href="/" class="logo">
+                <span class="logo-mini"><b>S</b></span>
+                <span class="logo-lg"><b>{{nomeSalao}}</b></span>
+            </a>
+            <nav class="navbar navbar-static-top" role="navigation">
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="<?=$this->url(\Site\Controller\LogoutController::ROUTE_NAME)?>">
+                                <i class="fa fa-sign-out margin-r-5"></i> Sair
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </nav>
         </header>
