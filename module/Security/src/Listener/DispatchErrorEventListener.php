@@ -40,10 +40,12 @@ class DispatchErrorEventListener
                 'message' => 'An error occurred during execution; please try again later.'
             ));
             $model->setTemplate('error/401');
-            $event->setResult($model);
             $response = $event->getResponse() ?: new Response();
             $response->setStatusCode(401);
-            $event->setResponse($response);
+
+            $appViewModel = $event->getViewModel();
+            $appViewModel->addChild($model, 'content');
+            $event->stopPropagation(true);
         }
     }
 }
