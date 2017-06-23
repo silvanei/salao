@@ -39,9 +39,9 @@ class DispatchErrorEventListener
             $model = new ViewModel(array(
                 'message' => 'An error occurred during execution; please try again later.'
             ));
-            $model->setTemplate('error/401');
+            $model->setTemplate('error/403');
             $response = $event->getResponse() ?: new Response();
-            $response->setStatusCode(401);
+            $response->setStatusCode(403);
 
             $appViewModel = $event->getViewModel();
             $appViewModel->addChild($model, 'content');
