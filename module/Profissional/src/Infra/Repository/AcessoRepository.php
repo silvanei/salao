@@ -6,12 +6,11 @@
  * Time: 20:58
  */
 
-namespace Salao\Infra\Repository;
+namespace Profissional\Infra\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Salao\Entity\Acesso;
-use Salao\Entity\AcessoProfissional;
-use Salao\Repository\AcessoRepositoryInterface;
+use Profissional\Entity\AcessoProfissional;
+use Profissional\Repository\AcessoRepositoryInterface;
 
 class AcessoRepository extends EntityRepository implements AcessoRepositoryInterface
 {

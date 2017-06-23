@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="Salao\Entity\AcessoProfissional" table="acesso_profissional" repository-class="Salao\Infra\Repository\AcessoRepository">
+  <entity name="Profissional\Entity\AcessoProfissional" table="acesso_profissional" repository-class="Profissional\Infra\Repository\AcessoRepository">
     <indexes>
       <index name="profissional_salao_id" columns="profissional_id"/>
     </indexes>

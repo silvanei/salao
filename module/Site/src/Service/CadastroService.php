@@ -9,10 +9,10 @@
 namespace Site\Service;
 
 use Common\Persistence\TransactionManager;
-use Salao\Entity\AcessoProfissional;
+use Profissional\Entity\AcessoProfissional;
 use Salao\Entity\Salao;
-use Salao\Repository\AcessoRepositoryInterface;
-use Salao\Repository\ProfissionalRepositoryInterface;
+use Profissional\Repository\AcessoRepositoryInterface;
+use Profissional\Repository\ProfissionalRepositoryInterface;
 use Salao\Repository\SalaoRepositoryInterface;
 
 class CadastroService

@@ -6,9 +6,9 @@
  * Time: 20:58
  */
 
-namespace Salao\Repository;
+namespace Profissional\Repository;
 
-use Salao\Entity\AcessoProfissional;
+use Profissional\Entity\AcessoProfissional;
 
 interface AcessoRepositoryInterface
 {

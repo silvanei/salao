@@ -6,11 +6,11 @@
  * Time: 20:58
  */
 
-namespace Salao\Infra\Repository;
+namespace Profissional\Infra\Repository;
 
 use Doctrine\ORM\EntityManager;
 use Profissional\Entity\Profissional;
-use Salao\Repository\ProfissionalRepositoryInterface;
+use Profissional\Repository\ProfissionalRepositoryInterface;
 
 class ProfissionalRepository implements ProfissionalRepositoryInterface
 {

@@ -1,8 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Salao\Entity;
-
-use Profissional\Entity\Profissional;
+namespace Profissional\Entity;
 
 /**
  * AcessoProfissional
@@ -136,7 +134,7 @@ class AcessoProfissional
      *
      * @return Profissional
      */
-    public function getProfissional()
+    public function getProfissional():? Profissional
     {
         return $this->profissional;
     }

@@ -10,8 +10,8 @@ namespace Site\Service;
 
 use Common\Persistence\DoctrineTransactionManager;
 use Interop\Container\ContainerInterface;
-use Salao\Repository\AcessoRepositoryInterface;
-use Salao\Repository\ProfissionalRepositoryInterface;
+use Profissional\Repository\AcessoRepositoryInterface;
+use Profissional\Repository\ProfissionalRepositoryInterface;
 use Salao\Repository\SalaoRepositoryInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 

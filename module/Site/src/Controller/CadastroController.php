@@ -9,7 +9,7 @@
 namespace Site\Controller;
 
 use Common\Controller\AbstractController;
-use Salao\Entity\AcessoProfissional;
+use Profissional\Entity\AcessoProfissional;
 use Profissional\Entity\Profissional;
 use Salao\Entity\Salao;
 use Security\Authorization\Role;

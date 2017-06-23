@@ -10,7 +10,7 @@ namespace Site\Form;
 
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
-use Salao\Entity\AcessoProfissional;
+use Profissional\Entity\AcessoProfissional;
 use Zend\Form\FormInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 

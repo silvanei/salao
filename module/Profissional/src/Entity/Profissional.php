@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Profissional\Entity;
 
@@ -52,7 +52,7 @@ class Profissional
      *
      * @return Profissional
      */
-    public function setNome($nome)
+    public function setNome(string $nome): Profissional
     {
         $this->nome = $nome;
 
@@ -64,7 +64,7 @@ class Profissional
      *
      * @return string
      */
-    public function getNome()
+    public function getNome(): string
     {
         return $this->nome;
     }
@@ -76,7 +76,7 @@ class Profissional
      *
      * @return Profissional
      */
-    public function setApelido($apelido)
+    public function setApelido(string $apelido): Profissional
     {
         $this->apelido = $apelido;
 
@@ -88,7 +88,7 @@ class Profissional
      *
      * @return string
      */
-    public function getApelido()
+    public function getApelido(): string
     {
         return $this->apelido;
     }
@@ -100,7 +100,7 @@ class Profissional
      *
      * @return Profissional
      */
-    public function setTelefone($telefone)
+    public function setTelefone(string $telefone): Profissional
     {
         $this->telefone = $telefone;
 
@@ -112,7 +112,7 @@ class Profissional
      *
      * @return string
      */
-    public function getTelefone()
+    public function getTelefone(): string
     {
         return $this->telefone;
     }
@@ -124,7 +124,7 @@ class Profissional
      *
      * @return Profissional
      */
-    public function setCelular($celular)
+    public function setCelular(string $celular): Profissional
     {
         $this->celular = $celular;
 
@@ -136,7 +136,7 @@ class Profissional
      *
      * @return string
      */
-    public function getCelular()
+    public function getCelular(): string
     {
         return $this->celular;
     }
@@ -148,7 +148,7 @@ class Profissional
      *
      * @return Profissional
      */
-    public function setDeletado($deletado)
+    public function setDeletado(bool $deletado): Profissional
     {
         $this->deletado = $deletado;
 
@@ -160,7 +160,7 @@ class Profissional
      *
      * @return boolean
      */
-    public function getDeletado()
+    public function getDeletado(): bool
     {
         return $this->deletado;
     }
@@ -170,7 +170,7 @@ class Profissional
      *
      * @return integer
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -194,7 +194,7 @@ class Profissional
      *
      * @return \Salao\Entity\Salao
      */
-    public function getSalao()
+    public function getSalao():? Salao
     {
         return $this->salao;
     }

@@ -10,19 +10,14 @@ use Salao\Controller\ServicoController;
 use Salao\Controller\ServicoControllerFactory;
 use Salao\Form\SalaoForm;
 use Salao\Form\SalaoFormFactory;
-use Salao\Infra\Repository\AcessoRepositoryFactory;
-use Salao\Infra\Repository\ProfissionalRepositoryFactory;
 use Salao\Infra\Repository\SalaoRepositoryFactory;
 use Salao\Infra\Repository\ServicoRepositoryFactory;
-use Salao\Repository\AcessoRepositoryInterface;
-use Salao\Repository\ProfissionalRepositoryInterface;
 use Salao\Repository\SalaoRepositoryInterface;
 use Salao\Repository\ServicoRepositoryInterface;
 use Salao\Service\SalaoService;
 use Salao\Service\SalaoServiceFactory;
 use Salao\Service\ServicoService;
 use Salao\Service\ServicoServiceFactory;
-use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
@@ -119,8 +114,6 @@ return [
     'service_manager' => [
         'factories' => [
             SalaoForm::class => SalaoFormFactory::class,
-            AcessoRepositoryInterface::class => AcessoRepositoryFactory::class,
-            ProfissionalRepositoryInterface::class => ProfissionalRepositoryFactory::class,
             SalaoRepositoryInterface::class => SalaoRepositoryFactory::class,
             SalaoService::class => SalaoServiceFactory::class,
 

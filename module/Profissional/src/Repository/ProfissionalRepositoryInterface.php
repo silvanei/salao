@@ -6,7 +6,7 @@
  * Time: 20:58
  */
 
-namespace Salao\Repository;
+namespace Profissional\Repository;
 
 use Profissional\Entity\Profissional;
 

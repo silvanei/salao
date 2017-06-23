@@ -4,6 +4,10 @@ namespace Profissional;
 
 use Doctrine\ORM\Mapping\Driver\XmlDriver;
 use Profissional\Controller\ProfissionalController;
+use Profissional\Infra\Repository\AcessoRepositoryFactory;
+use Profissional\Infra\Repository\ProfissionalRepositoryFactory;
+use Profissional\Repository\AcessoRepositoryInterface;
+use Profissional\Repository\ProfissionalRepositoryInterface;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
@@ -21,6 +25,13 @@ return [
                 ],
             ],
         ],
+    ],
+
+    'service_manager' => [
+        'factories' => [
+            AcessoRepositoryInterface::class => AcessoRepositoryFactory::class,
+            ProfissionalRepositoryInterface::class => ProfissionalRepositoryFactory::class,
+        ]
     ],
 
     'controllers' => [

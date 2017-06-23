@@ -9,7 +9,7 @@
 namespace Security\Authentication;
 
 use Doctrine\ORM\EntityManager;
-use Salao\Entity\AcessoProfissional;
+use Profissional\Entity\AcessoProfissional;
 use Salao\Entity\Identity;
 use Zend\Authentication\Adapter\AbstractAdapter;
 use Zend\Authentication\Adapter\Exception;
