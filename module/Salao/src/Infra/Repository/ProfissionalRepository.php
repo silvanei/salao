@@ -9,7 +9,7 @@
 namespace Salao\Infra\Repository;
 
 use Doctrine\ORM\EntityManager;
-use Salao\Entity\Profissional;
+use Profissional\Entity\Profissional;
 use Salao\Repository\ProfissionalRepositoryInterface;
 
 class ProfissionalRepository implements ProfissionalRepositoryInterface

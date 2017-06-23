@@ -10,7 +10,7 @@ namespace Site\Controller;
 
 use Common\Controller\AbstractController;
 use Salao\Entity\AcessoProfissional;
-use Salao\Entity\Profissional;
+use Profissional\Entity\Profissional;
 use Salao\Entity\Salao;
 use Security\Authorization\Role;
 use Site\Service\CadastroService;

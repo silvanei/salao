@@ -10,7 +10,6 @@ namespace Site\Service;
 
 use Common\Persistence\TransactionManager;
 use Salao\Entity\AcessoProfissional;
-use Salao\Entity\Profissional;
 use Salao\Entity\Salao;
 use Salao\Repository\AcessoRepositoryInterface;
 use Salao\Repository\ProfissionalRepositoryInterface;

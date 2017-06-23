@@ -8,7 +8,7 @@
 
 namespace Salao\Repository;
 
-use Salao\Entity\Profissional;
+use Profissional\Entity\Profissional;
 
 interface ProfissionalRepositoryInterface
 {

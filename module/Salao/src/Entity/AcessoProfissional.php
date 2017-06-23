@@ -2,6 +2,8 @@
 
 namespace Salao\Entity;
 
+use Profissional\Entity\Profissional;
+
 /**
  * AcessoProfissional
  */
@@ -28,7 +30,7 @@ class AcessoProfissional
     private $id;
 
     /**
-     * @var \Salao\Entity\Profissional
+     * @var Profissional
      */
     private $profissional;
 
@@ -118,11 +120,11 @@ class AcessoProfissional
     /**
      * Set profissional
      *
-     * @param \Salao\Entity\Profissional $profissional
+     * @param Profissional $profissional
      *
      * @return AcessoProfissional
      */
-    public function setProfissional(\Salao\Entity\Profissional $profissional = null)
+    public function setProfissional(Profissional $profissional = null)
     {
         $this->profissional = $profissional;
 
@@ -132,7 +134,7 @@ class AcessoProfissional
     /**
      * Get profissional
      *
-     * @return \Salao\Entity\Profissional
+     * @return Profissional
      */
     public function getProfissional()
     {

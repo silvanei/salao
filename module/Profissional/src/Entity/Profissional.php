@@ -1,6 +1,8 @@
 <?php
 
-namespace Salao\Entity;
+namespace Profissional\Entity;
+
+use Salao\Entity\Salao;
 
 /**
  * Profissional
@@ -180,7 +182,7 @@ class Profissional
      *
      * @return Profissional
      */
-    public function setSalao(\Salao\Entity\Salao $salao = null)
+    public function setSalao(Salao $salao = null)
     {
         $this->salao = $salao;
 
