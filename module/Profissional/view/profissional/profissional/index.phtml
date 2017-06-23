@@ -1,255 +1,72 @@
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <h1>Profissionais</h1>
-</section>
+<? use Profissional\Controller\ProfissionalController; ?>
+<? use Profissional\Entity\Profissional; ?>
+<? $this->layout()->header = 'Profissionais' ?>
 
-<!-- Main content -->
 <section class="content">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-primary">
-                <div class="box-body">
-                    <div>
-                        <a class="btn btn-primary" data-toggle="modal" ng-click="adicionar()"><i class="fa fa-fw fa-plus-circle"></i>Novo Profissional</a>
+    <div class="box box-primary">
+        <div class="box-body">
+            <div class="box-header with-border">
+                <div class="box-title">
+                    <a class="btn btn-primary btn-box-tool" href="<?=$this->url(ProfissionalController::ROUTE_NAME, ['action' => 'criar'])?>">
+                        <i class="fa fa-fw fa-plus-circle"></i>
+                    </a>
+                </div>
+
+                <div class="box-tools pull-right col-md-3" style="padding-right: 0; top: 14px;">
+                    <div class="has-feedback">
+                        <form action="<?= $this->url(ProfissionalController::ROUTE_NAME) ?>">
+                            <input type="text" name="search" class="form-control input-sm" placeholder="Search" value="<?=$this->serarch?>">
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                        </form>
                     </div>
-                    <br />
-                    <table id="profissional-table" class="table table-condensed table-hover" ng-show="profissionais.length > 0">
-                        <thead>
+                </div>
+            </div>
+            <br>
+
+            <table class="table table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Apelido</th>
+                        <th>Telefone fixo</th>
+                        <th>Telefone celular</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <? /** @var Profissional $profissional */ ?>
+                    <? foreach ($this->profissionais as $profissional): ?>
                         <tr>
-                            <th>Nome</th>
-                            <th>Apelido</th>
-                            <th>Telefone fixo</th>
-                            <th>Telefone celular</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="profissional in profissionais">
-                            <td>{{profissional.nome}}</td>
-                            <td>{{profissional.apelido}}</td>
-                            <td>{{profissional.telefone}}</td>
-                            <td>{{profissional.celular}}</td>
-                            <td>
-                                <a ng-click="editar(profissional)" ><i class="fa fa-fw fa-edit"></i></a>
-                                <a ng-click="confirmExcluir(profissional)"><i class="fa fa-fw fa-trash"></i></a>
+                            <td><?=$profissional->getNome()?></td>
+                            <td><?=$profissional->getApelido()?></td>
+                            <td><?=$profissional->getTelefone()?></td>
+                            <td><?=$profissional->getCelular()?></td>
+                            <td class="text-right">
+                                <a class="btn btn-primary btn-sm" aria-label="Settings" href="<?=$this->url(ProfissionalController::ROUTE_NAME, ['action' => 'editar', 'id' => $profissional->getId()])?>" ><i class="fa fa-fw fa-edit"></i></a>
+                                <a class="btn btn-danger btn-sm" aria-label="Settings" href="<?=$this->url(ProfissionalController::ROUTE_NAME, ['action' => 'excluir', 'id' => $profissional->getId()])?>"><i class="fa fa-fw fa-trash danger"></i></a>
                             </td>
                         </tr>
+                    <? endforeach; ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <?= $this->paginationControl(
+                                $this->profissionais,
+                                'sliding',
+                                'pagination.phtml',
+                                array(
+                                    'route' => ProfissionalController::ROUTE_NAME,
+                                    'params' => [],
+                                    'query' => $this->query
+                                )
+                            ) ?>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
 
-                        </tbody>
-                    </table>
-                    <div ng-show="profissionais.length > 0">
-                        <ul uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage" max-size="maxSize" ng-change="pageChanged()"></ul>
-                    </div>
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
-</section><!-- /.content -->
-
-
-<div class="fade modal" id="excluir-profissional">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="excluir-profissional-title">Excluir Profissional</h4>
-            </div>
-            <div class="modal-body">
-                <p>Deseja excluir este profissional ?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" ng-click="excluir(profissional)">Sim</button>
-            </div>
         </div>
     </div>
-</div>
-
-<div class="fade modal" id="modal-profissional">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="modal-profissional-title">Profissional</h4>
-            </div>
-            <div class="modal-body no-padding">
-                <div class="nav-tabs-custom" style="margin-bottom: 0;">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#dados" data-toggle="tab">Dados</a></li>
-                        <li><a href="#servicos" data-toggle="tab" ng-hide="!profissional.id">Serviços</a></li>
-                        <li><a href="#horarios" data-toggle="tab" ng-hide="!profissional.id">Horários</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <!-- DADOS -->
-                        <div class="active tab-pane" id="dados">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <form class="form-horizontal" name="dadosProfissionalForm">
-
-                                        <div class="form-group" ng-class="{'has-error': (dadosProfissionalForm.nome.$invalid && dadosProfissionalForm.nome.$dirty)}">
-                                            <label for="input-nome" class="col-sm-2 control-label">Nome</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="input-nome" name="nome" placeholder="Nome do profissional" ng-model="profissional.nome" ng-required="true" ng-minlength="5" ng-maxlength="255">
-                                                <div ng-messages="dadosProfissionalForm.nome.$error" ng-show="dadosProfissionalForm.nome.$dirty">
-                                                    <div ng-message="required" class="help-block">
-                                                        Por favor, preencher o campo nome
-                                                    </div>
-                                                    <div ng-message="minlength" class="help-block">
-                                                        O campo descrição deve ter no mínimo 5 caracteres
-                                                    </div>
-                                                    <div ng-message="maxlength" class="help-block">
-                                                        O campo descrição de ter no máximo 255 caracteres
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group" ng-class="{'has-error': (dadosProfissionalForm.apelido.$invalid && dadosProfissionalForm.apelido.$dirty)}">
-                                            <label for="input-apelido" class="col-sm-2 control-label">Apelido</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="input-apelido" name="apelido" placeholder="Apelido do profissional" ng-model="profissional.apelido" ng-required="true" ng-minlength="3" ng-maxlength="255">
-                                                <div ng-messages="dadosProfissionalForm.apelido.$error" ng-show="dadosProfissionalForm.apelido.$dirty">
-                                                    <div ng-message="required" class="help-block">
-                                                        Por favor, preencher o campo apelido
-                                                    </div>
-                                                    <div ng-message="minlength" class="help-block">
-                                                        O campo apelido deve ter no mínimo 3 caracteres
-                                                    </div>
-                                                    <div ng-message="maxlength" class="help-block">
-                                                        O campo apelido deve ter no máximo 255 caracteres
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group" ng-class="{'has-error': (dadosProfissionalForm.telefone.$invalid && dadosProfissionalForm.telefone.$dirty)}">
-                                            <label for="input-tel-fixo" class="col-sm-2 control-label" >Telefone fixo</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="input-tel-fixo" name="telefone" placeholder="Telefone fixo" ng-model="profissional.telefone" mask='(99) 9?9999-9999' mask-restrict='reject' mask-clean='true'>
-                                            </div>
-                                        </div>
-                                        <div class="form-group" ng-class="{'has-error': (dadosProfissionalForm.celular.$invalid && dadosProfissionalForm.celular.$dirty)}">
-                                            <label for="input-tel-celular" class="col-sm-2 control-label">Telefone celular</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="input-tel-celular" name="celular" placeholder="Telefone celular" ng-model="profissional.celular" mask='(99) 9?9999-9999' mask-restrict='reject' mask-clean='true'>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="col-sm-offset-2 col-sm-10">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                                <button type="button" class="btn btn-primary" ng-hide="!profissional.id" ng-click="atualizar(profissional)" ng-disabled="dadosProfissionalForm.$invalid" >Atualizar</button>
-                                                <button type="button" class="btn btn-primary" ng-hide="profissional.id" ng-click="salvar(profissional)" ng-disabled="dadosProfissionalForm.$invalid" >Salvar</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div><!-- /.col -->
-                            </div>
-
-                        </div>
-
-                        <!-- SERVIÇOS PRESTADOS -->
-                        <div class="tab-pane" id="servicos">
-                            <div class="input-group col-sm-12" ng-show="profissional.servicosDisponiveis.length > 0">
-                                <select class="form-control" ng-model="servico.selecionado" ng-options="servico.id as servico.descricao for servico in profissional.servicosDisponiveis">
-                                    <option value="">Selecione um Serviço</option>
-                                </select>
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary" type="button" ng-disabled="!servico.selecionado" ng-click="adicionarServico()">Adicionar Serviço</button>
-                                </span>
-                            </div>
-                            <br />
-                            <table class="table table-condensed" ng-show="profissional.servicosPrestados.length > 0">
-                                <tr>
-                                    <th>Serviço</th>
-                                    <th>Duração</th>
-                                    <th>Valor (R$)</th>
-                                    <th></th>
-                                </tr>
-                                <tr ng-repeat="servico in profissional.servicosPrestados" >
-                                    <td>{{servico.descricao}}</td>
-                                    <td>{{servico.duracao | date: 'HH:mm'}}</td>
-                                    <td>{{servico.valor | currency: 'R$ '}}</td>
-                                    <td><a ng-click="removeServico(profissional.id, servico.id)" ><i class="fa fa-fw fa-trash"></i></a></td>
-                                </tr>
-
-                            </table>
-
-                        </div>
-
-                        <!-- HORARIO DE TRABALHO -->
-                        <div class="tab-pane" id="horarios">
-                            <form class="form-inline" name="horarioTrabalhoForm" ng-show="diasDaSemana.length > 0">
-                                <div class="form-group"  ng-class="{'has-error': (horarioTrabalhoForm.dia.$invalid && horarioTrabalhoForm.dia.$dirty)}">
-                                    <select class="form-control" name="dia" ng-model="horarioTrabalho.dia" ng-options="dia.id as dia.label for dia in diasDaSemana" ng-required="true">
-                                        <option value="">Selecione um dia da semana</option>
-                                    </select>
-                                </div>
-                                <div class="form-group" ng-class="{'has-error': (horarioTrabalhoForm.entrada1.$invalid && horarioTrabalhoForm.entrada1.$dirty)}">
-                                    <input type="text" class="form-control" name="entrada1" time-input ng-model="horarioTrabalho.entrada1" ng-required="true" >
-                                </div>
-                                <div class="form-group" ng-class="{'has-error': (horarioTrabalhoForm.saida1.$invalid && horarioTrabalhoForm.saida1.$dirty)}">
-                                    <input type="text" class="form-control" name="saida1" time-input ng-model="horarioTrabalho.saida1" ng-required="true">
-                                </div>
-                                <div class="form-group" ng-class="{'has-error': (horarioTrabalhoForm.entrada2.$invalid && horarioTrabalhoForm.entrada2.$dirty)}">
-                                    <input type="text" class="form-control" name="entrada2" time-input ng-model="horarioTrabalho.entrada2" ng-required="true">
-                                </div>
-                                <div class="form-group" ng-class="{'has-error': (horarioTrabalhoForm.saida2.$invalid && horarioTrabalhoForm.saida2.$dirty)}">
-                                    <input type="text" class="form-control" name="saida2" time-input ng-model="horarioTrabalho.saida2" ng-required="true">
-                                </div>
-                                <button class="btn btn-primary" type="button" ng-click="adicionarHorario(profissional.id, horarioTrabalho)" ng-disabled="horarioTrabalhoForm.$invalid" >Adicionar Horário</button>
-
-                                <div ng-messages="horarioTrabalhoForm.dia.$error" ng-show="horarioTrabalhoForm.dia.$dirty" ng-class="{'has-error': (horarioTrabalhoForm.dia.$invalid && horarioTrabalhoForm.dia.$dirty)}">
-                                    <div ng-message="required" class="help-block">
-                                        Por favor, selecione o dia da semana
-                                    </div>
-                                </div>
-
-                                <div ng-messages="horarioTrabalhoForm.entrada1.$error" ng-show="horarioTrabalhoForm.entrada1.$dirty" ng-class="{'has-error': (horarioTrabalhoForm.entrada1.$invalid && horarioTrabalhoForm.entrada1.$dirty)}">
-                                    <div ng-message="parse" class="help-block">
-                                        Por favor, informe um horario de entrada válido
-                                    </div>
-                                </div>
-                                <div ng-messages="horarioTrabalhoForm.saida1.$error" ng-show="horarioTrabalhoForm.saida1.$dirty" ng-class="{'has-error': (horarioTrabalhoForm.saida1.$invalid && horarioTrabalhoForm.saida1.$dirty)}">
-                                    <div ng-message="parse" class="help-block">
-                                        Por favor, informe um horario de saida válido
-                                    </div>
-                                </div>
-                                <div ng-messages="horarioTrabalhoForm.entrada2.$error" ng-show="horarioTrabalhoForm.entrada2.$dirty" ng-class="{'has-error': (horarioTrabalhoForm.entrada2.$invalid && horarioTrabalhoForm.entrada2.$dirty)}">
-                                    <div ng-message="parse" class="help-block">
-                                        Por favor, informe um horario de entrada válido
-                                    </div>
-                                </div>
-                                <div ng-messages="horarioTrabalhoForm.saida2.$error" ng-show="horarioTrabalhoForm.saida2.$dirty" ng-class="{'has-error': (horarioTrabalhoForm.saida2.$invalid && horarioTrabalhoForm.saida2.$dirty)}">
-                                    <div ng-message="parse" class="help-block">
-                                        Por favor, informe um horario de saida válido
-                                    </div>
-                                </div>
-
-                            </form>
-                            <br/>
-                            <table class="table table-condensed" ng-show="profissional.horariosTrabalho.length > 0">
-                                <tr>
-                                    <th>Dia</th>
-                                    <th>Entrada</th>
-                                    <th>Saída</th>
-                                    <th>Entrada</th>
-                                    <th>Saída</th>
-                                    <th></th>
-                                </tr>
-                                <tr ng-repeat="horarioTrabalho in profissional.horariosTrabalho">
-                                    <td>{{horarioTrabalho.diaDaSemana | diasSemanaToLabel}}</td>
-                                    <td>{{horarioTrabalho.entrada1 | date:"HH:mm"}}</td>
-                                    <td>{{horarioTrabalho.saida1| date:"HH:mm"}}</td>
-                                    <td>{{horarioTrabalho.entrada2| date:"HH:mm"}}</td>
-                                    <td>{{horarioTrabalho.saida2| date:"HH:mm"}}</td>
-                                    <td><a ng-click="removeHorario(horarioTrabalho)" ><i class="fa fa-fw fa-trash"></i></a></td>
-                                </tr>
-                            </table>
-                        </div>
-
-                    </div><!-- /.tab-content -->
-                </div><!-- /.nav-tabs-custom -->
-            </div>
-        </div>
-    </div>
-</div>
+</section>
 

@@ -1,0 +1,24 @@
+<? $this->layout()->header = 'Profissional' ?>
+<? $this->layout()->subHeader = 'Editar profissional' ?>
+
+<?
+    /** @var \Zend\Form\Element $element */
+    foreach ($this->form->getElements() as $element) {
+        $element->setAttribute('disabled', 'disabled');
+    }
+
+?>
+<!-- Main content -->
+<section class="content">
+    <div class="box box-primary">
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <?=$this->partial('form-partial', ['form' => $this->form, 'submitLabel' => 'Excluir', 'btn' => 'danger'])?>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

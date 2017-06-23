@@ -88,7 +88,7 @@ class Profissional
      *
      * @return string
      */
-    public function getApelido(): string
+    public function getApelido():? string
     {
         return $this->apelido;
     }
@@ -112,7 +112,7 @@ class Profissional
      *
      * @return string
      */
-    public function getTelefone(): string
+    public function getTelefone():? string
     {
         return $this->telefone;
     }
@@ -136,7 +136,7 @@ class Profissional
      *
      * @return string
      */
-    public function getCelular(): string
+    public function getCelular():? string
     {
         return $this->celular;
     }

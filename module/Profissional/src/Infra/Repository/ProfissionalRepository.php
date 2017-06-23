@@ -8,30 +8,77 @@
 
 namespace Profissional\Infra\Repository;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
 use Profissional\Entity\Profissional;
 use Profissional\Repository\ProfissionalRepositoryInterface;
+use Salao\Entity\Salao;
+use Zend\Paginator\Paginator;
 
-class ProfissionalRepository implements ProfissionalRepositoryInterface
+class ProfissionalRepository extends EntityRepository implements ProfissionalRepositoryInterface
 {
-
-    /** @var  EntityManager */
-    private $em;
-
-    /**
-     * SalaoRepository constructor.
-     * @param EntityManager $em
-     */
-    public function __construct(EntityManager $em)
-    {
-        $this->em = $em;
-    }
 
     public function add(Profissional $profissional): Profissional
     {
-        $this->em->persist($profissional);
-        $this->em->flush();
+        $this->getEntityManager()->persist($profissional);
+        $this->getEntityManager()->flush();
 
+        return $profissional;
+    }
+
+    public function findBySaloonId(int $saloonId, string $serarch): Paginator
+    {
+        $query = $this->createQueryBuilder('p');
+        $query->where(
+            $query->expr()->andX(
+                $query->expr()->eq('p.salao', $saloonId),
+                $query->expr()->eq('p.deletado', 0),
+                $query->expr()->orX(
+                    $query->expr()->like('p.nome', sprintf("'%%%s%%'", $serarch)),
+                    $query->expr()->like('p.apelido', sprintf("'%%%s%%'", $serarch)),
+                    $query->expr()->like('p.telefone', sprintf("'%%%s%%'", $serarch)),
+                    $query->expr()->like('p.celular', sprintf("'%%%s%%'", $serarch))
+                )
+            )
+        );
+
+        $adapter = new DoctrineAdapter(new ORMPaginator($query, false));
+
+        return new Paginator($adapter);
+    }
+
+    public function criar(Profissional $profissional, int $saloonId): Profissional
+    {
+        $saloon = $this->getEntityManager()->find(Salao::class, $saloonId);
+        $profissional->setSalao($saloon);
+
+        $this->getEntityManager()->persist($profissional);
+        $this->getEntityManager()->flush();
+
+        return $profissional;
+    }
+
+    public function getBy(int $id, int $saloonId): Profissional
+    {
+        /** @var Profissional $profissional */
+        $profissional = $this->findOneBy([
+            'id' => $id,
+            'salao' => $saloonId,
+            'deletado' => 0
+        ]);
+        if (is_null($profissional)) {
+            throw new \InvalidArgumentException(sprintf('Profissional by id "%s" not found', $id));
+        }
+
+        return $profissional;
+    }
+
+    public function update(Profissional $profissional): Profissional
+    {
+
+        $this->getEntityManager()->persist($profissional);
+        $this->getEntityManager()->flush();
         return $profissional;
     }
 

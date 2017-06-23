@@ -49,6 +49,9 @@ return [
             sprintf(Role::RESOURCE_FORMAT, ServicoController::class, 'excluir'),
 
             sprintf(Role::RESOURCE_FORMAT, ProfissionalController::class, 'index'),
+            sprintf(Role::RESOURCE_FORMAT, ProfissionalController::class, 'criar'),
+            sprintf(Role::RESOURCE_FORMAT, ProfissionalController::class, 'editar'),
+            sprintf(Role::RESOURCE_FORMAT, ProfissionalController::class, 'excluir'),
 
             sprintf(Role::RESOURCE_FORMAT, AcessoController::class, 'index'),
 
@@ -78,6 +81,9 @@ return [
                     sprintf(Role::RESOURCE_FORMAT, ServicoController::class, 'excluir'),
 
                     sprintf(Role::RESOURCE_FORMAT, ProfissionalController::class, 'index'),
+                    sprintf(Role::RESOURCE_FORMAT, ProfissionalController::class, 'criar'),
+                    sprintf(Role::RESOURCE_FORMAT, ProfissionalController::class, 'editar'),
+                    sprintf(Role::RESOURCE_FORMAT, ProfissionalController::class, 'excluir'),
 
                     sprintf(Role::RESOURCE_FORMAT, AcessoController::class, 'index'),
                 ]

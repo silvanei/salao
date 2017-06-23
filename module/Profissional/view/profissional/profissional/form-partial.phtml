@@ -1,0 +1,33 @@
+<? use Profissional\Controller\ProfissionalController; ?>
+<? use Profissional\Form\ProfissionalForm; /** @var ProfissionalForm $form */ ?>
+
+<? $form->setAttribute('class', 'form-horizontal'); ?>
+<? $form->prepare(); ?>
+<?= $this->form()->openTag($form) ?>
+<?= $this->formExceptionErrors($form)?>
+    <div class="form-group <?= $form->getMessages(ProfissionalForm::NOME) ? 'has-error' : '' ?>" >
+        <label for="<?=ProfissionalForm::NOME?>" class="col-sm-2 control-label">Nome</label>
+        <div class="col-sm-5">
+            <? $nome = $form->get(ProfissionalForm::NOME)->setAttributes(['class' => 'form-control', 'placeholder' => 'Nome do profissional']); ?>
+            <?=$this->formInput($nome) ?>
+            <?=$this->formElementErrors($nome)?>
+        </div>
+    </div>
+    <div class="form-group <?= $form->getMessages(ProfissionalForm::APELIDO) ? 'has-error' : '' ?>">
+        <label for="<?=ProfissionalForm::APELIDO?>" class="col-sm-2 control-label">Apelido</label>
+        <div class="col-sm-5">
+            <? $apelido = $form->get(ProfissionalForm::APELIDO)->setAttributes(['class' => 'form-control minutes-to-hours', 'placeholder' => 'Apelido do profissional']); ?>
+            <?=$this->formInput($apelido) ?>
+            <?=$this->formElementErrors($apelido)?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-9">
+            <button type="submit" class="btn btn-<?=($this->btn) ? $this->btn : 'primary' ?>" ><?=$this->submitLabel?></button>
+            <a href="<?=$this->url(ProfissionalController::ROUTE_NAME)?>" type="button" class="btn btn-default" >Cancelar</a>
+        </div>
+    </div>
+<?= $this->form()->closeTag($form) ?>
+
+<?$this->inlineScript()->appendFile($this->basePath('js/minutes-to-hours.js'));?>

@@ -4,12 +4,14 @@ namespace Profissional;
 
 use Doctrine\ORM\Mapping\Driver\XmlDriver;
 use Profissional\Controller\ProfissionalController;
+use Profissional\Controller\ProfissionalControllerFactory;
 use Profissional\Infra\Repository\AcessoRepositoryFactory;
 use Profissional\Infra\Repository\ProfissionalRepositoryFactory;
 use Profissional\Repository\AcessoRepositoryInterface;
 use Profissional\Repository\ProfissionalRepositoryInterface;
+use Profissional\Service\ProfissionalService;
+use Profissional\Service\ProfissionalServiceFactory;
 use Zend\Router\Http\Segment;
-use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
     'router' => [
@@ -31,12 +33,13 @@ return [
         'factories' => [
             AcessoRepositoryInterface::class => AcessoRepositoryFactory::class,
             ProfissionalRepositoryInterface::class => ProfissionalRepositoryFactory::class,
+            ProfissionalService::class => ProfissionalServiceFactory::class,
         ]
     ],
 
     'controllers' => [
         'factories' => [
-            ProfissionalController::class => InvokableFactory::class,
+            ProfissionalController::class => ProfissionalControllerFactory::class,
         ],
     ],
 
