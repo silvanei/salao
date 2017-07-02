@@ -79,6 +79,8 @@ class ProfissionalController extends AbstractController
             $profissional = new Profissional();
             $profissional->setNome($data[ProfissionalForm::NOME]);
             $profissional->setApelido($data[ProfissionalForm::APELIDO]);
+            $profissional->setTelefone($data[ProfissionalForm::TELEFONE]);
+            $profissional->setCelular($data[ProfissionalForm::CELULAR]);
 
             $this->profissionalService->create($profissional);
         } catch (\Throwable $exception) {

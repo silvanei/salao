@@ -14,6 +14,7 @@ use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
 use Profissional\Entity\Profissional;
 use Profissional\Repository\ProfissionalRepositoryInterface;
 use Salao\Entity\Salao;
+use Zend\I18n\Filter\Alnum;
 use Zend\Paginator\Paginator;
 
 class ProfissionalRepository extends EntityRepository implements ProfissionalRepositoryInterface
@@ -29,6 +30,8 @@ class ProfissionalRepository extends EntityRepository implements ProfissionalRep
 
     public function findBySaloonId(int $saloonId, string $serarch): Paginator
     {
+        $filter = new Alnum();
+
         $query = $this->createQueryBuilder('p');
         $query->where(
             $query->expr()->andX(
@@ -37,8 +40,8 @@ class ProfissionalRepository extends EntityRepository implements ProfissionalRep
                 $query->expr()->orX(
                     $query->expr()->like('p.nome', sprintf("'%%%s%%'", $serarch)),
                     $query->expr()->like('p.apelido', sprintf("'%%%s%%'", $serarch)),
-                    $query->expr()->like('p.telefone', sprintf("'%%%s%%'", $serarch)),
-                    $query->expr()->like('p.celular', sprintf("'%%%s%%'", $serarch))
+                    $query->expr()->like('p.telefone', sprintf("'%%%s%%'", $filter->filter($serarch))),
+                    $query->expr()->like('p.celular', sprintf("'%%%s%%'", $filter->filter($serarch)))
                 )
             )
         );

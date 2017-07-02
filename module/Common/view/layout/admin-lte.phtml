@@ -11,13 +11,11 @@
 
     <!-- Le styles -->
     <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath('application/img/favicon.ico')])
-        ->prependStylesheet($this->basePath('vendor/admin-lte/bootstrap/css/bootstrap-theme.min.css'))
-        ->prependStylesheet($this->basePath('vendor/admin-lte/bootstrap/css/bootstrap.min.css'))
-        ->prependStylesheet($this->basePath('vendor/admin-lte/dist/css/AdminLTE.min.css'))
-        ->prependStylesheet($this->basePath('vendor/admin-lte/dist/css/skins/_all-skins.min.css'))
-        ->prependStylesheet($this->basePath('vendor/admin-lte/dist/css/AdminLTE.min.css'))
-        ->prependStylesheet($this->basePath('vendor/admin-lte/plugins/pace/pace.css'))
-        ->prependStylesheet($this->basePath('vendor/font-awesome/css/font-awesome.min.css'))
+        ->appendStylesheet($this->basePath('vendor/admin-lte/bootstrap/css/bootstrap.min.css'))
+        ->appendStylesheet($this->basePath('vendor/font-awesome/css/font-awesome.min.css'))
+        ->appendStylesheet($this->basePath('vendor/admin-lte/plugins/pace/pace.css'))
+        ->appendStylesheet($this->basePath('vendor/admin-lte/dist/css/AdminLTE.min.css'))
+        ->appendStylesheet($this->basePath('vendor/admin-lte/dist/css/skins/_all-skins.min.css'))
     ?>
 
     <!-- Scripts -->
@@ -28,12 +26,12 @@
         ->appendFile($this->basePath('vendor/jquery-maskmoney/dist/jquery.maskMoney.min.js'))
         ->appendFile($this->basePath('vendor/moment/min/moment.min.js'))
         ->appendFile($this->basePath('vendor/moment-duration-format/lib/moment-duration-format.js'))
-        ->appendFile($this->basePath('vendor/admin-lte/bootstrap/js/bootstrap.min.js'))
         ->appendFile($this->basePath('vendor/admin-lte/plugins/jQueryUI/jquery-ui.min.js'))
         ->appendFile($this->basePath('js/common-jquery-mask-set.js'))
+        ->appendFile($this->basePath('vendor/admin-lte/bootstrap/js/bootstrap.min.js'))
         ->appendScript('
             $(function () {
-                var AdminLTEOptions = {
+                AdminLTEOptions = {
                     
                 };
                 

@@ -38,5 +38,17 @@ class ProfissionalForm extends Form
             'id' => self::APELIDO
         ]);
         $this->add($apelido);
+
+        $telefone = new Text(self::TELEFONE);
+        $telefone->setAttributes([
+            'id' => self::TELEFONE
+        ]);
+        $this->add($telefone);
+
+        $celular = new Text(self::CELULAR);
+        $celular->setAttributes([
+            'id' => self::CELULAR
+        ]);
+        $this->add($celular);
     }
 }

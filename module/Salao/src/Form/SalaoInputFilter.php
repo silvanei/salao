@@ -10,6 +10,7 @@ namespace Salao\Form;
 
 use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;
+use Zend\I18n\Filter\Alnum;
 use Zend\I18n\Filter\NumberFormat;
 use Zend\I18n\Validator\IsFloat;
 use Zend\InputFilter\InputFilter;
@@ -36,6 +37,26 @@ class SalaoInputFilter extends InputFilter
                         'max' => 255,
                     ],
                 ]
+            ]
+        ]);
+
+        $this->add([
+            'name' => SalaoForm::TELEFONE,
+            'required' => false,
+            'filters' => [
+                ['name' => StripTags::class],
+                ['name' => StringTrim::class],
+                ['name' => Alnum::class],
+            ]
+        ]);
+
+        $this->add([
+            'name' => SalaoForm::CELULAR,
+            'required' => false,
+            'filters' => [
+                ['name' => StripTags::class],
+                ['name' => StringTrim::class],
+                ['name' => Alnum::class],
             ]
         ]);
 

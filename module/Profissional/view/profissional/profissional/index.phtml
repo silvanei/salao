@@ -7,7 +7,7 @@
         <div class="box-body">
             <div class="box-header with-border">
                 <div class="box-title">
-                    <a class="btn btn-primary btn-box-tool" href="<?=$this->url(ProfissionalController::ROUTE_NAME, ['action' => 'criar'])?>">
+                    <a class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Cadastrar Profissional" href="<?=$this->url(ProfissionalController::ROUTE_NAME, ['action' => 'criar'])?>">
                         <i class="fa fa-fw fa-plus-circle"></i>
                     </a>
                 </div>
@@ -15,7 +15,7 @@
                 <div class="box-tools pull-right col-md-3" style="padding-right: 0; top: 14px;">
                     <div class="has-feedback">
                         <form action="<?= $this->url(ProfissionalController::ROUTE_NAME) ?>">
-                            <input type="text" name="search" class="form-control input-sm" placeholder="Search" value="<?=$this->serarch?>">
+                            <input type="text" name="search" class="form-control" placeholder="Search" value="<?=$this->serarch?>">
                             <span class="glyphicon glyphicon-search form-control-feedback"></span>
                         </form>
                     </div>
@@ -39,11 +39,13 @@
                         <tr>
                             <td><?=$profissional->getNome()?></td>
                             <td><?=$profissional->getApelido()?></td>
-                            <td><?=$profissional->getTelefone()?></td>
-                            <td><?=$profissional->getCelular()?></td>
+                            <td class="mask-phone"><?=$profissional->getTelefone()?></td>
+                            <td class="mask-phone"><?=$profissional->getCelular()?></td>
                             <td class="text-right">
-                                <a class="btn btn-primary btn-sm" aria-label="Settings" href="<?=$this->url(ProfissionalController::ROUTE_NAME, ['action' => 'editar', 'id' => $profissional->getId()])?>" ><i class="fa fa-fw fa-edit"></i></a>
-                                <a class="btn btn-danger btn-sm" aria-label="Settings" href="<?=$this->url(ProfissionalController::ROUTE_NAME, ['action' => 'excluir', 'id' => $profissional->getId()])?>"><i class="fa fa-fw fa-trash danger"></i></a>
+                                <a class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Editar" aria-label="Settings" href="<?=$this->url(ProfissionalController::ROUTE_NAME, ['action' => 'editar', 'id' => $profissional->getId()])?>" ><i class="fa fa-fw fa-edit"></i></a>
+                                <a class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Horário de Trabalho" aria-label="Settings" href="<?=$this->url(ProfissionalController::ROUTE_NAME, ['action' => 'excluir', 'id' => $profissional->getId()])?>"><i class="fa fa-fw fa-clock-o"></i></a>
+                                <a class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Serviços Prestados" aria-label="Settings" href="<?=$this->url(ProfissionalController::ROUTE_NAME, ['action' => 'excluir', 'id' => $profissional->getId()])?>"><i class="fa fa-fw fa-building-o"></i></a>
+                                <a class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Excluir" aria-label="Settings" href="<?=$this->url(ProfissionalController::ROUTE_NAME, ['action' => 'excluir', 'id' => $profissional->getId()])?>"><i class="fa fa-fw fa-trash"></i></a>
                             </td>
                         </tr>
                     <? endforeach; ?>

@@ -5,7 +5,7 @@
         <div class="box-body">
             <div class="box-header with-border">
                 <div class="box-title">
-                    <a class="btn btn-primary btn-box-tool" href="<?=$this->url(\Salao\Controller\ServicoController::ROUTE_NAME, ['action' => 'criar'])?>">
+                    <a class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Cadastrar Serviço" href="<?=$this->url(\Salao\Controller\ServicoController::ROUTE_NAME, ['action' => 'criar'])?>">
                         <i class="fa fa-fw fa-plus-circle"></i>
                     </a>
                 </div>
@@ -37,8 +37,8 @@
                             <td><?=$this->convertMinutesToHour($servico->getDuracao())?></td>
                             <td><?=$this->currencyFormat($servico->getValor())?></td>
                             <td class="text-right">
-                                <a class="btn btn-primary btn-sm" aria-label="Settings" href="<?=$this->url(\Salao\Controller\ServicoController::ROUTE_NAME, ['action' => 'editar', 'id' => $servico->getId()])?>" ><i class="fa fa-fw fa-edit"></i></a>
-                                <a class="btn btn-danger btn-sm" aria-label="Settings" href="<?=$this->url(\Salao\Controller\ServicoController::ROUTE_NAME, ['action' => 'excluir', 'id' => $servico->getId()])?>"><i class="fa fa-fw fa-trash danger"></i></a>
+                                <a class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Editar" aria-label="Settings" href="<?=$this->url(\Salao\Controller\ServicoController::ROUTE_NAME, ['action' => 'editar', 'id' => $servico->getId()])?>" ><i class="fa fa-fw fa-edit"></i></a>
+                                <a class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Excluir" aria-label="Settings" href="<?=$this->url(\Salao\Controller\ServicoController::ROUTE_NAME, ['action' => 'excluir', 'id' => $servico->getId()])?>"><i class="fa fa-fw fa-trash danger"></i></a>
                             </td>
                         </tr>
                     <? endforeach; ?>
