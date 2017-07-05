@@ -11,6 +11,7 @@ return [
         'Zend\Mvc\Console',
         'ZendDeveloperTools',
         'SanSessionToolbar',
+        'DoctrineDataFixtureModule',
     ],
     // Configuration overrides during development mode
     'module_listener_options' => [
