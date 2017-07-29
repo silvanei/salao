@@ -65,7 +65,11 @@
         "test": "phpunit --colors=always",
         "doctrine": "doctrine-module --ansi",
         "post-install-cmd": [
-            "bower install"
+            "bower install",
+            "./vendor/bin/doctrine-module orm:clear-cache:metadata",
+            "./vendor/bin/doctrine-module orm:clear-cache:query",
+            "./vendor/bin/doctrine-module orm:clear-cache:result",
+            "./vendor/bin/doctrine-module migrations:migrate"
         ],
         "post-update-cmd": [
             "bower install"
