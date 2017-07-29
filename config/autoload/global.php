@@ -18,11 +18,11 @@ return [
             'orm_default' => [
                 'driverClass' => \Doctrine\DBAL\Driver\PDOMySql\Driver::class,
                 'params' => [
-                    'host' => 'mysql',
+                    'host' => 'lgg2gx1ha7yp2w0k.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
                     'port' => '3306',
-                    'user' => 'root',
-                    'password' => 'root',
-                    'dbname' => 'agenda',
+                    'user' => 'ppgiiwx13tw2ep64',
+                    'password' => 'w1uj2vat4mfo4tq6',
+                    'dbname' => 'zrocaqkk6hjxx51q',
                     'charset'  => 'utf8',
                     'driverOptions' => array(
                         1002 => 'SET NAMES utf8'

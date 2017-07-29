@@ -64,7 +64,8 @@
         "test": "phpunit --colors=always",
         "doctrine": "doctrine-module --ansi",
         "post-install-cmd": [
-            "bower install"
+            "bower install",
+            "doctrine migrations:migrate"
         ],
         "post-update-cmd": [
             "bower install"
