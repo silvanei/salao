@@ -65,7 +65,7 @@
         "doctrine": "doctrine-module --ansi",
         "post-install-cmd": [
             "bower install",
-            "doctrine migrations:migrate"
+            "./vendor/bin/doctrine-module migrations:migrate"
         ],
         "post-update-cmd": [
             "bower install"
