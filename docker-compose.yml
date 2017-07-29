@@ -16,6 +16,13 @@ services:
     build: .
     working_dir: /var/www/salao
     #command: composer doctrine-migrate
+    environment:
+        - DEBUG=1
+        - DB_HOST=mysql
+        - DB_PORT=3306
+        - DB_USER=root
+        - DB_PASS=root
+        - DB_NAME=agenda
     volumes:
       - .:/var/www/salao
     links:
