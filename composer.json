@@ -64,10 +64,11 @@
         "serve": "php -S 0.0.0.0:8080 -t public public/index.php",
         "test": "phpunit --colors=always",
         "doctrine": "doctrine-module --ansi",
+        "compile": [
+            "./vendor/bin/doctrine-module migrations:migrate"
+        ],
         "post-install-cmd": [
-            "bower install",
-            "./vendor/bin/doctrine-module migrations:migrate",
-            "rm ./data/cache/application.*"
+            "bower install"
         ],
         "post-update-cmd": [
             "bower install"
