@@ -51,13 +51,7 @@
             "ApplicationTest\\": "module/Application/test/"
         }
     },
-    "extra": {
-        "heroku": {
-            "compile": [
-                "./vendor/bin/doctrine-module migrations:migrate"
-            ]
-        }
-    },
+    "extra": [],
     "scripts": {
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
@@ -71,7 +65,10 @@
         "test": "phpunit --colors=always",
         "doctrine": "doctrine-module --ansi",
         "post-install-cmd": [
-            "bower install"
+            "bower install",
+            "zf-development-mode enable",
+            "./vendor/bin/doctrine-module migrations:migrate",
+            "zf-development-mode disable"
         ],
         "post-update-cmd": [
             "bower install"
