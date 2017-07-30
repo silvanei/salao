@@ -65,6 +65,7 @@
         "test": "phpunit --colors=always",
         "doctrine": "doctrine-module --ansi",
         "post-install-cmd": [
+            "rm data/cache/application.*",
             "bower install",
             "./vendor/bin/doctrine-module migrations:migrate",
             "rm data/cache/application.*"
