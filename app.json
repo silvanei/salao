@@ -1,0 +1,16 @@
+{
+  "name": "ZendSkeletonApplication",
+  "description": "A Zend Framework Skeleton Application",
+  "repository": "https://github.com/NeftaliYagua/Heroku-ZendSkeletonApplication",
+  "logo": "http://framework.zend.com/images/logos/zf2-logo-mark.png",
+  "author": "Zend Technologies Ltd <neftali.yagua@gmail.com>",
+  "website": "http://framework.zend.com/",
+  "success_url": "/",
+  "keywords": ["php", "zf2", "Zend Framework 2", "Zend", "Framework", "ZendFramework", "Zend Framework", "ZendSkeletonApplication", "ZendSkeleton"],
+  "image": "heroku/php",
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-php"
+    }
+  ]
+}
