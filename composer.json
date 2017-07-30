@@ -66,9 +66,8 @@
         "doctrine": "doctrine-module --ansi",
         "post-install-cmd": [
             "bower install",
-            "zf-development-mode enable",
             "./vendor/bin/doctrine-module migrations:migrate",
-            "zf-development-mode disable"
+            "rm data/cache/application.*"
         ],
         "post-update-cmd": [
             "bower install"
