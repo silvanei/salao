@@ -16,6 +16,8 @@ interface ServicoRepositoryInterface
 
     public function findBySaloonId(int $saloonId, string $serarch): Paginator;
 
+    public function ServicesNotProvidedByProfessional(int $saloonId, int $profissionalId): array;
+
     public function create(Servico $servico, int $saloonId): Servico;
 
     public function getBy(int $id): Servico;

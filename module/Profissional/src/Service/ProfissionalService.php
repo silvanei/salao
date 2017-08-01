@@ -12,6 +12,7 @@ namespace Profissional\Service;
 use Profissional\Entity\Profissional;
 use Profissional\Repository\ProfissionalRepositoryInterface;
 use Salao\Entity\Identity;
+use Salao\Repository\ServicoRepositoryInterface;
 use Zend\Paginator\Paginator;
 
 class ProfissionalService
@@ -20,17 +21,25 @@ class ProfissionalService
     /** @var  ProfissionalRepositoryInterface */
     private $profissionalRepository;
 
+    /** @var  ServicoRepositoryInterface */
+    private $servicoRepository;
+
     /** @var  Identity */
     protected $identity;
 
     /**
      * ProfissionalService constructor.
      * @param ProfissionalRepositoryInterface $profissionalRepository
+     * @param ServicoRepositoryInterface $servicoRepository
      * @param Identity|null $identity
      */
-    public function __construct(ProfissionalRepositoryInterface $profissionalRepository, Identity $identity = null)
-    {
+    public function __construct(
+        ProfissionalRepositoryInterface $profissionalRepository,
+        ServicoRepositoryInterface $servicoRepository,
+        Identity $identity = null
+    ) {
         $this->profissionalRepository = $profissionalRepository;
+        $this->servicoRepository = $servicoRepository;
         $this->identity = $identity;
     }
 
@@ -68,5 +77,12 @@ class ProfissionalService
         $profissional->setDeletado(true);
         $this->profissionalRepository->update($profissional);
         return true;
+    }
+
+    public function servicesNotProvided($profissionalId): array
+    {
+        $saloonId = $this->identity->getSalaoId();
+
+        return $this->servicoRepository->ServicesNotProvidedByProfessional($saloonId, $profissionalId);
     }
 }

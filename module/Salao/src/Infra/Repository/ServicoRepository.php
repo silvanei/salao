@@ -37,6 +37,28 @@ class ServicoRepository extends EntityRepository implements ServicoRepositoryInt
         return new Paginator($adapter);
     }
 
+    public function ServicesNotProvidedByProfessional(int $saloonId, int $profissionalId): array
+    {
+        $query = $this->createQueryBuilder('s');
+        $query->leftJoin('s.profissional', 'p');
+        $query->where(
+            $query->expr()->andX(
+                $query->expr()->eq('s.salao', $saloonId),
+                $query->expr()->eq('s.deletado', 0),
+                $query->expr()->andX(
+                    $query->expr()->orX(
+                        $query->expr()->isNull('p.id'),
+                        $query->expr()->notIn('p.id', $profissionalId)
+                    )
+                )
+            )
+        );
+
+        $query = $query->getQuery();
+        return $query->execute();
+
+    }
+
     public function create(Servico $servico, int $saloonId): Servico
     {
 

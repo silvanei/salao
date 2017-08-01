@@ -5,6 +5,8 @@ namespace Profissional;
 use Doctrine\ORM\Mapping\Driver\XmlDriver;
 use Profissional\Controller\ProfissionalController;
 use Profissional\Controller\ProfissionalControllerFactory;
+use Profissional\Controller\ProfissionalServicoController;
+use Profissional\Controller\ProfissionalServicoControllerFactory;
 use Profissional\Infra\Repository\AcessoRepositoryFactory;
 use Profissional\Infra\Repository\ProfissionalRepositoryFactory;
 use Profissional\Repository\AcessoRepositoryInterface;
@@ -26,6 +28,16 @@ return [
                     ],
                 ],
             ],
+            ProfissionalServicoController::ROUTE_NAME => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/profissional-servico[/:profissional][/:action][/:id]',
+                    'defaults' => [
+                        'controller' => ProfissionalServicoController::class,
+                        'action' => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -40,6 +52,7 @@ return [
     'controllers' => [
         'factories' => [
             ProfissionalController::class => ProfissionalControllerFactory::class,
+            ProfissionalServicoController::class => ProfissionalServicoControllerFactory::class,
         ],
     ],
 

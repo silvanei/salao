@@ -1,0 +1,64 @@
+<? use Profissional\Controller\ProfissionalServicoController; ?>
+<? $this->layout()->header = 'Profissional' ?>
+<? $this->layout()->subHeader = 'Serviços prestados' ?>
+
+
+<section class="content">
+    <div class="box box-primary">
+        <div class="box-body">
+            <div class="box-header with-border">
+                <div class="box-title">
+                    <form action="" class="form-horizontal">
+                        <div class="input-group col-sm-4">
+                            <select class="form-control">
+                                <option value="" class="" selected="selected">Selecione um Serviço</option>
+                                <? foreach ($this->servicosNaoPrestado as $servico): ?>
+                                    <?= sprintf('<option value="%d" class="">%s</option>', $servico->getId(), $servico->getDescricao()) ?>
+                                <? endforeach; ?>
+                            </select>
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button" disabled="disabled">Adicionar Serviço</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br>
+
+            <table class="table table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>Serviço</th>
+                        <th>Duração</th>
+                        <th>Valor</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <? /** @var \Salao\Entity\Servico $servico */ ?>
+                    <? foreach ($this->servicosPrestado as $servico): ?>
+                        <tr>
+                            <td><?=$servico->getDescricao()?></td>
+                            <td><?=$servico->getDuracao()?></td>
+                            <td><?=$servico->getValor()?></td>
+                            <td class="text-right">
+                                <a class="btn btn-danger btn-sm"
+                                   data-toggle="tooltip"
+                                   data-placement="bottom"
+                                   title="Excluir"
+                                   aria-label="Settings"
+                                   href="<?=$this->url(
+                                           ProfissionalServicoController::ROUTE_NAME,
+                                       ['action' => 'excluir', 'profissional' => 1, 'id' => $servico->getId()]
+                                   )?>"
+                                ><i class="fa fa-fw fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    <? endforeach; ?>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</section>

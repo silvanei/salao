@@ -3,6 +3,8 @@
 namespace Profissional\Entity;
 
 use Salao\Entity\Salao;
+use Salao\Entity\Servico;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Profissional
@@ -43,6 +45,19 @@ class Profissional
      * @var \Salao\Entity\Salao
      */
     private $salao;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $servico;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->servico = new ArrayCollection();
+    }
 
 
     /**
@@ -198,5 +213,43 @@ class Profissional
     {
         return $this->salao;
     }
+
+    /**
+     * Add servico.
+     *
+     * @param Servico $servico
+     *
+     * @return Profissional
+     */
+    public function addServico(Servico $servico)
+    {
+        $this->servico[] = $servico;
+
+        return $this;
+    }
+
+    /**
+     * Remove servico.
+     *
+     * @param Servico $servico
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeServico(Servico $servico)
+    {
+        return $this->servico->removeElement($servico);
+    }
+
+    /**
+     * Get servico.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getServico():? \Doctrine\Common\Collections\Collection
+    {
+        return $this->servico;
+    }
+
+
 }
 

@@ -5,6 +5,7 @@ namespace Security;
 use Cliente\Controller\ClienteController;
 use DoctrineORMModule\Yuml\YumlController;
 use Profissional\Controller\ProfissionalController;
+use Profissional\Controller\ProfissionalServicoController;
 use Salao\Controller\AcessoController;
 use Salao\Controller\ServicoController;
 use Security\Authentication\AuthenticationAdapterFactory;
@@ -53,6 +54,8 @@ return [
             sprintf(Role::RESOURCE_FORMAT, ProfissionalController::class, 'editar'),
             sprintf(Role::RESOURCE_FORMAT, ProfissionalController::class, 'excluir'),
 
+            sprintf(Role::RESOURCE_FORMAT, ProfissionalServicoController::class, 'index'),
+
             sprintf(Role::RESOURCE_FORMAT, AcessoController::class, 'index'),
 
             // Gerador de grafico Doctrine
@@ -84,6 +87,8 @@ return [
                     sprintf(Role::RESOURCE_FORMAT, ProfissionalController::class, 'criar'),
                     sprintf(Role::RESOURCE_FORMAT, ProfissionalController::class, 'editar'),
                     sprintf(Role::RESOURCE_FORMAT, ProfissionalController::class, 'excluir'),
+
+                    sprintf(Role::RESOURCE_FORMAT, ProfissionalServicoController::class, 'index'),
 
                     sprintf(Role::RESOURCE_FORMAT, AcessoController::class, 'index'),
                 ]

@@ -2,6 +2,9 @@
 
 namespace Salao\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Profissional\Entity\Profissional;
+
 /**
  * Servico
  */
@@ -36,6 +39,19 @@ class Servico
      * @var \Salao\Entity\Salao
      */
     private $salao;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $profissional;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->profissional = new ArrayCollection();
+    }
 
     public function setDescricao(string $descricao): Servico
     {
@@ -101,6 +117,42 @@ class Servico
     public function getSalao(): ?Salao
     {
         return $this->salao;
+    }
+
+    /**
+     * Add profissional.
+     *
+     * @param Profissional $profissional
+     *
+     * @return Servico
+     */
+    public function addProfissional(Profissional $profissional)
+    {
+        $this->profissional[] = $profissional;
+
+        return $this;
+    }
+
+    /**
+     * Remove profissional.
+     *
+     * @param Profissional $profissional
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeProfissional(Profissional $profissional)
+    {
+        return $this->profissional->removeElement($profissional);
+    }
+
+    /**
+     * Get profissional.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProfissional()
+    {
+        return $this->profissional;
     }
 }
 
